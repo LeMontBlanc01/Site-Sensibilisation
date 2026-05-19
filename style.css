@@ -47,3 +47,11 @@ main {
 .intro {
             margin-bottom: 50px;
         }
+
+.resaux {
+            display: flex;
+            gap: 20px;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
