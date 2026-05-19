@@ -52,6 +52,7 @@ main {
 
 h2 {
         text-align: center;
+        padding-top: 200px;
 
     }
 
@@ -62,3 +63,4 @@ h2 {
     bottom: 20px;
     left: 20px;
 }
+
