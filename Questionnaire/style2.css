@@ -34,7 +34,7 @@ main {
             padding: 10px 20px;
             font-size: 1.2em;
             color: #fff;
-            background-color: #dbb25a;
+            background: linear-gradient(70deg, #dbb25a, #f0d18f);
             border: black;
             border-radius: 5px;
             cursor: pointer;
