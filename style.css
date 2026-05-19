@@ -47,3 +47,9 @@ main {
 .intro {
             margin-bottom: 50px;
         }
+
+.resaux {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
