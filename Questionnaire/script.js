@@ -64,20 +64,3 @@ function checkQ2() {
         result.style.color = "red";
     }
 }
-
-function checkQ3() {
-    const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["separez", "utilisez1"];
-
-    const result = document.getElementById("result-q3");
-
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! ";
-        result.style.color = "green";
-    } else {
-        result.textContent = "Mauvaise réponse.";
-        result.style.color = "red";
-    }
-}
