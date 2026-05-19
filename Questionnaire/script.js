@@ -37,6 +37,7 @@ function checkQ1() {
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
+        document.getElementById("btn-valider-q1").style.display = "none";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
@@ -59,6 +60,7 @@ function checkQ2() {
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
+        document.getElementById("btn-valider-q2").style.display = "none";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
