@@ -26,10 +26,12 @@
         <label><input type="checkbox" name="q1" value="0000"> 0000</label><br>
         <label><input type="checkbox" name="q1" value="azerty"> Azerty</label><br>
         <label><input type="checkbox" name="q1" value="g7!pl9@vq2#rt"> G7!pL9@vQ2#rT</label><br>
-
-        <button class="fr-btn" type="button" onclick="history.back()">
-            Revenir à l'accueil
-        </button>
+        
+        <div class="bouton-revenir">
+            <button class="fr-btn" type="button" onclick="history.back()">
+                Revenir à l'accueil
+            </button>
+        </div>
 
     </div>
 
@@ -41,17 +43,21 @@
 
         <label><input type="checkbox" name="q2" value="oui"> Oui</label><br>
         <label><input type="checkbox" name="q2" value="non"> Non</label><br>
-        
-        <button class="fr-btn"" type="button" onclick="history.back()">
-            Revenir à l'accueil
-        </button>
+
+        <div class="bouton-revenir">
+            <button class="fr-btn" type="button" onclick="history.back()">
+                Revenir à l'accueil
+            </button>
+        </div>
 
     </div>
 
     <p id="result-q1"></p> <!-- Résultat pour savoir si la question a bien été repondue ou pas -->
 
     <p id="result-q2"></p> <!-- Résultat pour savoir si la question a bien été repondue ou pas --> 
+    
 
+    
     <button class="fr-btn" type="button" onclick="checkQ1()">Valider votre réponse</button> <!-- Bouton pour valider la réponse de la question 1 -->
 
     <button class="fr-btn" type="button" onclick="showQuestion('q2')">Passer à la prochaine question</button> <!-- Bourton pour passer à la question 2 -->
