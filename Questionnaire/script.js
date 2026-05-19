@@ -3,6 +3,7 @@ console.log("JS chargé !");
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
   document.getElementById(id).style.display = 'block';
+  document.getElementById("btn-valider-q1").style.display = "none";
 
   if (id !== 'q1') {
     const result1 = document.getElementById('result-q1');
