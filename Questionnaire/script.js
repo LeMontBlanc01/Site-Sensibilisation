@@ -1,5 +1,5 @@
 console.log("JS chargé !");
-
+document.getElementById("btn-valider-q2").style.display = "none";
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
   document.getElementById(id).style.display = 'block';
@@ -9,7 +9,6 @@ function showQuestion(id) {
     const result1 = document.getElementById('result-q1');
     if (result1) {
       result1.textContent = '';
-      document.getElementById("btn-valider-q2").style.display = "none";
     }
   }
 
