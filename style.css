@@ -55,3 +55,8 @@ main {
             bottom: 20px;
             left: 20px;
         }
+
+.resaux img {
+            width: 70px;
+            height: 70px;
+        }
