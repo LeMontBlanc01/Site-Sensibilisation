@@ -25,3 +25,20 @@ function checkQ1() {
 function arraysEqual(a, b) {
     return a.length === b.length && a.every(v => b.includes(v));
 }
+
+function checkQ2() {
+    const selected = Array.from(document.querySelectorAll('input[name="q2"]:checked'))
+                          .map(el => el.value);
+
+    const correct = ["oui"];
+
+    const result = document.getElementById("result-q2");
+
+    if (arraysEqual(selected, correct)) {
+        result.textContent = "Bonne réponse !";
+        result.style.color = "green";
+    } else {
+        result.textContent = "Mauvaise réponse.";
+        result.style.color = "red";
+    }
+}
