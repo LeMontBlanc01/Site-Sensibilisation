@@ -17,6 +17,13 @@ function showQuestion(id) {
       result2.textContent = '';
     }
   }
+
+  if (id !== 'q3') {
+    const result3 = document.getElementById('result-q3');
+    if (result3) {
+      result3.textContent = '';
+    }
+  }
 }
 
 function checkQ1() {
