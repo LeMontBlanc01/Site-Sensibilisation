@@ -50,6 +50,8 @@ main {
 
 .resaux {
             display: flex;
-            justify-content: center;
             gap: 20px;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
         }
