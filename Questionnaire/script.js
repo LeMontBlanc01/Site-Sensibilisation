@@ -10,6 +10,13 @@ function showQuestion(id) {
       result1.textContent = '';
     }
   }
+
+  if (id !== 'q2') {
+    const result2 = document.getElementById('result-q2');
+    if (result2) {
+      result2.textContent = '';
+    }
+  }
 }
 
 function checkQ1() {
@@ -21,13 +28,14 @@ function checkQ1() {
     const result = document.getElementById("result-q1");
 
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
     }
 }
+
 
 function arraysEqual(a, b) {
     return a.length === b.length && a.every(v => b.includes(v));
@@ -42,7 +50,24 @@ function checkQ2() {
     const result = document.getElementById("result-q2");
 
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! ";
+        result.style.color = "green";
+    } else {
+        result.textContent = "Mauvaise réponse.";
+        result.style.color = "red";
+    }
+}
+
+function checkQ3() {
+    const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
+                          .map(el => el.value);
+
+    const correct = ["separez", "utilisez1"];
+
+    const result = document.getElementById("result-q3");
+
+    if (arraysEqual(selected, correct)) {
+        result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
     } else {
         result.textContent = "Mauvaise réponse.";
