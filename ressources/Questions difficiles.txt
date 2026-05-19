@@ -1,0 +1,63 @@
+Questions difficiles
+
+
+Dans une attaque de type 'Pass-the-Hash', quel est l'élément principal exploité par l'attaquant pour s'authentifier sans connaître le mot de passe en clair?
+
+La clé privée RSA de l'utilsateur
+
+Le token OAuth stocké dans le navigateur
+
+Le ticket Kerberos TGT
+
+Le hash NTLM du mot de passe (bonne réponse) explication: L'attaque Pass-the-Hash repose sur la réutilisation du hash NTLM, permettant une authentification sans connaître le mot de passe en clair.
+
+
+
+Quel mécanisme permet de limiter l'impact d'une compromission d'un compte dans une architecture Zero Trust?
+
+La rotation mensuelle des mots de passe
+
+Le chiffrement AES-256
+
+L'utilisation d'un VPN permanent
+
+La segmentation micro-perimétrique (bonne réponse) explication: La micro-segmentation limite les accès d'un compte compromis en cloisonnant fortement les ressources.
+
+
+Quel indicateur est le plus révélateur d'une attaque par exfiltration lente (Low and Slow)?
+
+Une connexion SSH échouée plusieurs fois
+
+Un trafic sortant faible mais constant vers une même adresse (bonne réponse) explication: Les attaques Low and Slow exfiltrent des données en petites quantités pour éviter la détection, créant un flux faible mais continu.
+
+
+Une augmentation du taux d'erreur DNS
+
+Un pic soudain de bande passante sortante
+
+
+
+Quel type d'attaque exploite principalement les failles dans la logique métier d'une application plutôt que dans son code?
+
+Les attaques XSS
+
+Les injections SQL
+
+Les attaques CSRF
+
+Les attaques Business Logic (bonne réponse) explication: Les attaques Business Logic exploitent des failles dans le processus métier, comme des validations insuffisantes dans les workflows.
+
+
+
+Quel protocole est le plus vulnérable aux attaques de types 'Downgrade Attack' lors de la négociation de chiffrement?
+
+S/MIME
+
+TLS (bonne réponse) explication: TLS peut être ciblé par des attaques de downgrade où l'attaquant force l'utilisation d'une version ou d'une suite cryptographique plus faible.
+
+SSH
+
+IPSec
+
+
+
