@@ -53,11 +53,12 @@ function checkQ1() {
     }
 }
 
-
+//Fonction utilitaire qui compare deux tableaux
 function arraysEqual(a, b) {
-    return a.length === b.length && a.every(v => b.includes(v));
+    return a.length === b.length && a.every(v => b.includes(v));  //Même longueur + chaque élément de a est dans b
 }
 
+//Fonction qui permet de vérifier la réponse de la question 2
 function checkQ2() {
     const selected = Array.from(document.querySelectorAll('input[name="q2"]:checked'))
                           .map(el => el.value);
