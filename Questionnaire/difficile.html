@@ -17,7 +17,7 @@
         <p id="score" style="font-size: 18px; font-weight: bold; color: #ffffff;">Score : 0</p>
     </header>
 
-    <div class="question" id="q1-dififcile">
+    <div class="question" id="q1">
         <h2>Question 1</h2>
         <h3>Quel protocole est le plus vulnérable aux attaques de type "downgrade" lors de la négociation de chiffrement ?</h3>
         <label><input type="checkbox" name="q1" value="sslv3"> SSLv3</label><br>
@@ -29,7 +29,7 @@
         <button id="btn-suivant-q1" class="fr-btn" type="button" onclick="showQuestion('q2')">Passer à la prochaine question</button>
     </div>
 
-    <div class="question" id="q2-difficile" style="display:none;">
+    <div class="question" id="q2" style="display:none;">
         <h2>Question 2</h2>
         <h3>Quelle est la contre-mesure la plus appropriée pour prévenir les scripts intersites (XSS) ?</h3>
         <label><input type="checkbox" name="q2" value="sortie"> Échapper les données avant l'affichage côté sortie</label><br>
@@ -98,7 +98,7 @@
         <label><input type="checkbox" name="q7" value="ocsp"> Vérifier les certificats avec OCSP</label><br>
         <p id="result-q7"></p>
         <button id="btn-valider-q7" class="fr-btn" type="button" onclick="checkQ7()">Valider votre réponse</button>
-        <button id="btn-suivant-q7" class="fr-btn" type="button" onclick="showQuestion('q8')"></button>Passer à la prochaine question</button>
+        <button id="btn-suivant-q7" class="fr-btn" type="button" onclick="showQuestion('q8')">Passer à la prochaine question</button>
     </div>
 
     <div class="question" id="q8" style="display:none;">
