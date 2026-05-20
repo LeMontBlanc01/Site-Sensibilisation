@@ -230,13 +230,14 @@ function checkQ5() {
 
     const result = document.getElementById("result-q5");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
+    if (arraysEqual(selected, correct, score ++)) {
+        score ++;
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
     } else {
+        score --;
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
     }
