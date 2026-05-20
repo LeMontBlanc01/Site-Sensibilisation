@@ -28,8 +28,23 @@ function showQuestion(id) {
       result3.textContent = '';
     }
   }
-}
 
+
+  if (id !== 'q4') {
+    const result4 = document.getElementById('result-q4');
+    if (result4) {
+      result4.textContent = '';
+    }
+  }
+
+  if (id !== 'q5') {
+    const result5 = document.getElementById('result-q5');
+    if (result5) {
+      result5.textContent = '';
+    }
+  }
+
+}
 //Fonction qui permet de vérifier la réponse de la question 1
 function checkQ1() {
     const selected = Array.from(document.querySelectorAll('input[name="q1"]:checked'))  //Récupère toutes les cases cochées de la question 1 et on prend leur valeur
@@ -75,3 +90,23 @@ function checkQ2() {
         result.style.color = "red";
     }
 }
+
+function checkQ3() {
+    const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
+                          .map(el => el.value);
+
+    const correct = ["Séparez travail et personnel", "Utilisez plusieurs adresses électroniques"];
+
+    const result = document.getElementById("result-q3");
+
+    if (arraysEqual(selected, correct)) {
+        result.textContent = "Bonne réponse ! ";
+        result.style.color = "green";
+        document.getElementById("btn-valider-q3").style.display = "none";
+        document.getElementById("btn-suivant-q3").style.display = "inline-block";
+    } else {
+        result.textContent = "Mauvaise réponse.";
+        result.style.color = "red";
+    }
+}
+
