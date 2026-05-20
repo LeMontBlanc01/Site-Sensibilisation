@@ -129,7 +129,7 @@ function showQuestion(id) {
 
 function showResult(id) {
   document.querySelectorAll('.result').forEach(r => r.style.display = 'none');
-  document.getElementById(id).style.display = 'block');
+  document.getElementById(id).style.display = 'block';
 }
 
 //Fonction qui permet de vérifier la réponse de la question 1
