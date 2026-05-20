@@ -63,3 +63,20 @@ main {
             width: 70px;
             height: 70px;
         }
+
+
+.support {
+
+            display: flex;
+            gap: 20px;
+            position: fixed;
+            bottom: 20px;
+            left: 200px;
+            padding-left: 1100px;
+
+        }
+
+.support img {
+            width: 70px;
+            height: 70px;
+        }
