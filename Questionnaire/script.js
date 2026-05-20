@@ -172,6 +172,7 @@ function checkQ2() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 3
 function checkQ3() {
     const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
                           .map(el => el.value);
@@ -191,6 +192,7 @@ function checkQ3() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 4
 function checkQ4() {
     const selected = Array.from(document.querySelectorAll('input[name="q4"]:checked'))
                           .map(el => el.value);
@@ -210,6 +212,7 @@ function checkQ4() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 5
 function checkQ5() {
     const selected = Array.from(document.querySelectorAll('input[name="q5"]:checked'))
                           .map(el => el.value);
@@ -229,6 +232,7 @@ function checkQ5() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 6
 function checkQ6() {
     const selected = Array.from(document.querySelectorAll('input[name="q6"]:checked'))
                           .map(el => el.value);
@@ -248,6 +252,7 @@ function checkQ6() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 7
 function checkQ7() {
     const selected = Array.from(document.querySelectorAll('input[name="q7"]:checked'))
                           .map(el => el.value);
@@ -267,6 +272,7 @@ function checkQ7() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 8
 function checkQ8() {
     const selected = Array.from(document.querySelectorAll('input[name="q8"]:checked'))
                           .map(el => el.value);
@@ -286,6 +292,7 @@ function checkQ8() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 9
 function checkQ9() {
     const selected = Array.from(document.querySelectorAll('input[name="q9"]:checked'))
                           .map(el => el.value);
@@ -305,6 +312,7 @@ function checkQ9() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 10
 function checkQ10() {
     const selected = Array.from(document.querySelectorAll('input[name="q10"]:checked'))
                           .map(el => el.value);
@@ -324,6 +332,7 @@ function checkQ10() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 11
 function checkQ11() {
     const selected = Array.from(document.querySelectorAll('input[name="q11"]:checked'))
                           .map(el => el.value);
@@ -343,6 +352,7 @@ function checkQ11() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 12
 function checkQ12() {
     const selected = Array.from(document.querySelectorAll('input[name="q12"]:checked'))
                           .map(el => el.value);
@@ -362,6 +372,7 @@ function checkQ12() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 13
 function checkQ13() {
     const selected = Array.from(document.querySelectorAll('input[name="q13"]:checked'))
                           .map(el => el.value);
@@ -381,6 +392,7 @@ function checkQ13() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 14
 function checkQ14() {
     const selected = Array.from(document.querySelectorAll('input[name="q14"]:checked'))
                           .map(el => el.value);
@@ -400,6 +412,7 @@ function checkQ14() {
     }
 }
 
+//Fonction qui permet de vérifier la réponse de la question 15
 function checkQ15() {
     const selected = Array.from(document.querySelectorAll('input[name="q15"]:checked'))
                           .map(el => el.value);
