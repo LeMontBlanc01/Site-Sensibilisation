@@ -1,0 +1,46 @@
+Reliez
+
+
+Mon adresse de messagerie a été usurpée A						1 Je fais opposition auprès de ma banque et je dépose plainte
+
+J'ai malencontreusement communiqué mon numéro de carte bancaire B			2 Je la signale à Phishing Initiative
+
+J'identifie une adresse de site d'hameçonnage C						3 Je change immédiatement de mot de passe
+
+Bonnes réponses: A->3, B->1, C->2
+
+
+
+
+
+Je travaille régulièrement à l'extérieur A				1 Je bloque ma ligne en appelant mon opérateur et mon téléphone en communiquant mon code IMEI et je 										dépose plainte
+
+J'ai perdu ou je me suis fait voler mon téléphone B			2 J'évite de me connecter à un réseau Wi-Fi public
+
+Je télécharge un jeu sur mon téléphone C				3 Je n'autorise pas l'accès à mes photos, mes contacts et mes messages
+
+Bonnes réponses: A->2, B->1, C->3
+
+
+
+
+Je suis à la maison et je consulte mes messages professionnels A				1 Je demande l'autorisation à mon employeur et prends des mesures de sécurité 													supplémentaires
+
+Je stocke des documents professionnels sur un service en ligne personnel B			2 Je ne le fais qu'à partir de mon ordinateur professionnel
+
+Je réalise parfois des téléchargements illégaux depuis mon ordinateur professionnel C 		3 Mon entreprise pourrait contrôler mon utilisation de la connexion Internet 													professionnelle et se retourner contre moi
+
+
+Bonnes réponses: A->2, B->1, C->3
+
+
+
+
+Je ne me souviens jamais de mes mots de passe A				1 Je n'enregistre pas les mots de passe et me déconnecte après utilisation
+
+Je soupçonne qu'un de mes comptes ait été piraté B			2 Je fais confiance à Keepass, mon gestionnaire de mots de passe
+
+Je travaille sur un ordinateur à la bibliothèque C			3 Je change immédiatement de mot de passe
+
+
+Bonnes réponses: A->2, B->3, C->1
