@@ -155,10 +155,14 @@ function checkQ1() {
     }
 }
 
-//Fonction utilitaire qui compare deux tableaux
+
+// a = réponses cochées par l'utilisateur
+// b = bonnes réponses définies dans le code
+// La fonction compare les deux tableaux pour vérifier si la réponse est correcte
 function arraysEqual(a, b) {
-    return a.length === b.length && a.every(v => b.includes(v));  //Même longueur + chaque élément de a est dans b
+    return a.length === b.length && a.every(v => b.includes(v));
 }
+
 
 //Fonction qui permet de vérifier la réponse de la question 2
 function checkQ2() {
