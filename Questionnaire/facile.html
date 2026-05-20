@@ -67,9 +67,44 @@
  
         <button id="btn-valider-q3" class="fr-btn" type="button" onclick="checkQ3()">Valider votre réponse</button>
         
+        <button id="btn-suivant-q2" class="fr-btn" type="button" onclick="showQuestion('q4')" style="display:none;">Passer à la prochaine question</button>
+    
+    </div>
+
+    <div class="question" id="q4" style="display:none;">
+        <h2>Question 4</h2>
+        <h3>Quel est le meilleur moyen de protéger vos données personnelles ?</h3>
+        
+        <!--Propositions de réponses pour la question 4-->
+
+        <label><input type="checkbox" name="q4" value="partagez"> Partager vos données sur les réseaux sociaux</label><br>
+        <label><input type="checkbox" name="q4" value="nepaspartager"> Ne pas partager vos données personnelles en ligne</label><br>
+        <label><input type="checkbox" name="q4" value="utilisezvpn"> Utiliser un VPN pour masquer votre adresse IP</label><br>
+        <label><input type="checkbox" name="q4" value="utilisezantivirus"> Utiliser un antivirus pour protéger votre ordinateur</label><br>
+
+        <p id="result-q4"></p>
+ 
+        <button id="btn-valider-q4" class="fr-btn" type="button" onclick="checkQ4()">Valider votre réponse</button>
+        
+        <button id="btn-suivant-q2" class="fr-btn" type="button" onclick="showQuestion('q5')" style="display:none;">Passer à la prochaine question</button>
 
     </div>
 
+    <div class="question" id="q5" style="display:none;">
+        <h2>Question 5</h2>
+        <h3>Quel est le meilleur moyen de se protéger contre les attaques de phishing ?</h3>
+        
+        <!--Propositions de réponses pour la question 5-->
+
+        <label><input type="checkbox" name="q5" value="cliquez"> Cliquer sur les liens dans les e-mails suspects</label><br>
+        <label><input type="checkbox" name="q5" value="verifiez"> Vérifier l'authenticité des e-mails avant de cliquer sur les liens</label><br>
+        <label><input type="checkbox" name="q5" value="partagez"> Partager vos informations personnelles avec des sources non fiables</label><br>
+        <label><input type="checkbox" name="q5" value="utilisezantivirus"> Utiliser un antivirus pour détecter les e-mails de phishing</label><br>
+
+        <p id="result-q5"></p>
+ 
+        <button id="btn-valider-q5" class="fr-btn" type="button" onclick="checkQ5()">Valider votre réponse</button>
+        
     <div class="bouton-revenir">
         <button class="fr-btn" type="button" onclick="history.back()">
             Revenir à l'accueil
