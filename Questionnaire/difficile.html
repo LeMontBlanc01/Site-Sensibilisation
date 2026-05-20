@@ -20,10 +20,10 @@
     <div class="question" id="q1">
         <h2>Question 1</h2>
         <h3>Quel protocole est le plus vulnérable aux attaques de type "downgrade" lors de la négociation de chiffrement ?</h3>
-        <label><input type="checkbox" name="q1" value="sslv3"> SSLv3</label><br>
-        <label><input type="checkbox" name="q1" value="tls1.3"> TLS 1.3</label><br>
-        <label><input type="checkbox" name="q1" value="ssh"> SSH</label><br>
-        <label><input type="checkbox" name="q1" value="ipsec"> IPsec</label><br>
+        <label><input type="radio" name="q1" value="sslv3"> SSLv3</label><br>
+        <label><input type="radio" name="q1" value="tls1.3"> TLS 1.3</label><br>
+        <label><input type="radio" name="q1" value="ssh"> SSH</label><br>
+        <label><input type="radio" name="q1" value="ipsec"> IPsec</label><br>
         <p id="result-q1"></p>
         <button id="btn-valider-q1" class="fr-btn" type="button" onclick="checkQ1()">Valider votre réponse</button>
         <button id="btn-suivant-q1" class="fr-btn" type="button" onclick="showQuestion('q2')">Passer à la prochaine question</button>
@@ -32,10 +32,10 @@
     <div class="question" id="q2" style="display:none;">
         <h2>Question 2</h2>
         <h3>Quelle est la contre-mesure la plus appropriée pour prévenir les scripts intersites (XSS) ?</h3>
-        <label><input type="checkbox" name="q2" value="sortie"> Échapper les données avant l'affichage côté sortie</label><br>
-        <label><input type="checkbox" name="q2" value="https"> Forcer HTTPS uniquement</label><br>
-        <label><input type="checkbox" name="q2" value="csp"> Connexion de page sécurisée</label><br>
-        <label><input type="checkbox" name="q2" value="cache"> Utiliser la mise en cache du navigateur</label><br>
+        <label><input type="radio" name="q2" value="sortie"> Échapper les données avant l'affichage côté sortie</label><br>
+        <label><input type="radio" name="q2" value="https"> Forcer HTTPS uniquement</label><br>
+        <label><input type="radio" name="q2" value="csp"> Connexion de page sécurisée</label><br>
+        <label><input type="radio" name="q2" value="cache"> Utiliser la mise en cache du navigateur</label><br>
         <p id="result-q2"></p>
         <button id="btn-valider-q2" class="fr-btn" type="button" onclick="checkQ2()">Valider votre réponse</button>
         <button id="btn-suivant-q2" class="fr-btn" type="button" onclick="showQuestion('q3')">Passer à la prochaine question</button>
@@ -56,10 +56,10 @@
     <div class="question" id="q4" style="display:none;">
         <h2>Question 4</h2>
         <h3>Quelle affirmation décrit le mieux la différence entre hachage et chiffrement ?</h3>
-        <label><input type="checkbox" name="q4" value="oneway"> Le hachage est une fonction à sens unique, le chiffrement est réversible avec une clé</label><br>
-        <label><input type="checkbox" name="q4" value="simple"> Le hachage est toujours plus lent que le chiffrement</label><br>
-        <label><input type="checkbox" name="q4" value="format"> Le chiffrement modifie le format JSON uniquement</label><br>
-        <label><input type="checkbox" name="q4" value="nonce"> Le hachage utilise toujours un nonce pour être sécurisé</label><br>
+        <label><input type="radio" name="q4" value="oneway"> Le hachage est une fonction à sens unique, le chiffrement est réversible avec une clé</label><br>
+        <label><input type="radio" name="q4" value="simple"> Le hachage est toujours plus lent que le chiffrement</label><br>
+        <label><input type="radio" name="q4" value="format"> Le chiffrement modifie le format JSON uniquement</label><br>
+        <label><input type="radio" name="q4" value="nonce"> Le hachage utilise toujours un nonce pour être sécurisé</label><br>
         <p id="result-q4"></p>
         <button id="btn-valider-q4" class="fr-btn" type="button" onclick="checkQ4()">Valider votre réponse</button>
         <button id="btn-suivant-q4" class="fr-btn" type="button" onclick="showQuestion('q5')">Passer à la prochaine question</button>
@@ -68,10 +68,10 @@
     <div class="question" id="q5" style="display:none;">
         <h2>Question 5</h2>
         <h3>Quelle caractéristique distingue un jeton anti-CSRF efficace ?</h3>
-        <label><input type="checkbox" name="q5" value="unique"> Il est unique et associé à la session utilisateur</label><br>
-        <label><input type="checkbox" name="q5" value="visible"> Il est visible dans l'URL publique</label><br>
-        <label><input type="checkbox" name="q5" value="long"> Il est toujours identique sur toutes les pages</label><br>
-        <label><input type="checkbox" name="q5" value="static"> Il ne change jamais</label><br>
+        <label><input type="radio" name="q5" value="unique"> Il est unique et associé à la session utilisateur</label><br>
+        <label><input type="radio" name="q5" value="visible"> Il est visible dans l'URL publique</label><br>
+        <label><input type="radio" name="q5" value="long"> Il est toujours identique sur toutes les pages</label><br>
+        <label><input type="radio" name="q5" value="static"> Il ne change jamais</label><br>
         <p id="result-q5"></p>
         <button id="btn-valider-q5" class="fr-btn" type="button" onclick="checkQ5()">Valider votre réponse</button>
         <button id="btn-suivant-q5" class="fr-btn" type="button" onclick="showQuestion('q6')">Passer à la prochaine question</button>
@@ -80,10 +80,10 @@
     <div class="question" id="q6" style="display:none;">
         <h2>Question 6</h2>
         <h3>Quel en-tête HTTP est le plus efficace pour limiter le risque d'exécution de scripts non autorisés ?</h3>
-        <label><input type="checkbox" name="q6" value="csp"> Content-Security-Policy</label><br>
-        <label><input type="checkbox" name="q6" value="hsts"> Strict-Transport-Security</label><br>
-        <label><input type="checkbox" name="q6" value="xss"> X-XSS-Protection</label><br>
-        <label><input type="checkbox" name="q6" value="cache"> Cache-Control</label><br>
+        <label><input type="radio" name="q6" value="csp"> Content-Security-Policy</label><br>
+        <label><input type="radio" name="q6" value="hsts"> Strict-Transport-Security</label><br>
+        <label><input type="radio" name="q6" value="xss"> X-XSS-Protection</label><br>
+        <label><input type="radio" name="q6" value="cache"> Cache-Control</label><br>
         <p id="result-q6"></p>
         <button id="btn-valider-q6" class="fr-btn" type="button" onclick="checkQ6()">Valider votre réponse</button>
         <button id="btn-suivant-q6" class="fr-btn" type="button" onclick="showQuestion('q7')">Passer à la prochaine question</button>
@@ -92,10 +92,10 @@
     <div class="question" id="q7" style="display:none;">
         <h2>Question 7</h2>
         <h3>Quel principe décrit le mieux une architecture "zero trust" ?</h3>
-        <label><input type="checkbox" name="q7" value="nepasfaireconfiance"> Ne faire confiance à aucun élément du réseau sans vérification continue</label><br>
-        <label><input type="checkbox" name="q7" value="dmz"> Placer tout le trafic sur une DMZ</label><br>
-        <label><input type="checkbox" name="q7" value="firewall"> Utiliser uniquement un pare-feu matériel</label><br>
-        <label><input type="checkbox" name="q7" value="ocsp"> Vérifier les certificats avec OCSP</label><br>
+        <label><input type="radio" name="q7" value="nepasfaireconfiance"> Ne faire confiance à aucun élément du réseau sans vérification continue</label><br>
+        <label><input type="radio" name="q7" value="dmz"> Placer tout le trafic sur une DMZ</label><br>
+        <label><input type="radio" name="q7" value="firewall"> Utiliser uniquement un pare-feu matériel</label><br>
+        <label><input type="radio" name="q7" value="ocsp"> Vérifier les certificats avec OCSP</label><br>
         <p id="result-q7"></p>
         <button id="btn-valider-q7" class="fr-btn" type="button" onclick="checkQ7()">Valider votre réponse</button>
         <button id="btn-suivant-q7" class="fr-btn" type="button" onclick="showQuestion('q8')">Passer à la prochaine question</button>
@@ -104,10 +104,10 @@
     <div class="question" id="q8" style="display:none;">
         <h2>Question 8</h2>
         <h3>Dans une attaque par chaîne d'approvisionnement, quel acteur est le plus souvent compromis ?</h3>
-        <label><input type="checkbox" name="q8" value="fournisseur"> Le fournisseur de logiciels ou de dépendances</label><br>
-        <label><input type="checkbox" name="q8" value="client"> Le client final uniquement</label><br>
-        <label><input type="checkbox" name="q8" value="routeur"> Le routeur domestique</label><br>
-        <label><input type="checkbox" name="q8" value="antivirus"> L'antivirus installé</label><br>
+        <label><input type="radio" name="q8" value="fournisseur"> Le fournisseur de logiciels ou de dépendances</label><br>
+        <label><input type="radio" name="q8" value="client"> Le client final uniquement</label><br>
+        <label><input type="radio" name="q8" value="routeur"> Le routeur domestique</label><br>
+        <label><input type="radio" name="q8" value="antivirus"> L'antivirus installé</label><br>
         <p id="result-q8"></p>
         <button id="btn-valider-q8" class="fr-btn" type="button" onclick="checkQ8()">Valider votre réponse</button>
         <button id="btn-suivant-q8" class="fr-btn" type="button" onclick="showQuestion('q9')">Passer à la prochaine question</button>
@@ -116,10 +116,10 @@
     <div class="question" id="q9" style="display:none;">
         <h2>Question 9</h2>
         <h3>Pourquoi est-il dangereux d'utiliser le même certificat SSL/TLS pour plusieurs domaines non liés ?</h3>
-        <label><input type="checkbox" name="q9" value="identite"> Cela compromet l'identité d'un hôte et permet des usages abusifs</label><br>
-        <label><input type="checkbox" name="q9" value="perf"> Cela accélère trop le serveur</label><br>
-        <label><input type="checkbox" name="q9" value="smtp"> Cela casse uniquement le service SMTP</label><br>
-        <label><input type="checkbox" name="q9" value="dns"> Cela modifie automatiquement les enregistrements DNS</label><br>
+        <label><input type="radio" name="q9" value="identite"> Cela compromet l'identité d'un hôte et permet des usages abusifs</label><br>
+        <label><input type="radio" name="q9" value="perf"> Cela accélère trop le serveur</label><br>
+        <label><input type="radio" name="q9" value="smtp"> Cela casse uniquement le service SMTP</label><br>
+        <label><input type="radio" name="q9" value="dns"> Cela modifie automatiquement les enregistrements DNS</label><br>
         <p id="result-q9"></p>
         <button id="btn-valider-q9" class="fr-btn" type="button" onclick="checkQ9()">Valider votre réponse</button>
         <button id="btn-suivant-q9" class="fr-btn" type="button" onclick="showQuestion('q10')">Passer à la prochaine question</button>
@@ -128,10 +128,10 @@
     <div class="question" id="q10" style="display:none;">
         <h2>Question 10</h2>
         <h3>Dans quel cas préfère-t-on un chiffrement asymétrique plutôt que symétrique ?</h3>
-        <label><input type="checkbox" name="q10" value="samekey"> Lorsqu'on ne veut pas partager la même clé entre l'émetteur et le récepteur</label><br>
-        <label><input type="checkbox" name="q10" value="rapidite"> Lorsqu'on veut chiffrer uniquement de très petits fichiers</label><br>
-        <label><input type="checkbox" name="q10" value="wifi"> Pour sécuriser une connexion Wi-Fi publique</label><br>
-        <label><input type="checkbox" name="q10" value="root"> Pour modifier l'accès root</label><br>
+        <label><input type="radio" name="q10" value="samekey"> Lorsqu'on ne veut pas partager la même clé entre l'émetteur et le récepteur</label><br>
+        <label><input type="radio" name="q10" value="rapidite"> Lorsqu'on veut chiffrer uniquement de très petits fichiers</label><br>
+        <label><input type="radio" name="q10" value="wifi"> Pour sécuriser une connexion Wi-Fi publique</label><br>
+        <label><input type="radio" name="q10" value="root"> Pour modifier l'accès root</label><br>
         <p id="result-q10"></p>
         <button id="btn-valider-q10" class="fr-btn" type="button" onclick="checkQ10()">Valider votre réponse</button>
         <button id="btn-suivant-q10" class="fr-btn" type="button" onclick="showQuestion('q11')">Passer à la prochaine question</button>
@@ -164,10 +164,10 @@
     <div class="question" id="q13" style="display:none;">
         <h2>Question 13</h2>
         <h3>Qu'est-ce qu'un rootkit ?</h3>
-        <label><input type="checkbox" name="q13" value="privilege"> Un logiciel malveillant conçu pour obtenir un accès privilégié discret</label><br>
-        <label><input type="checkbox" name="q13" value="firewall"> Un pare-feu matériel</label><br>
-        <label><input type="checkbox" name="q13" value="vpn"> Un objectif VPN</label><br>
-        <label><input type="checkbox" name="q13" value="cache"> Un cache de navigateur</label><br>
+        <label><input type="radio" name="q13" value="privilege"> Un logiciel malveillant conçu pour obtenir un accès privilégié discret</label><br>
+        <label><input type="radio" name="q13" value="firewall"> Un pare-feu matériel</label><br>
+        <label><input type="radio" name="q13" value="vpn"> Un objectif VPN</label><br>
+        <label><input type="radio" name="q13" value="cache"> Un cache de navigateur</label><br>
         <p id="result-q13"></p>
         <button id="btn-valider-q13" class="fr-btn" type="button" onclick="checkQ13()">Valider votre réponse</button>
         <button id="btn-suivant-q13" class="fr-btn" type="button" onclick="showQuestion('q14')">Passer à la prochaine question</button>
@@ -176,10 +176,10 @@
     <div class="question" id="q14" style="display:none;">
         <h2>Question 14</h2>
         <h3>Quel concept correspond à lier explicitement une clé publique à un domaine ?</h3>
-        <label><input type="checkbox" name="q14" value="pinning"> Le public key pinning</label><br>
-        <label><input type="checkbox" name="q14" value="spam"> Le filtrage anti-spam</label><br>
-        <label><input type="checkbox" name="q14" value="dnssec"> La signature DNSSEC</label><br>
-        <label><input type="checkbox" name="q14" value="proxy"> Le serveur mandataire</label><br>
+        <label><input type="radio" name="q14" value="pinning"> Le public key pinning</label><br>
+        <label><input type="radio" name="q14" value="spam"> Le filtrage anti-spam</label><br>
+        <label><input type="radio" name="q14" value="dnssec"> La signature DNSSEC</label><br>
+        <label><input type="radio" name="q14" value="proxy"> Le serveur mandataire</label><br>
         <p id="result-q14"></p>
         <button id="btn-valider-q14" class="fr-btn" type="button" onclick="checkQ14()">Valider votre réponse</button>
         <button id="btn-suivant-q14" class="fr-btn" type="button" onclick="showQuestion('q15')">Passer à la prochaine question</button>
@@ -188,10 +188,10 @@
     <div class="question" id="q15" style="display:none;">
         <h2>Question 15</h2>
         <h3>Quelle action est la plus pertinente pour vérifier la validité d'un certificat TLS ?</h3>
-        <label><input type="checkbox" name="q15" value="chaine"> Vérifier la chaîne de certification et la validité de la signature</label><br>
-        <label><input type="checkbox" name="q15" value="ping"> Pinger l'adresse IP du serveur</label><br>
-        <label><input type="checkbox" name="q15" value="taille"> Vérifier la taille du certificat uniquement</label><br>
-        <label><input type="checkbox" name="q15" value="temps"> Vérifier l'heure locale du poste</label><br>
+        <label><input type="radio" name="q15" value="chaine"> Vérifier la chaîne de certification et la validité de la signature</label><br>
+        <label><input type="radio" name="q15" value="ping"> Pinger l'adresse IP du serveur</label><br>
+        <label><input type="radio" name="q15" value="taille"> Vérifier la taille du certificat uniquement</label><br>
+        <label><input type="radio" name="q15" value="temps"> Vérifier l'heure locale du poste</label><br>
         <p id="result-q15"></p>
         <button id="btn-valider-q15" class="fr-btn" type="button" onclick="checkQ15()">Valider votre réponse</button>
         <button id="btn-suivant-q15" class="fr-btn" type="button" onclick="history.back()">Voir les résultats / Retour</button>
