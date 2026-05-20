@@ -145,11 +145,13 @@ function checkQ1() {
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Un bon mot de passe doit contenir au moins 12 caractères, avec une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
         result.style.color = "green";
+        score ++;
         document.getElementById("btn-valider-q1").style.display = "none";
         document.getElementById("btn-suivant-q1").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        score --;
     }
 }
 
