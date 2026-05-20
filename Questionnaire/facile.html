@@ -27,6 +27,12 @@
         <label><input type="checkbox" name="q1" value="azerty"> Azerty</label><br>
         <label><input type="checkbox" name="q1" value="g7!pl9@vq2#rt"> G7!pL9@vQ2#rT</label><br>
 
+        <p id="result-q1"></p> <!-- Résultat pour savoir si la question a bien été repondue ou pas -->
+
+    <button id="btn-valider-q1" class="fr-btn" type="button" onclick="checkQ1()">Valider votre réponse</button>
+ 
+    <button id="btn-suivant-q1" class="fr-btn" type="button" onclick="showQuestion('q2')" style="display:none;">Passer à la prochaine question</button>
+
     </div>
 
     <div class="question" id="q2" style="display:none;">
@@ -38,6 +44,11 @@
         <label><input type="checkbox" name="q2" value="oui"> Oui</label><br>
         <label><input type="checkbox" name="q2" value="non"> Non</label><br>
         
+        <p id="result-q2"></p>
+ 
+        <button id="btn-valider-q2" class="fr-btn" type="button" onclick="checkQ2()">Valider votre réponse</button>
+ 
+        <button id="btn-suivant-q2" class="fr-btn" type="button" onclick="showQuestion('q3')" style="display:none;">Passer à la prochaine question</button>
 
     </div>
 
@@ -51,26 +62,13 @@
         <label><input type="checkbox" name="q3" value="separez"> Séparez travail et personnel</label><br>
         <label><input type="checkbox" name="q3" value="utilisez1"> Utilisez plusieurs adresses électroniques</label><br>
         <label><input type="checkbox" name="q3" value="utilisez2"> Utilisez une seule adresse électronique</label><br>
+
+        <p id="result-q3"></p>
+ 
+        <button id="btn-valider-q3" class="fr-btn" type="button" onclick="checkQ3()">Valider votre réponse</button>
         
 
     </div>
-
-    <p id="result-q1"></p> <!-- Résultat pour savoir si la question a bien été repondue ou pas -->
-
-    <p id="result-q2"></p> <!-- Résultat pour savoir si la question a bien été repondue ou pas --> 
-    
-
-    <p id="result-q3"></p> <!-- Résultat pour savoir si la question a bien été repondue ou pas --> 
-
-    <button id="btn-valider-q1" class="fr-btn" type="button" onclick="checkQ1()">Valider votre réponse</button> <!-- Bouton pour valider la réponse de la question 1 -->
-
-    <button id="tn-valider-q2" class="fr-btn" type="button" onclick="checkQ2()">Valider votre réponse</button> <!-- Bouton pour valider la réponse de la question 2 -->
-    
-
-    <button class="fr-btn" type="button" onclick="showQuestion('q2')">Passer à la prochaine question</button> <!-- Bourton pour passer à la question 2 -->
-
-
-    
 
     <div class="bouton-revenir">
         <button class="fr-btn" type="button" onclick="history.back()">

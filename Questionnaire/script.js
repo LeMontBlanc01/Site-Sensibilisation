@@ -1,8 +1,5 @@
 console.log("JS chargé !"); // Affiche un message dans la console pour confirmer que le fichier JS est bien chargé
 
-document.getElementById("btn-valider-q2").style.display = "none"; //Cache le bouton de validation de la question 2 au chargement
-
-//Fonction qui affiche une question et cache les autres
 function showQuestion(id) {
 
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
@@ -46,7 +43,8 @@ function checkQ1() {
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
-        document.getElementById("btn-valider-q1").style.display = "none"; //Cacher le bouton de validation une fois que c'est validé
+        document.getElementById("btn-valider-q1").style.display = "none";
+        document.getElementById("btn-suivant-q1").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
@@ -71,6 +69,7 @@ function checkQ2() {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
         document.getElementById("btn-valider-q2").style.display = "none";
+        document.getElementById("btn-suivant-q2").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
