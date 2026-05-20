@@ -29,7 +29,7 @@ function showQuestion(id) {
     }
   }
 
-
+  //Pour Q4
   if (id !== 'q4') {
     const result4 = document.getElementById('result-q4');
     if (result4) {
@@ -37,6 +37,7 @@ function showQuestion(id) {
     }
   }
 
+  //Pour Q5
   if (id !== 'q5') {
     const result5 = document.getElementById('result-q5');
     if (result5) {
