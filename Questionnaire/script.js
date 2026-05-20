@@ -253,7 +253,7 @@ function checkQ5() {
 
     const result = document.getElementById("result-q5");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    if (arraysEqual(selected, correct, score ++)) {
+    if (arraysEqual(selected, correct)) {
         score ++;
         result.textContent = "Bonne réponse ! Pour vérifier l'authenticité d'un email, il est important de vérifier l'adresse de l'expéditeur, de ne pas cliquer sur les liens ou télécharger les pièces jointes, et d'utiliser un logiciel antivirus pour analyser les emails suspects.";
         result.style.color = "green";
