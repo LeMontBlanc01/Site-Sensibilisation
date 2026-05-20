@@ -167,6 +167,7 @@ function checkQ2() {
 
     const result = document.getElementById("result-q2");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! La clé USB peut être infectée par un virus ou un malware, et en la connectant à votre ordinateur, vous risquez de contaminer votre système. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés.";
         result.style.color = "green";
@@ -187,6 +188,7 @@ function checkQ3() {
 
     const result = document.getElementById("result-q3");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -207,6 +209,7 @@ function checkQ4() {
 
     const result = document.getElementById("result-q4");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -227,6 +230,7 @@ function checkQ5() {
 
     const result = document.getElementById("result-q5");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -247,6 +251,7 @@ function checkQ6() {
 
     const result = document.getElementById("result-q6");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -267,6 +272,7 @@ function checkQ7() {
 
     const result = document.getElementById("result-q7");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -287,6 +293,7 @@ function checkQ8() {
 
     const result = document.getElementById("result-q8");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -307,6 +314,7 @@ function checkQ9() {
 
     const result = document.getElementById("result-q9");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -327,6 +335,7 @@ function checkQ10() {
 
     const result = document.getElementById("result-q10");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -347,6 +356,7 @@ function checkQ11() {
 
     const result = document.getElementById("result-q11");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -367,6 +377,7 @@ function checkQ12() {
 
     const result = document.getElementById("result-q12");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -387,6 +398,7 @@ function checkQ13() {
 
     const result = document.getElementById("result-q13");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -407,6 +419,7 @@ function checkQ14() {
 
     const result = document.getElementById("result-q14");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
@@ -427,6 +440,7 @@ function checkQ15() {
 
     const result = document.getElementById("result-q15");
 
+    //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! ";
         result.style.color = "green";
