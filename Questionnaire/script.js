@@ -95,7 +95,7 @@ function checkQ3() {
     const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["test"];
+    const correct = ["separez", "utilisez1"]; //Il faut cocher les cases "Séparez travail et personnel" et "Utilisez plusieurs adresses électroniques"
 
     const result = document.getElementById("result-q3");
 
