@@ -28,6 +28,12 @@
         <p id="result-q1"></p>
         <button id="btn-valider-q1" class="fr-btn" type="button" onclick="checkQ1()">Valider votre réponse</button>
         <button id="btn-suivant-q1" class="fr-btn" type="button" onclick="showQuestion('q2')" style="display:none;">Passer à la prochaine question</button>
+        
+        <div class="resultats" id="resultats" style="display:none;">
+            <h2>Résultats</h2>
+            <p id="score"></p>
+            <p id="feedback"></p>
+        </div>
     </div>
 
     <div class="question" id="q2" style="display:none;">
@@ -223,6 +229,9 @@
         <button id="btn-valider-q15" class="fr-btn" type="button" onclick="checkQ15()">Valider votre réponse</button>
         <button id="btn-suivant-q15" class="fr-btn" type="button" onclick="history.back()" style="display:none;">Voir les résultats / Retour</button>
     </div>
+
+
+
 
     <div class="bouton-revenir">
         <button class="fr-btn" type="button" onclick="history.back()">Revenir à l'accueil</button>
