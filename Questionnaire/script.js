@@ -1,4 +1,5 @@
 console.log("JS chargé !");
+
 document.getElementById("btn-valider-q2").style.display = "none";
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
