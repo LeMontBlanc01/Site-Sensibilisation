@@ -110,3 +110,40 @@ function checkQ3() {
     }
 }
 
+function checkQ4() {
+    const selected = Array.from(document.querySelectorAll('input[name="q4"]:checked'))
+                          .map(el => el.value);
+
+    const correct = ["nepaspartager", "utilisezvpn", "utilisezantivirus"]; //Il faut cocher les cases "Ne pas partager vos données personnelles en ligne", "Utiliser un VPN pour masquer votre adresse IP" et "Utiliser un antivirus pour protéger votre ordinateur"
+
+    const result = document.getElementById("result-q4");
+
+    if (arraysEqual(selected, correct)) {
+        result.textContent = "Bonne réponse ! ";
+        result.style.color = "green";
+        document.getElementById("btn-valider-q4").style.display = "none";
+        document.getElementById("btn-suivant-q4").style.display = "inline-block";
+    } else {
+        result.textContent = "Mauvaise réponse.";
+        result.style.color = "red";
+    }
+}
+
+function checkQ5() {
+    const selected = Array.from(document.querySelectorAll('input[name="q5"]:checked'))
+                          .map(el => el.value);
+
+    const correct = ["verifiez", "utilisezantivirus"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+
+    const result = document.getElementById("result-q5");
+
+    if (arraysEqual(selected, correct)) {
+        result.textContent = "Bonne réponse ! ";
+        result.style.color = "green";
+        document.getElementById("btn-valider-q5").style.display = "none";
+        document.getElementById("btn-suivant-q5").style.display = "inline-block";
+    } else {
+        result.textContent = "Mauvaise réponse.";
+        result.style.color = "red";
+    }
+}
