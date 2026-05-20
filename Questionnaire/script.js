@@ -139,7 +139,7 @@ function checkQ1() {
 
     const correct = ["g7!pl9@vq2#rt"]; //La bonne réponse
 
-    const result = document.getElementById("result-q1");  //Zone où afficher le résultat
+    const result = document.getElementById("result-q1");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -165,7 +165,7 @@ function checkQ2() {
 
     const correct = ["oui"];  //La bonne réponse
 
-    const result = document.getElementById("result-q2");
+    const result = document.getElementById("result-q2");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -186,7 +186,7 @@ function checkQ3() {
 
     const correct = ["separez", "utilisez1"]; //Les bonnes réponses
 
-    const result = document.getElementById("result-q3");
+    const result = document.getElementById("result-q3");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -207,7 +207,7 @@ function checkQ4() {
 
     const correct = ["vpn"]; //La bonne réponse
 
-    const result = document.getElementById("result-q4");
+    const result = document.getElementById("result-q4");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -228,7 +228,7 @@ function checkQ5() {
 
     const correct = ["verifiez", "antivirus"]; //La bonne réponse
 
-    const result = document.getElementById("result-q5");
+    const result = document.getElementById("result-q5");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -249,7 +249,7 @@ function checkQ6() {
 
     const correct = ["failles"]; //La bonne réponse
 
-    const result = document.getElementById("result-q6");
+    const result = document.getElementById("result-q6");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -270,7 +270,7 @@ function checkQ7() {
 
     const correct = ["signaler"]; //La bonne réponse
 
-    const result = document.getElementById("result-q7");
+    const result = document.getElementById("result-q7");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -291,7 +291,7 @@ function checkQ8() {
 
     const correct = ["gestionnaire"]; //La bonne réponse
 
-    const result = document.getElementById("result-q8");
+    const result = document.getElementById("result-q8");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -312,7 +312,7 @@ function checkQ9() {
 
     const correct = ["infection"]; //La bonne réponse
 
-    const result = document.getElementById("result-q9");
+    const result = document.getElementById("result-q9");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -333,7 +333,7 @@ function checkQ10() {
 
     const correct = ["adresse"]; //La bonne réponse
 
-    const result = document.getElementById("result-q10");
+    const result = document.getElementById("result-q10");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -354,7 +354,7 @@ function checkQ11() {
 
     const correct = ["2fa"]; //La bonne réponse
 
-    const result = document.getElementById("result-q11");
+    const result = document.getElementById("result-q11");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -375,7 +375,7 @@ function checkQ12() {
 
     const correct = ["regulier"]; //La bonne réponse
 
-    const result = document.getElementById("result-q12");
+    const result = document.getElementById("result-q12");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -396,7 +396,7 @@ function checkQ13() {
 
     const correct = ["source"]; //La bonne réponse
 
-    const result = document.getElementById("result-q13");
+    const result = document.getElementById("result-q13");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -417,7 +417,7 @@ function checkQ14() {
 
     const correct = ["malware"]; //La bonne réponse
 
-    const result = document.getElementById("result-q14");
+    const result = document.getElementById("result-q14");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
@@ -438,7 +438,7 @@ function checkQ15() {
 
     const correct = ["change"]; //La bonne réponse
 
-    const result = document.getElementById("result-q15");
+    const result = document.getElementById("result-q15");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
