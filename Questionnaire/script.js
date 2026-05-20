@@ -157,7 +157,7 @@ function checkQ2() {
     const selected = Array.from(document.querySelectorAll('input[name="q2"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["oui"];
+    const correct = ["oui"];  //La bonne réponse
 
     const result = document.getElementById("result-q2");
 
@@ -177,7 +177,7 @@ function checkQ3() {
     const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["separez", "utilisez1"]; //Il faut cocher les cases "Séparez travail et personnel" et "Utilisez plusieurs adresses électroniques"
+    const correct = ["separez", "utilisez1"]; //Les bonnes réponses
 
     const result = document.getElementById("result-q3");
 
@@ -197,7 +197,7 @@ function checkQ4() {
     const selected = Array.from(document.querySelectorAll('input[name="q4"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["vpn"]; //Il faut cocher les cases "Ne pas partager vos données personnelles en ligne", "Utiliser un VPN pour masquer votre adresse IP" et "Utiliser un antivirus pour protéger votre ordinateur"
+    const correct = ["vpn"]; //La bonne réponse
 
     const result = document.getElementById("result-q4");
 
@@ -217,7 +217,7 @@ function checkQ5() {
     const selected = Array.from(document.querySelectorAll('input[name="q5"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["verifiez", "antivirus"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["verifiez", "antivirus"]; //La bonne réponse
 
     const result = document.getElementById("result-q5");
 
@@ -237,7 +237,7 @@ function checkQ6() {
     const selected = Array.from(document.querySelectorAll('input[name="q6"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["failles"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["failles"]; //La bonne réponse
 
     const result = document.getElementById("result-q6");
 
@@ -257,7 +257,7 @@ function checkQ7() {
     const selected = Array.from(document.querySelectorAll('input[name="q7"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["signaler"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["signaler"]; //La bonne réponse
 
     const result = document.getElementById("result-q7");
 
@@ -277,7 +277,7 @@ function checkQ8() {
     const selected = Array.from(document.querySelectorAll('input[name="q8"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["gestionnaire"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["gestionnaire"]; //La bonne réponse
 
     const result = document.getElementById("result-q8");
 
@@ -297,7 +297,7 @@ function checkQ9() {
     const selected = Array.from(document.querySelectorAll('input[name="q9"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["infection"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["infection"]; //La bonne réponse
 
     const result = document.getElementById("result-q9");
 
@@ -317,7 +317,7 @@ function checkQ10() {
     const selected = Array.from(document.querySelectorAll('input[name="q10"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["adresse"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["adresse"]; //La bonne réponse
 
     const result = document.getElementById("result-q10");
 
@@ -337,7 +337,7 @@ function checkQ11() {
     const selected = Array.from(document.querySelectorAll('input[name="q11"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["2fa"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["2fa"]; //La bonne réponse
 
     const result = document.getElementById("result-q11");
 
@@ -357,7 +357,7 @@ function checkQ12() {
     const selected = Array.from(document.querySelectorAll('input[name="q12"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["regulier"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["regulier"]; //La bonne réponse
 
     const result = document.getElementById("result-q12");
 
@@ -377,7 +377,7 @@ function checkQ13() {
     const selected = Array.from(document.querySelectorAll('input[name="q13"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["source"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["source"]; //La bonne réponse
 
     const result = document.getElementById("result-q13");
 
@@ -397,7 +397,7 @@ function checkQ14() {
     const selected = Array.from(document.querySelectorAll('input[name="q14"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["malware"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["malware"]; //La bonne réponse
 
     const result = document.getElementById("result-q14");
 
@@ -417,7 +417,7 @@ function checkQ15() {
     const selected = Array.from(document.querySelectorAll('input[name="q15"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["change"]; //Il faut cocher les cases "Vérifier l'authenticité des e-mails avant de cliquer sur les liens" et "Utiliser un antivirus pour détecter les e-mails de phishing"
+    const correct = ["change"]; //La bonne réponse
 
     const result = document.getElementById("result-q15");
 
