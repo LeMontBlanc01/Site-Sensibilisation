@@ -126,6 +126,12 @@ function showQuestion(id) {
   }
 
 }
+
+function showResult(id) {
+  document.querySelectorAll('.result').forEach(r => r.style.display = 'none');
+  document.getElementById(id).style.display = 'block');
+}
+
 //Fonction qui permet de vérifier la réponse de la question 1
 function checkQ1() {
     const selected = Array.from(document.querySelectorAll('input[name="q1"]:checked'))  //Récupère toutes les cases cochées de la question 1 et on prend leur valeur
