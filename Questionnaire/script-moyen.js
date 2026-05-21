@@ -176,7 +176,7 @@ function checkQ2() {
     const selected = Array.from(document.querySelectorAll('input[name="q2"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["vpn"];  //La bonne réponse: utiliser un VPN
+  const correct = ["segmentation"];  //La bonne réponse: la segmentation réseau
 
     const result = document.getElementById("result-q2");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
