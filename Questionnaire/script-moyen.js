@@ -142,7 +142,7 @@ function checkQ1() {
   const result = document.getElementById("result-q1");
 
   if (arraysEqual(selected, correct)) {
-    result.textContent = "Bonne réponse !";
+    result.textContent = "Bonne réponse !Pour un mot de passe fort, il est recommandé d'utiliser au moins 12 caractères, incluant des majuscules, des minuscules, des chiffres et des symboles.";
     result.style.color = "green";
     score++;
     document.getElementById("btn-valider-q1").style.display = "none";
@@ -182,7 +182,7 @@ function checkQ2() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! La segmentation réseau permet de diviser un réseau en sous-réseaux plus petits, ce qui améliore la sécurité en limitant la propagation d'une attaque.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q2").style.display = "none";
@@ -206,7 +206,7 @@ function checkQ3() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) ajoute une couche de sécurité supplémentaire en demandant une preuve d'identité supplémentaire, et l'utilisation de mots de passe uniques pour chaque compte réduit le risque de compromission en cas de fuite de données.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q3").style.display = "none";
@@ -230,7 +230,7 @@ function checkQ4() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Une demande urgente est un indicateur classique d'une tentative de phishing, car les attaquants cherchent à créer un sentiment d'urgence pour inciter les victimes à agir rapidement et sans réfléchir.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q4").style.display = "none";
@@ -254,7 +254,7 @@ function checkQ5() {
 
     if (arraysEqual(selected, correct)) {
         score ++;
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Maintenir les systèmes à jour avec les derniers correctifs de sécurité et restreindre les permissions des utilisateurs sont des mesures essentielles pour réduire la surface d'attaque et prévenir les compromissions.";
         result.style.color = "green";
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
@@ -277,7 +277,7 @@ function checkQ6() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Un gestionnaire de mots de passe permet de stocker et de générer des mots de passe forts et uniques pour chaque compte, ce qui améliore considérablement la sécurité en réduisant le risque de réutilisation de mots de passe et en facilitant la gestion des identifiants.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q6").style.display = "none";
@@ -301,7 +301,7 @@ function checkQ7() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Des connexions RDP inhabituelles entre machines internes peuvent être un indicateur d'une attaque par mouvement latéral, où un attaquant qui a compromis une machine tente de se déplacer latéralement à travers le réseau pour accéder à d'autres ressources.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q7").style.display = "none";
@@ -325,7 +325,7 @@ function checkQ8() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! L'utilisation de HTTPS et l'indication d'un icône cadenas dans la barre d'adresse sont des signes que la connexion est sécurisée.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q8").style.display = "none";
@@ -349,7 +349,7 @@ function checkQ9() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Un trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissant sur le réseau, et des ports ouverts inattendus sur plusieurs machines sont tous des indicateurs potentiels d'une compromission du réseau.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q9").style.display = "none";
@@ -373,7 +373,7 @@ function checkQ10() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Des permissions inhabituelles, un éditeur inconnu, ou une taille de fichier anormalement grande ou petite peuvent être des indicateurs d'une compromission ou d'une activité malveillante.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q10").style.display = "none";
@@ -397,7 +397,7 @@ function checkQ11() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Le principe du moindre privilège consiste à accorder aux utilisateurs uniquement les permissions nécessaires pour accomplir leurs tâches, réduisant ainsi le risque de compromission en cas d'intrusion.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q11").style.display = "none";
@@ -421,7 +421,7 @@ function checkQ12() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Stocker une copie locale des données et une copie dans le cloud chiffré offre une protection contre la perte de données due à des incidents locaux (comme un vol ou un incendie) tout en assurant que les données sont sécurisées contre les accès non autorisés grâce au chiffrement.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q12").style.display = "none";
@@ -445,7 +445,7 @@ function checkQ13() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Révoquer les sessions et changer les mots de passe est une mesure de sécurité importante en cas de compromission.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q13").style.display = "none";
@@ -469,7 +469,7 @@ function checkQ14() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Protéger les données en cas de vol est crucial pour éviter que des informations sensibles ne tombent entre de mauvaises mains, ce qui peut entraîner des conséquences graves telles que le vol d'identité ou la compromission de comptes.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q14").style.display = "none";
@@ -493,7 +493,7 @@ function checkQ15() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! La compromission de la clé maître donnant accès à l'ensemble du coffre est un risque majeur en matière de sécurité.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q15").style.display = "none";
