@@ -26,15 +26,12 @@ header {
         }
 
 header img {
+            left: 20px;
+            display: block;
             width: 80px;
             height: 80px;
             flex-shrink: 0;
-        }
-
-header h1 {
-            text-align: left;
-            font-size: 2em;
-            margin: 0;
+            
         }
 
 
