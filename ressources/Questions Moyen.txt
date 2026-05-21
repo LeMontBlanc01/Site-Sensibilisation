@@ -1,0 +1,119 @@
+Moyen
+
+Quel indicateur permet le mieux de détecter une attaque par mouvement latéral dans un réseau d'entreprise ?
+
+Un pic de trafic sortant vers un domaine récemment créé
+
+Une augmentation anormale des requêtes DNS internes
+
+Une hausse de taux d'échec des connexions Wi-Fi invité
+
+Des connexions RDP inhabituelles entre machines internes (bonne réponse) explication: Les mouvements latéraux impliquent souvent l'usage de protocoles internes comme RDP pour se déplacer d'une machine à l'autre.
+
+
+Quel est le principal risque lié à l'utilisation d'un gestionnaire de mots de passe mal configuré ?
+
+La perte de tous les mots de passe en cas de panne du PC
+
+L'impossibilité de synchroniser les mots de passe entre appareils
+
+La compromission de la clé maître donnant accès à l'ensemble du coffre (bonne réponse) explication: Si la clé maître est compromise, l'attaquant accède à toutes les informations stockées.
+
+La création automatique de mots de passe trop complexes
+
+
+
+Quel type d'attaque repose sur l'exploitation d'un service exposé mais rarement surveillé, comme un protocole d'administration oublié ?
+
+Living-off-the-land
+
+Attaque par dictionnaire
+
+Attaque par rebond
+
+Shadow IT exploitation (bonne réponse) explication: Le Shadow IT désigne les services ou systèmes non gérés, souvent oubliés et vulnérables.
+
+
+
+Quel comportement d'un employé est le plus susceptible d'indiquer une compromission de son compte professionnel ?
+
+Il réçoit plus de spams que d'habitude
+
+Il doit réinitialiser son mot de passe après une mise à jour
+
+Son compte envoie des e-mails à des contacts inhabituels (bonne réponse) explication: L'envoi d'e-mails non sollicités à des contacts inhabituels est typique d'un compte compromis.
+
+Il ne parvient plus à accéder à un site interne
+
+
+
+Quel mécanisme permet de limiter l'impact d'un ransomware même si une machine est chiffrée ?
+
+Le chiffrement du disque dur
+
+L'utilisation d'un VPN d'entreprise
+
+La désactivation du pare-feu local
+
+La segmentation réseau (bonne réponse) explication: La segmentation réseau limite la capacité du ransomware à se propager à d'autres segments.
+
+
+
+Quelles actions permettent de limiter les dégâts après une attaque réussie ?
+
+Isoler immédiatement la machine compromise (bonne réponse)
+
+Changer les mots de passe des comptes sensibles (bonnne réponse aussi)
+
+Redémarrer la machine pour "réinitialiser" le malware
+
+Analyser les journaux pour comprendre l'origine de l'attaque (aussi bonne réponse)
+
+
+
+Quels signes peuvent indiquer une compromission réseau dans une petite entreprise ?
+
+Trafic sortant inhabituel vers des pays étrangers (bonne réponse)
+
+Des appareils inconnus apparaissent sur le réseau (bonne réponse)
+
+Le serveur DNS interne répond plus lentement
+
+Des ports ouverts inattendus sur plusieurs machines (bonne réponse)
+
+
+
+Quels éléments peuvent indiquer une attaque MITM simple (non chiffrée) ?
+
+L'adresse IP de la passerelle change soudainement (bonnne réponse)
+
+Le navigateur affiche un avertissement de certificat (bonne réponse)
+
+Le trafic HTTP montre des modifications dans le contenu (bonne réponse)
+
+Le débit Internet augmente fortement 
+
+
+
+Quelles pratiques permettent de sécuriser un réseau Wi-Fi domestique ?
+
+Utiliser WPA2 ou WPA3 (bonne réponse)
+
+Laisser le mot de passe par défaut
+
+Désactiver le WPS (bonne réponse)
+
+Diffuser le SSID publiquement
+
+
+
+Lorsque vous devez partager un document sensible avec un collègue, comment devriez-vous NE PAS le faire ?
+
+L'imprimer et le mettre sur son bureau (bonne réponse)
+
+Utiliser les moyens prédéfinis 
+
+L'envoyer à son adresse e-mail privée (bonne réponse)
+
+Créer un lien de partage public (bonne réponse)
+
