@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="style3.css" rel="stylesheet">
     <title>QCM Moyen - Sensibilisation à la cybersécurité</title>
-    <script src="script.js" defer></script>
+    <script src="script-moyen.js" defer></script>
 
 
 </head>
@@ -14,15 +14,192 @@
 
     <header>
         <h1>Questionnaire Moyen</h1>
+        <p id="score" style="font-size: 18px; font-weight: bold; color: #ffffff;">Score : 0</p>
     </header>
 
-    <div class="bouton-revenir">
-        <button class="fr-btn" type="button" onclick="history.back()">
-            Revenir à l'accueil
-        </button>
+    <div class="question" id="q1">
+        <h2>Question 1</h2>
+        <h3>Quelle longueur minimale est recommandée pour un mot de passe sécurisé ?</h3>
+        <label><input type="radio" name="q1" value="6"> 6 caractères</label><br>
+        <label><input type="radio" name="q1" value="8"> 8 caractères</label><br>
+        <label><input type="radio" name="q1" value="12"> 12 caractères</label><br>
+        <label><input type="radio" name="q1" value="4"> 4 caractères</label><br>
+        <p id="result-q1"></p>
+        <button id="btn-valider-q1" class="fr-btn" type="button" onclick="checkQ1()">Valider votre réponse</button>
+        <button id="btn-suivant-q1" class="fr-btn" type="button" onclick="showQuestion('q2')" style="display:none;">Passer à la prochaine question</button>
     </div>
 
+    <div class="question" id="q2" style="display:none;">
+        <h2>Question 2</h2>
+        <h3>Quel comportement réduit le risque lors de l'utilisation d'un réseau Wi‑Fi public ?</h3>
+        <label><input type="radio" name="q2" value="vpn"> Utiliser un VPN</label><br>
+        <label><input type="radio" name="q2" value="partage"> Activer le partage de fichiers</label><br>
+        <label><input type="radio" name="q2" value="aucun"> Ne rien faire</label><br>
+        <label><input type="radio" name="q2" value="http"> Ne pas vérifier les sites HTTP</label><br>
+        <p id="result-q2"></p>
+        <button id="btn-valider-q2" class="fr-btn" type="button" onclick="checkQ2()">Valider votre réponse</button>
+        <button id="btn-suivant-q2" class="fr-btn" type="button" onclick="showQuestion('q3')" style="display:none;">Passer à la prochaine question</button>
+    </div>
 
+    <div class="question" id="q3" style="display:none;">
+        <h2>Question 3</h2>
+        <h3>Quelles actions sont recommandées pour protéger un compte en ligne ? (choix multiples)</h3>
+        <label><input type="checkbox" name="q3" value="2fa"> Activer l'authentification à deux facteurs</label><br>
+        <label><input type="checkbox" name="q3" value="reutiliser"> Réutiliser le même mot de passe partout</label><br>
+        <label><input type="checkbox" name="q3" value="unique"> Utiliser un mot de passe unique par site</label><br>
+        <label><input type="checkbox" name="q3" value="partager"> Partager son mot de passe avec un collègue</label><br>
+        <p id="result-q3"></p>
+        <button id="btn-valider-q3" class="fr-btn" type="button" onclick="checkQ3()">Valider votre réponse</button>
+        <button id="btn-suivant-q3" class="fr-btn" type="button" onclick="showQuestion('q4')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q4" style="display:none;">
+        <h2>Question 4</h2>
+        <h3>Quel signe indique souvent un e‑mail de phishing ?</h3>
+        <label><input type="radio" name="q4" value="urgent"> Demande urgente d'informations personnelles</label><br>
+        <label><input type="radio" name="q4" value="parfait"> Message avec une grammaire parfaite et inattendue</label><br>
+        <label><input type="radio" name="q4" value="contact"> E‑mail venant d'un contact connu sans lien</label><br>
+        <label><input type="radio" name="q4" value="signature"> Présence d'une signature professionnelle</label><br>
+        <p id="result-q4"></p>
+        <button id="btn-valider-q4" class="fr-btn" type="button" onclick="checkQ4()">Valider votre réponse</button>
+        <button id="btn-suivant-q4" class="fr-btn" type="button" onclick="showQuestion('q5')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q5" style="display:none;">
+        <h2>Question 5</h2>
+        <h3>Parmi ces bonnes pratiques, lesquelles améliorent la confidentialité sur un smartphone ? (choix multiples)</h3>
+        <label><input type="checkbox" name="q5" value="maj"> Maintenir les applications à jour</label><br>
+        <label><input type="checkbox" name="q5" value="gps"> Laisser la localisation activée en permanence</label><br>
+        <label><input type="checkbox" name="q5" value="permissions"> Restreindre les permissions des applications</label><br>
+        <label><input type="checkbox" name="q5" value="bluetooth"> Activer Bluetooth en permanence</label><br>
+        <p id="result-q5"></p>
+        <button id="btn-valider-q5" class="fr-btn" type="button" onclick="checkQ5()">Valider votre réponse</button>
+        <button id="btn-suivant-q5" class="fr-btn" type="button" onclick="showQuestion('q6')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q6" style="display:none;">
+        <h2>Question 6</h2>
+        <h3>Que permet un gestionnaire de mots de passe ?</h3>
+        <label><input type="radio" name="q6" value="stocker"> Stocker et générer des mots de passe uniques</label><br>
+        <label><input type="radio" name="q6" value="partager"> Partager automatiquement les mots de passe publiquement</label><br>
+        <label><input type="radio" name="q6" value="dev"> Remplacer le développeur</label><br>
+        <label><input type="radio" name="q6" value="aucun"> Ne rien stocker</label><br>
+        <p id="result-q6"></p>
+        <button id="btn-valider-q6" class="fr-btn" type="button" onclick="checkQ6()">Valider votre réponse</button>
+        <button id="btn-suivant-q6" class="fr-btn" type="button" onclick="showQuestion('q7')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q7" style="display:none;">
+        <h2>Question 7</h2>
+        <h3>Que faut-il faire avant d'installer un nouveau logiciel ?</h3>
+        <label><input type="radio" name="q7" value="source"> Vérifier la source et les avis</label><br>
+        <label><input type="radio" name="q7" value="tous"> Installer sans vérification</label><br>
+        <label><input type="radio" name="q7" value="maj"> Attendre une mise à jour</label><br>
+        <label><input type="radio" name="q7" value="pirate"> Télécharger depuis un site pirate</label><br>
+        <p id="result-q7"></p>
+        <button id="btn-valider-q7" class="fr-btn" type="button" onclick="checkQ7()">Valider votre réponse</button>
+        <button id="btn-suivant-q7" class="fr-btn" type="button" onclick="showQuestion('q8')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q8" style="display:none;">
+        <h2>Question 8</h2>
+        <h3>Quelles sont des indications qu'un site est sécurisé pour les paiements en ligne ? (choix multiples)</h3>
+        <label><input type="checkbox" name="q8" value="https"> Présence de HTTPS et certificat valide</label><br>
+        <label><input type="checkbox" name="q8" value="avis"> Avis utilisateurs positifs</label><br>
+        <label><input type="checkbox" name="q8" value="icone"> Icône de cadenas dans la barre d'adresse</label><br>
+        <label><input type="checkbox" name="q8" value="email"> Recevoir un e‑mail non sollicité après paiement</label><br>
+        <p id="result-q8"></p>
+        <button id="btn-valider-q8" class="fr-btn" type="button" onclick="checkQ8()">Valider votre réponse</button>
+        <button id="btn-suivant-q8" class="fr-btn" type="button" onclick="showQuestion('q9')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q9" style="display:none;">
+        <h2>Question 9</h2>
+        <h3>Que risque-t-on en ouvrant une pièce jointe d'un expéditeur inconnu ?</h3>
+        <label><input type="radio" name="q9" value="malware"> Infection par malware</label><br>
+        <label><input type="radio" name="q9" value="gain"> Gagner un cadeau</label><br>
+        <label><input type="radio" name="q9" value="aucun"> Aucun risque</label><br>
+        <label><input type="radio" name="q9" value="maj"> Obtenir une mise à jour</label><br>
+        <p id="result-q9"></p>
+        <button id="btn-valider-q9" class="fr-btn" type="button" onclick="checkQ9()">Valider votre réponse</button>
+        <button id="btn-suivant-q9" class="fr-btn" type="button" onclick="showQuestion('q10')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q10" style="display:none;">
+        <h2>Question 10</h2>
+        <h3>Quels éléments peuvent indiquer qu'une application mobile est malveillante ? (choix multiples)</h3>
+        <label><input type="checkbox" name="q10" value="permissions"> Permissions excessives demandées</label><br>
+        <label><input type="checkbox" name="q10" value="editeur"> Éditeur inconnu</label><br>
+        <label><input type="checkbox" name="q10" value="etoiles"> Beaucoup d'avis positifs récents</label><br>
+        <label><input type="checkbox" name="q10" value="taille"> Taille de l'application trop petite</label><br>
+        <p id="result-q10"></p>
+        <button id="btn-valider-q10" class="fr-btn" type="button" onclick="checkQ10()">Valider votre réponse</button>
+        <button id="btn-suivant-q10" class="fr-btn" type="button" onclick="showQuestion('q11')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q11" style="display:none;">
+        <h2>Question 11</h2>
+        <h3>Que signifie le principe du moindre privilège ?</h3>
+        <label><input type="radio" name="q11" value="least"> Donner uniquement les droits nécessaires pour une tâche</label><br>
+        <label><input type="radio" name="q11" value="admin"> Donner un accès administrateur à tous</label><br>
+        <label><input type="radio" name="q11" value="aucun"> Ne donner aucun droit</label><br>
+        <label><input type="radio" name="q11" value="partager"> Partager les comptes entre collègues</label><br>
+        <p id="result-q11"></p>
+        <button id="btn-valider-q11" class="fr-btn" type="button" onclick="checkQ11()">Valider votre réponse</button>
+        <button id="btn-suivant-q11" class="fr-btn" type="button" onclick="showQuestion('q12')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q12" style="display:none;">
+        <h2>Question 12</h2>
+        <h3>Quelle pratique est recommandée pour les sauvegardes de données personnelles ?</h3>
+        <label><input type="radio" name="q12" value="local+cloud"> Avoir une copie locale et une copie chiffrée dans le cloud</label><br>
+        <label><input type="radio" name="q12" value="postit"> Écrire les mots de passe et sauvegardes sur papier</label><br>
+        <label><input type="radio" name="q12" value="jamais"> Ne jamais sauvegarder</label><br>
+        <label><input type="radio" name="q12" value="publique"> Sauvegarder sur un dossier public</label><br>
+        <p id="result-q12"></p>
+        <button id="btn-valider-q12" class="fr-btn" type="button" onclick="checkQ12()">Valider votre réponse</button>
+        <button id="btn-suivant-q12" class="fr-btn" type="button" onclick="showQuestion('q13')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q13" style="display:none;">
+        <h2>Question 13</h2>
+        <h3>Que faire si vous perdez votre téléphone contenant des comptes connectés ?</h3>
+        <label><input type="radio" name="q13" value="changer"> Révoquer les sessions et changer les mots de passe</label><br>
+        <label><input type="radio" name="q13" value="ignorer"> Ignorer et attendre</label><br>
+        <label><input type="radio" name="q13" value="vendre"> Le vendre rapidement</label><br>
+        <label><input type="radio" name="q13" value="avertir"> Avertir uniquement un ami</label><br>
+        <p id="result-q13"></p>
+        <button id="btn-valider-q13" class="fr-btn" type="button" onclick="checkQ13()">Valider votre réponse</button>
+        <button id="btn-suivant-q13" class="fr-btn" type="button" onclick="showQuestion('q14')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q14" style="display:none;">
+        <h2>Question 14</h2>
+        <h3>Quel est l'avantage principal de chiffrer vos données au repos ?</h3>
+        <label><input type="radio" name="q14" value="protection"> Protéger les données en cas de vol du support</label><br>
+        <label><input type="radio" name="q14" value="rapidite"> Améliorer la rapidité d'accès</label><br>
+        <label><input type="radio" name="q14" value="compress"> Réduire la taille des fichiers</label><br>
+        <label><input type="radio" name="q14" value="aucun"> Aucun avantage</label><br>
+        <p id="result-q14"></p>
+        <button id="btn-valider-q14" class="fr-btn" type="button" onclick="checkQ14()">Valider votre réponse</button>
+        <button id="btn-suivant-q14" class="fr-btn" type="button" onclick="showQuestion('q15')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q15" style="display:none;">
+        <h2>Question 15</h2>
+        <h3>Quelle action est recommandée après une suspicion d'intrusion sur un compte professionnel ?</h3>
+        <label><input type="radio" name="q15" value="alerter"> Alerter l'équipe sécurité et changer les accès</label><br>
+        <label><input type="radio" name="q15" value="supprimer"> Supprimer le compte immédiatement</label><br>
+        <label><input type="radio" name="q15" value="partager"> Partager les informations de connexion</label><br>
+        <label><input type="radio" name="q15" value="rien"> Ne rien faire</label><br>
+        <p id="result-q15"></p>
+        <button id="btn-valider-q15" class="fr-btn" type="button" onclick="checkQ15()">Valider votre réponse</button>
+        <button id="btn-suivant-q15" class="fr-btn" type="button" onclick="history.back()" style="display:none;">Voir les résultats / Retour</button>
+    </div>
+
+    <div class="bouton-revenir">
+        <button class="fr-btn" type="button" onclick="history.back()">Revenir à l'accueil</button>
+    </div>
 
 </body>
 </html>
