@@ -278,7 +278,7 @@ function checkQ6() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Mettre en place une politique de sécurité du contenu (Content Security Policy - CSP) est une mesure efficace pour prévenir les attaques de type cross-site scripting (XSS), car elle permet de contrôler les sources de contenu autorisées et de limiter l'exécution de scripts malveillants sur une page web.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q6").style.display = "none";
