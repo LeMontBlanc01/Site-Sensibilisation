@@ -295,7 +295,7 @@ function checkQ7() {
     const selected = Array.from(document.querySelectorAll('input[name="q7"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["source"]; //La bonne réponse: vérifier la source et les avis
+  const correct = ["rdp"]; //La bonne réponse: des connexions RDP inhabituelles entre machines internes, indicateur d'une attaque par mouvement latéral
 
     const result = document.getElementById("result-q7");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
@@ -487,7 +487,7 @@ function checkQ15() {
     const selected = Array.from(document.querySelectorAll('input[name="q15"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["alerter"]; //La bonne réponse: alerter l'équipe sécurité et changer les accès
+  const correct = ["compromission"]; //La bonne réponse: la compromission de la clé maître donnant accès à l'ensemble du coffre
 
     const result = document.getElementById("result-q15");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
