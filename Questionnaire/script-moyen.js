@@ -343,7 +343,7 @@ function checkQ9() {
     const selected = Array.from(document.querySelectorAll('input[name="q9"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["malware"]; //La bonne réponse: risque d'infection par malware
+  const correct = ["trafic", "inconnus", "ports"]; //Les bonnes réponses: trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissent sur le réseau, des ports ouverts inattendus sur plusieurs machines
 
     const result = document.getElementById("result-q9");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 

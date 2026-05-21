@@ -115,11 +115,11 @@
 
     <div class="question" id="q9" style="display:none;">
         <h2>Question 9</h2>
-        <h3>Que risque-t-on en ouvrant une pièce jointe d'un expéditeur inconnu ?</h3>
-        <label><input type="radio" name="q9" value="malware"> Infection par malware</label><br>
-        <label><input type="radio" name="q9" value="gain"> Gagner un cadeau</label><br>
-        <label><input type="radio" name="q9" value="aucun"> Aucun risque</label><br>
-        <label><input type="radio" name="q9" value="maj"> Obtenir une mise à jour</label><br>
+        <h3>Quels signes peuvent indiquer une compromission réseau dans une petite entreprise ?</h3>
+        <label><input type="checkbox" name="q9" value="trafic"> Trafic sortant inhabituel vers des pays étrangers</label><br>
+        <label><input type="checkbox" name="q9" value="inconnus"> Des appareils inconnus apparaissent sur le réseau</label><br>
+        <label><input type="checkbox" name="q9" value="servdns"> Le serveur DNS interne répond plus lentement</label><br>
+        <label><input type="checkbox" name="q9" value="ports"> Des ports ouverts inattendus sur plusieurs machines</label><br>
         <p id="result-q9"></p>
         <button id="btn-valider-q9" class="fr-btn" type="button" onclick="checkQ9()">Valider votre réponse</button>
         <button id="btn-suivant-q9" class="fr-btn" type="button" onclick="showQuestion('q10')" style="display:none;">Passer à la prochaine question</button>
