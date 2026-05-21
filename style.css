@@ -20,7 +20,21 @@ header {
             background-color: #0d293a;
             color: #fff;
             padding: 20px;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+header img {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+        }
+
+header h1 {
+            text-align: left;
+            font-size: 2em;
+            margin: 0;
         }
 
 
