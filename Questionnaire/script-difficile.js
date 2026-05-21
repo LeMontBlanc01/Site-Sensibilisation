@@ -143,7 +143,7 @@ function checkQ1() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Utiliser un protocole de chiffrement obsolète comme SSLv3 expose les données à des vulnérabilités connues, ce qui peut permettre à des attaquants d'intercepter et de déchiffrer les informations sensibles transmises entre le client et le serveur.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q1").style.display = "none";
@@ -183,7 +183,7 @@ function checkQ2() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! En cas de ransomware, la meilleure solution est de couper la machine du réseau pour éviter que le malware ne se propage à d'autres systèmes et de contacter immédiatement les équipes de sécurité pour une analyse approfondie.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q2").style.display = "none";
@@ -207,7 +207,7 @@ function checkQ3() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! La validation côté serveur est essentielle pour garantir la sécurité des applications web, car elle permet de vérifier et de filtrer les données entrantes, empêchant ainsi les attaques telles que l'injection SQL, les scripts intersites (XSS) et d'autres formes de manipulation de données malveillantes.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q3").style.display = "none";
@@ -231,7 +231,7 @@ function checkQ4() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Un message avec une grammaire parfaite et inattendue est souvent un signe de phishing, car les attaquants utilisent parfois des outils de traduction ou de génération de texte pour créer des messages qui semblent légitimes mais qui contiennent des erreurs subtiles ou un style d'écriture inhabituel.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q4").style.display = "none";
@@ -255,7 +255,7 @@ function checkQ5() {
 
     if (arraysEqual(selected, correct)) {
         score ++;
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Utiliser un mot de passe unique pour chaque compte est crucial pour la sécurité en ligne, car cela empêche qu'une compromission d'un compte n'entraîne la compromission d'autres comptes, réduisant ainsi les risques de piratage et de vol d'identité.";
         result.style.color = "green";
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
@@ -302,7 +302,7 @@ function checkQ7() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Il est important de ne pas faire confiance à des sources d'information non vérifiées, car elles peuvent diffuser des informations erronées ou biaisées, ce qui peut conduire à de mauvaises décisions ou à la propagation de fausses informations.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q7").style.display = "none";
@@ -326,7 +326,7 @@ function checkQ8() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Faire confiance à un fournisseur de paiement réputé est un indicateur clé de la sécurité d'un site de commerce en ligne, car ces fournisseurs mettent en place des mesures de sécurité robustes pour protéger les informations de paiement des clients et réduire les risques de fraude.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q8").style.display = "none";
@@ -350,7 +350,7 @@ function checkQ9() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Vérifier l'identité du destinataire avant d'envoyer des informations sensibles est crucial pour éviter les attaques de phishing et les fraudes, car cela permet de s'assurer que les données sont envoyées à la bonne personne ou organisation et non à un imposteur malveillant.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q9").style.display = "none";
@@ -374,7 +374,7 @@ function checkQ10() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Utiliser la même clé de chiffrement pour plusieurs données sensibles peut compromettre la sécurité, car si un attaquant parvient à découvrir cette clé, il pourra potentiellement accéder à toutes les données protégées par cette clé, augmentant ainsi les risques de fuite d'informations et de compromission de la confidentialité.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q10").style.display = "none";
@@ -398,7 +398,7 @@ function checkQ11() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Les trois facteurs d'authentification sont : la connaissance (quelque chose que vous savez, comme un mot de passe), la possession (quelque chose que vous avez, comme un téléphone ou une carte) et la biométrie (quelque chose que vous êtes, comme une empreinte digitale ou une reconnaissance faciale). Utiliser plusieurs facteurs d'authentification renforce la sécurité en rendant plus difficile pour les attaquants de compromettre un compte.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q11").style.display = "none";
@@ -422,7 +422,7 @@ function checkQ12() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Utiliser un gestionnaire de mots de passe (vault) et pratiquer la rotation régulière des mots de passe sont des pratiques essentielles pour maintenir la sécurité des comptes en ligne, car elles permettent de stocker les mots de passe de manière sécurisée et de réduire les risques associés à l'utilisation prolongée d'un même mot de passe, qui peut être compromis au fil du temps.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q12").style.display = "none";
@@ -446,7 +446,7 @@ function checkQ13() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Le principe du moindre privilège consiste à accorder aux utilisateurs et aux processus uniquement les permissions nécessaires pour accomplir leurs tâches, ce qui réduit les risques de compromission et de propagation d'attaques en limitant les actions qu'un attaquant peut effectuer en cas de compromission d'un compte ou d'un processus.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q13").style.display = "none";
@@ -470,7 +470,7 @@ function checkQ14() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! Le pinning de certificat est une technique de sécurité qui consiste à associer un certificat spécifique à une application ou un site web, ce qui permet de prévenir les attaques de type man-in-the-middle en s'assurant que l'application ou le site web ne communique qu'avec des serveurs présentant le certificat attendu, même si un attaquant parvient à compromettre une autorité de certification ou à intercepter les communications.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q14").style.display = "none";
@@ -494,7 +494,7 @@ function checkQ15() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        result.textContent = "Bonne réponse ! L'utilisation d'une chaîne de confiance (chain of trust) est essentielle pour garantir la sécurité des communications en ligne, car elle permet de vérifier l'authenticité des certificats et des entités impliquées dans une communication, assurant ainsi que les données sont échangées avec des parties légitimes et de confiance.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q15").style.display = "none";
