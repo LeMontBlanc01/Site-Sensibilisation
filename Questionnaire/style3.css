@@ -18,12 +18,11 @@ body {
 
 
 header {
-            background-color: #275470;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-        }
-
+        background-color: #275470;
+        color: #fff;
+        padding: 20px;
+        position: relative;
+    }
 
 main {
         color: #333;
