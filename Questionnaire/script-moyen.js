@@ -206,7 +206,7 @@ function checkQ3() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) ajoute une couche de sécurité supplémentaire en demandant une preuve d'identité supplémentaire, et l'utilisation de mots de passe uniques pour chaque compte réduit le risque de compromission en cas de fuite de données.";
+        result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) ajoute une couche de sécurité supplémentaire en demandant une preuve d'identité supplémentaire, et l'utilisation de mots de passe uniques pour chaque compte réduit le risque d'accès non autorisé en cas de fuite de données.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q3").style.display = "none";
@@ -254,7 +254,7 @@ function checkQ5() {
 
     if (arraysEqual(selected, correct)) {
         score ++;
-        result.textContent = "Bonne réponse ! Maintenir les systèmes à jour avec les derniers correctifs de sécurité et restreindre les permissions des utilisateurs sont des mesures essentielles pour réduire la surface d'attaque et prévenir les compromissions.";
+        result.textContent = "Bonne réponse ! Maintenir les systèmes à jour avec les derniers correctifs de sécurité et restreindre les permissions des utilisateurs sont des mesures essentielles pour réduire la surface d'attaque et prévenir les accès non autorisés.";
         result.style.color = "green";
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
@@ -397,7 +397,7 @@ function checkQ11() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Le principe du moindre privilège consiste à accorder aux utilisateurs uniquement les permissions nécessaires pour accomplir leurs tâches, réduisant ainsi le risque de compromission en cas d'intrusion.";
+        result.textContent = "Bonne réponse ! Le principe du moindre privilège consiste à accorder aux utilisateurs uniquement les permissions nécessaires pour accomplir leurs tâches, réduisant ainsi les risques.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q11").style.display = "none";
@@ -469,7 +469,7 @@ function checkQ14() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Protéger les données en cas de vol est crucial pour éviter que des informations sensibles ne tombent entre de mauvaises mains, ce qui peut entraîner des conséquences graves telles que le vol d'identité ou la compromission de comptes.";
+        result.textContent = "Bonne réponse ! Protéger les données en cas de vol est crucial pour éviter que des informations sensibles ne tombent entre de mauvaises mains, ce qui peut entraîner des conséquences graves comme le vol d'identité.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q14").style.display = "none";
