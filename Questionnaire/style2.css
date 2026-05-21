@@ -52,7 +52,7 @@ main {
 
 h2 {
         text-align: center;
-        padding-top: 200px;
+        padding-top: 50px;
 
     }
 
@@ -64,3 +64,9 @@ h2 {
     left: 20px;
 }
 
+.img1 img {
+    display: block;
+    margin: 2px auto;
+    width: 650px;
+    height: 450px;
+}
