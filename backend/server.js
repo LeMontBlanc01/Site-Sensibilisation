@@ -37,6 +37,6 @@ app.get('/api/scores', (req, res) => {
     res.json(db.scores);
 });
 
-aapp.listen(3001, () => {
+app.listen(3001, () => {
     console.log('Server is running on port 3001 on http://localhost:3001');
 });
