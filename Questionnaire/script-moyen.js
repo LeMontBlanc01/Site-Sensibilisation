@@ -508,29 +508,16 @@ function checkQ15() {
 
 async function envoyerScore(nom, score, niveau, total) {
   try {
-    await fetch('http://localhost:3001/scores', {
+    await fetch('http://localhost:3001/api/score', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nom, score, niveau, total })
     });
     console.log('Score envoyé avec succès');
   } catch (error) {
-    console.error('Erreur lors de l\'envoi du score :', error);
+    console.error('Erreur envoi score :', error);
   }
 }
 
-const nom = prompt("Entrez votre nom :");
+const nom = prompt("Entrez votre prénom :") || "Anonyme";
 envoyerScore(nom, score, "facile", 15);
-
-const nom = prompt("Entrez votre prénom pour sauvegarder votre score :") || "Anonyme";
-
-fetch("http://localhost:3001/api/score", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    nom: nom,
-    score: score,       // ta variable score existante
-    niveau: "facile",   // "moyen" ou "difficile" selon le fichier
-    total: 10
-  })
-});
