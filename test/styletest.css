@@ -82,6 +82,18 @@ h2 {
 #conteneur {
     position: relative;
     width: 700px; /* Plus petit */
+    min-height: 500px; /* Plus petit */
+}
+
+
+#lignes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Le canvas passe AU-DESSUS */
+  pointer-events: none; /* Pour ne pas bloquer les clics */
 }
 
 #zonerelier {
@@ -93,13 +105,6 @@ h2 {
     z-index: 2;
 }
 
-canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    pointer-events: none;
-}
 
 .col {
     display: flex;
