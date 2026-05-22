@@ -21,7 +21,12 @@ header {
         background-color: #009dff;
         color: #fff;
         padding: 20px;
-        position: center;
+        text-align: center;
+    }
+
+#score {
+        margin: 0 auto;
+        display: inline-block;
     }
 
 main {
