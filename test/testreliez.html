@@ -33,26 +33,41 @@
 
         <p id="result-q15"></p>
         <button id="btn-valider-q15" class="fr-btn" type="button" onclick="checkQ15()">Valider votre réponse</button>
-        <button id="btn-suivant-q15" class="fr-btn" type="button" onclick="history.back()" style="display:none;">Voir les résultats / Retour</button>
+        <button id="btn-suivant-q15" class="fr-btn" type="button" onclick="showQuestion('q16')" style="display:none;">Voir les résultats / Retour</button>
     </div>
 
 
     <div class="question" id="q16" style="display:none;">
         <h2>Question 16</h2>
-        <h3>Quel est le meilleur moyen de protéger ses données personnelles en ligne ?</h3>
+        <h3>Reliez les termes suivants :</h3>
 
-        
+        <div id="conteneur">
 
-        <div class="imgf16">
-            <img src="" alt="">
+            <canvas id="lignes"></canvas>
+
+            <div id="zonerelier">
+
+                <div class="gauche">
+                    <div class="bloc" data-id="A">A. Mon adresse de messagerie a été usurpée</div>
+                    <div class="bloc" data-id="B">B. J'ai malencontreusement communiqué mon numéro de carte bancaire</div>
+                    <div class="bloc" data-id="C">C. J'identifie une adresse de site d'hameçonnage</div>
+                </div>
+
+                <div class="droite">
+                    <div class="bloc" data-id="1">1. Je fais opposition auprès de ma banque et je dépose plainte</div>
+                    <div class="bloc" data-id="2">2. Je la signale à Phishing Initiative</div>
+                    <div class="bloc" data-id="3">3. Je change immédiatement de mot de passe</div>
+                </div>
+
+            </div>
         </div>
 
         <p id="result-q16"></p>
         <button id="btn-valider-q16" class="fr-btn" type="button" onclick="checkQ16()">Valider votre réponse</button>
-        <button id="btn-suivant-q16" class="fr-btn" type="button" onclick="history.back()" style="display:none;">Voir les résultats / Retour</button>
+        <button id="btn-suivant-q16" class="fr-btn" type="button" onclick="showQuestion('q17')" style="display:none;">Voir les résultats / Retour</button>
 
 
-
+    </div>
 
 
 

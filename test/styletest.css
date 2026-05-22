@@ -76,3 +76,52 @@ h2 {
     height: 360px;
     margin-top: -90px;
 }
+
+
+
+#conteneur {
+    position: relative;
+    width: 700px; /* Plus petit */
+}
+
+#zonerelier {
+    display: flex;
+    justify-content: flex-start;
+    gap: 150px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.bloc {
+    padding: 10px;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 280px; /* Taille réduite */
+    font-size: 14px; /* Texte plus petit */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+
+.bloc:hover {
+    background: #eef7ff;
+}
+
+.bloc.selected {
+    background: #cfe4ff;
+}
