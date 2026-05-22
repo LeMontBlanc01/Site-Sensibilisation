@@ -81,8 +81,8 @@ h2 {
 
 #conteneur {
     position: relative;
-    width: 700px; /* Plus petit */
-    min-height: 500px; /* Plus petit */
+    width: 600px;
+    min-height: 225px;
 }
 
 
