@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styletest.css" rel="stylesheet">
+    <title>QCM Facile - Sensibilisation à la cybersécurité</title>
+    <script src="script-test.js" defer></script>
+
+</head>
+
+<body>
+
+    <header>
+        <h1>Questionnaire Facile</h1>
+        <p id="score" style="font-size: 18px; font-weight: bold; color: #ffffff;">Score : 0</p>
+    </header>
+
+    <br>
+
+    <div class="question" id="q15">
+        <h2>Question 15</h2>
+        <h3>Que faire en cas de suspicion de phishing ?</h3>
+
+        <label><input type="radio" name="q15" value="ignorer"> Ignorer et ne rien faire</label><br>
+        <label><input type="radio" name="q15" value="change"> Changer ses mots de passe et signaler</label><br>
+        <label><input type="radio" name="q15" value="repondre"> Répondre à l'expéditeur</label><br>
+        <label><input type="radio" name="q15" value="partager"> Partager l'e-mail publiquement</label><br>
+
+        <div class="imgf15">
+            <img src="https://images.ctfassets.net/5i1m3im8l2b5/3wIRSBd1uuCeOlSr34Snlq/22d42b323358ba2de10db9560a9393a3/10-tips-to-prevent-phishing.png?w=1200&h=630&q=50&fm=png" alt="phishing2">
+        </div>
+
+        <p id="result-q15"></p>
+        <button id="btn-valider-q15" class="fr-btn" type="button" onclick="checkQ15()">Valider votre réponse</button>
+        <button id="btn-suivant-q15" class="fr-btn" type="button" onclick="history.back()" style="display:none;">Voir les résultats / Retour</button>
+    </div>
+
+
+    <div class="question" id="q16" style="display:none;">
+        <h2>Question 16</h2>
+        <h3>Quel est le meilleur moyen de protéger ses données personnelles en ligne ?</h3>
+
+        
+
+        <div class="imgf16">
+            <img src="" alt="">
+        </div>
+
+        <p id="result-q16"></p>
+        <button id="btn-valider-q16" class="fr-btn" type="button" onclick="checkQ16()">Valider votre réponse</button>
+        <button id="btn-suivant-q16" class="fr-btn" type="button" onclick="history.back()" style="display:none;">Voir les résultats / Retour</button>
+
+
+
+
+
+
+
+
+
+
+    <div class="resultats" id="resultats">
+        <p id="score"></p>
+        <p id="feedback"></p>
+    </div>
+
+    
+    <div class="bouton-revenir">
+        <button class="fr-btn" type="button" onclick="history.back()">Revenir à l'accueil</button>
+    </div>
+
+</body>
+</html>
