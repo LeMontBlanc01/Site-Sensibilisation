@@ -20,6 +20,13 @@ function showQuestion(id) {
       redraw17();       //Redessine les lignes déjà créées
   }
 
+  //Quand on affiche Q18, on redimensionne le canvas
+  //indispensable car Q18 est cachée au chargement, donc le canvas aurait une hauteur 0
+  if (id === 'q18') {
+      resizeCanvas18(); //Donne au canvas la bonne taille réelle
+      redraw18();       //Redessine les lignes déjà créées
+  }
+
   //Pour Q15
   if (id !== 'q15') {
     const result15 = document.getElementById('result-q15');
@@ -356,6 +363,148 @@ document.getElementById("btn-valider-q17").addEventListener("click", () => {
     redraw17(); //Met à jour les couleurs des lignes (rouge/bleu)
 
     const result = document.getElementById("result-q17");
+
+    //Si toutes les connexions sont correctes
+    if (bonnesConnexions === 3) {
+        result.textContent = "Bonne réponse !";
+        result.style.color = "green";
+        score++;
+        document.getElementById("btn-valider-q17").style.display = "none";
+        document.getElementById("btn-suivant-q17").style.display = "inline-block";
+    } else {
+        result.textContent = "Mauvaise réponse.";
+        result.style.color = "red";
+        score--;
+    }
+
+    updateScore();
+});
+
+
+
+
+//q18
+
+
+//Récupération du canvas et de son contexte 2D
+const canvas18 = document.getElementById("lignes18");
+const ctx18 = canvas18.getContext("2d");
+
+//Ajuste la taille du canvas pour qu'il corresponde exactement au conteneur
+//essentiel pour que les lignes soient dessinées dans la bonne zone
+function resizeCanvas18() {
+  canvas18.width = document.getElementById("conteneur18").clientWidth;
+  canvas18.height = document.getElementById("conteneur18").clientHeight;
+}
+resizeCanvas18(); //Premier appel (sera corrigé ensuite par showQuestion('q18'))
+
+
+
+//Recalcule et redessine les lignes quand la fenêtre change de taille
+//évite que les lignes se décalent si l'utilisateur redimensionne la fenêtre
+window.addEventListener("resize", () => {
+  resizeCanvas18();
+  redraw18();
+});
+
+let blocGaucheSelectionne18 = null;   //Stocke le bloc de gauche sélectionné
+let connexions18 = [];                //Liste des connexions créées (gauche → droite)
+
+//Sélection des blocs
+const blocsGauche18 = document.querySelectorAll(".gauche18 .bloc18");
+const blocsDroite18 = document.querySelectorAll(".droite18 .bloc18");
+
+//Fonction pour obtenir le centre d’un bloc
+//permet de tracer une ligne proprement entre deux blocs
+function getCenter18(el) {
+  const r = el.getBoundingClientRect();
+  const cont = document.getElementById("conteneur18").getBoundingClientRect();
+
+  return {
+    x: r.left - cont.left + r.width / 2,
+    y: r.top - cont.top + r.height / 2
+  };
+}
+
+//Efface et redessine toutes les lignes existantes
+//appelé après chaque connexion ou redimensionnement
+function redraw18() {
+  ctx18.clearRect(0, 0, canvas18.width, canvas18.height);
+  ctx18.lineWidth = 3;
+
+  connexions18.forEach(c => {
+    const blocG = document.querySelector(`.gauche18 .bloc18[data-id="${c.left}"]`);
+    const blocD = document.querySelector(`.droite18 .bloc18[data-id="${c.right}"]`);
+
+    const p1 = getCenter18(blocG);
+    const p2 = getCenter18(blocD);
+
+    //Rouge si incorrect, bleu sinon
+    ctx18.strokeStyle = c.correct === false ? "#e74c3c" : "#3498db";
+
+    ctx18.beginPath();
+    ctx18.moveTo(p1.x, p1.y);
+    ctx18.lineTo(p2.x, p2.y);
+    ctx18.stroke();
+  });
+}
+
+//Gestion du clic sur les blocs de gauche
+blocsGauche18.forEach(bloc => {
+  bloc.addEventListener("click", () => {
+
+    //Retire la sélection précédente
+    blocsGauche18.forEach(b => b.classList.remove("selected"));
+
+    //Sélectionne le bloc cliqué
+    bloc.classList.add("selected");
+
+    //Stocke l'identifiant du bloc sélectionné
+    blocGaucheSelectionne18 = bloc.dataset.id;
+  });
+});
+
+//Gestion du clic sur les blocs de droite
+blocsDroite18.forEach(bloc => {
+  bloc.addEventListener("click", () => {
+
+    //On ne peut connecter que si un bloc gauche est sélectionné
+    if (!blocGaucheSelectionne18) return;
+
+    //Supprime une éventuelle connexion précédente pour ce bloc gauche
+    //garantit qu’un bloc gauche ne peut avoir qu’une seule liaison
+    connexions18 = connexions18.filter(c => c.left !== blocGaucheSelectionne18);
+
+    //Ajoute la nouvelle connexion
+    connexions18.push({
+      left: blocGaucheSelectionne18,
+      right: bloc.dataset.id,
+      correct: null //sera défini lors de la validation
+    });
+
+    //Désélectionne le bloc gauche
+    blocsGauche18.forEach(b => b.classList.remove("selected"));
+    blocGaucheSelectionne18 = null;
+
+    redraw18(); //Met à jour les lignes affichées
+  });
+});
+
+//Vérification des réponses
+document.getElementById("btn-valider-q18").addEventListener("click", () => {
+
+    const correctMap18 = { A: "2", B: "1", C: "3" }; //Solutions officielles
+    let bonnesConnexions = 0;
+
+    //Vérifie chaque connexion
+    connexions18.forEach(c => {
+        c.correct = c.right === correctMap18[c.left]; //Compare la réponse donnée avec la bonne
+        if (c.correct) bonnesConnexions++;
+    });
+
+    redraw18(); //Met à jour les couleurs des lignes (rouge/bleu)
+
+    const result = document.getElementById("result-q18");
 
     //Si toutes les connexions sont correctes
     if (bonnesConnexions === 3) {

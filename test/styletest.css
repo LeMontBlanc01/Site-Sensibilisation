@@ -175,3 +175,51 @@ h2 {
 .bloc17.selected {
     background: #cfe4ff;
 }
+
+
+
+#conteneur18 {
+    position: relative;
+    width: 800px;
+    min-height: 225px;
+}
+
+
+#lignes18 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Le canvas passe au dessus */
+  pointer-events: none; /* Pour ne pas bloquer les clics */
+}
+
+#zonerelier18 {
+    display: flex;
+    justify-content: flex-start;
+    gap: 150px;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+
+.bloc18 {
+    padding: 10px;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 450px; /* Taille réduite */
+    font-size: 14px; /* Texte plus petit */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: 0.2s;
+}
+
+.bloc18:hover {
+    background: #eef7ff;
+}
+
+.bloc18.selected {
+    background: #cfe4ff;
+}
