@@ -521,3 +521,16 @@ async function envoyerScore(nom, score, niveau, total) {
 
 const nom = prompt("Entrez votre nom :");
 envoyerScore(nom, score, "facile", 15);
+
+const nom = prompt("Entrez votre prénom pour sauvegarder votre score :") || "Anonyme";
+
+fetch("http://localhost:3001/api/score", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    nom: nom,
+    score: score,       // ta variable score existante
+    niveau: "facile",   // "moyen" ou "difficile" selon le fichier
+    total: 10
+  })
+});
