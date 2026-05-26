@@ -8,7 +8,7 @@ function showQuestion(id) {
   document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
   
   //Vide les messages de résultat quand on change de question
-  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q16', 'q17', 'q18'].forEach(qid => {
+  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15', 'q16', 'q17'].forEach(qid => {
     if (id !== qid) {
       const r = document.getElementById(`result-${qid}`);
       if (r) r.textContent = '';
@@ -17,17 +17,17 @@ function showQuestion(id) {
 
   //Les canvas ont une taille 0 quand leur question est cachée,
   //il faut donc les redimensionner au moment où elles deviennent visibles
-  const match = id.match(/^q(16|17|18)$/);
+  const match = id.match(/^q(15|16|17)$/);
   if (match) {
     const n = match[1];
     resizeCanvas(n);
     redraw(n);
   }
 
-  if (id === 'q15') {
+  if (id === 'q18') {
     const exportBtn = document.getElementById('btn-export');
-    const result15 = document.getElementById('result-q15');
-    if (exportBtn && result15 && result15.textContent.trim().length) {
+    const result18 = document.getElementById('result-q18');
+    if (exportBtn && result18 && result18.textContent.trim().length) {
       exportBtn.style.display = 'block';
     }
   }
@@ -93,11 +93,11 @@ function exportResults() {
     const lines = [
         `Nom : ${joueurNom}`,
         `Niveau : ${niveau}`,
-        `Score : ${score}/15`,
+        `Score : ${score}/18`,
         '',
         'Détail des réponses :'
     ];
-    for (let i = 1; i <= 15; i++) {
+    for (let i = 1; i <= 18; i++) {
         lines.push(getQuestionSummary(i));
         lines.push('');
     }
@@ -112,7 +112,7 @@ function exportResults() {
     document.body.removeChild(link);
 
     const subject = encodeURIComponent(`Résultats questionnaire ${niveau}`);
-    const body = encodeURIComponent(`Bonjour,\n\nVeuillez trouver ci-joint le fichier de mes résultats.\n\nNom : ${joueurNom}\nNiveau : ${niveau}\nScore : ${score}/15\n\nMerci.`);
+    const body = encodeURIComponent(`Bonjour,\n\nVeuillez trouver ci-joint le fichier de mes résultats.\n\nNom : ${joueurNom}\nNiveau : ${niveau}\nScore : ${score}/18\n\nMerci.`);
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
@@ -429,35 +429,35 @@ function checkQ14() {
 
 
 
-//Q16 / Q17 / Q18
+//Q15 / Q16 / Q17
 
 //Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
 const configs = {
-  16: { correctMap: { A: "3", B: "1", C: "2" } },
+  15: { correctMap: { A: "3", B: "1", C: "2" } },
+  16: { correctMap: { A: "2", B: "1", C: "3" } },
   17: { correctMap: { A: "2", B: "1", C: "3" } },
-  18: { correctMap: { A: "2", B: "1", C: "3" } },
 };
 
 
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
-function onBonneReponse16(result) {
+function onBonneReponse15(result) {
   result.innerHTML = "Bonne réponse !<br><small>Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).</small>";
 }
 
-function onBonneReponse17(result) {
+function onBonneReponse16(result) {
   result.innerHTML = "Bonne réponse !<br><small>Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.</small>";
 }
 
-function onBonneReponse18(result) {
+function onBonneReponse17(result) {
   result.innerHTML = "Bonne réponse !<br><small>Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.</small>";
 }
 
 //Regroupe les callbacks par numéro de question pour les appeler dans la boucle
 const onBonneReponse = {
+  15: onBonneReponse15,
   16: onBonneReponse16,
   17: onBonneReponse17,
-  18: onBonneReponse18,
 };
 
 //Canvas
@@ -494,7 +494,7 @@ function redraw(n) {
 }
 
 
-[16, 17, 18].forEach(n => {
+[15, 16, 17].forEach(n => {
   const canvas = document.getElementById(`lignes${n}`);
   state[n] = { canvas, ctx: canvas.getContext("2d"), connexions: [], selected: null };
 
@@ -559,22 +559,22 @@ function redraw(n) {
 
 
 
-//Fonction qui permet de vérifier la réponse de la question 15
-function checkQ15() {
-    const selected = Array.from(document.querySelectorAll('input[name="q15"]:checked'))
+//Fonction qui permet de vérifier la réponse de la question 18
+function checkQ18() {
+    const selected = Array.from(document.querySelectorAll('input[name="q18"]:checked'))
                           .map(el => el.value);
 
     const correct = ["change"]; //La bonne réponse
 
-    const result = document.getElementById("result-q15");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q18");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! En cas de suspicion de phishing, il est important de changer immédiatement vos mots de passe pour les comptes concernés. De plus, signalez l'incident à votre service informatique ou à l'équipe de sécurité de votre organisation pour qu'ils puissent prendre les mesures nécessaires pour protéger les autres utilisateurs.";
         result.style.color = "green";
         score++;
-        document.getElementById("btn-valider-q15").style.display = "none";
-        document.getElementById("btn-suivant-q15").style.display = "inline-block";
+        document.getElementById("btn-valider-q18").style.display = "none";
+        document.getElementById("btn-suivant-q18").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
@@ -585,7 +585,7 @@ function checkQ15() {
         exportBtn.style.display = "block";
     }
     updateScore();
-    envoyerScore(joueurNom, score, "Facile", 15);
+    envoyerScore(joueurNom, score, "Facile", 18);
 }
 
 
