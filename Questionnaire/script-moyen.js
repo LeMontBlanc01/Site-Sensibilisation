@@ -2,6 +2,38 @@ console.log("JS chargé !"); // Affiche un message dans la console pour confirme
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 
+// Ordre aléatoire des questions
+let questionOrder = [];
+function shuffle(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
+
+function initRandomQuestions() {
+  const qs = Array.from(document.querySelectorAll('.question')).map(q => q.id);
+  if (!qs.length) return;
+  questionOrder = shuffle(qs);
+
+  questionOrder.forEach((id, idx) => {
+    const nextBtn = document.getElementById(`btn-suivant-${id}`);
+    if (nextBtn) {
+      if (idx < questionOrder.length - 1) {
+        nextBtn.onclick = () => showQuestion(questionOrder[idx + 1]);
+      } else {
+        nextBtn.onclick = () => { history.back(); };
+      }
+    }
+  });
+
+  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+  document.getElementById(questionOrder[0]).style.display = 'block';
+}
+
+window.addEventListener('load', initRandomQuestions);
+
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
   document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
