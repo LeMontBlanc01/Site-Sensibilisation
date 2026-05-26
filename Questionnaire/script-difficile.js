@@ -1,5 +1,6 @@
 console.log("JS chargé !"); // Affiche un message dans la console pour confirmer que le fichier JS est bien chargé
 let score = 0;
+const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
@@ -171,6 +172,42 @@ function updateScore() {
     }
 }
 updateScore();
+
+function getQuestionSummary(questionNumber) {
+    const selected = Array.from(document.querySelectorAll(`input[name="q${questionNumber}"]:checked`))
+                          .map(el => el.value);
+    const answerText = selected.length ? selected.join(', ') : 'Aucune réponse';
+    const resultText = document.getElementById(`result-q${questionNumber}`)?.textContent || 'Pas de résultat';
+    return `Question ${questionNumber}: ${answerText}\nRésultat: ${resultText}`;
+}
+
+function exportResults() {
+    const niveau = "Difficile";
+    const lines = [
+        `Nom : ${joueurNom}`,
+        `Niveau : ${niveau}`,
+        `Score : ${score}/15`,
+        '',
+        'Détail des réponses :'
+    ];
+    for (let i = 1; i <= 15; i++) {
+        lines.push(getQuestionSummary(i));
+        lines.push('');
+    }
+
+    const fileContent = lines.join('\n');
+    const blob = new Blob([fileContent], { type: 'text/plain;charset=utf-8' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = `resultats_${niveau.toLowerCase()}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    const subject = encodeURIComponent(`Résultats questionnaire ${niveau}`);
+    const body = encodeURIComponent(`Bonjour,\n\nVeuillez trouver ci-joint le fichier de mes résultats.\n\nNom : ${joueurNom}\nNiveau : ${niveau}\nScore : ${score}/15\n\nMerci.`);
+    window.location.href = `mailto:?subject=${subject}&body=${body}`;
+}
 
 //Fonction qui permet de vérifier la réponse de la question 2
 function checkQ2() {
@@ -504,12 +541,13 @@ function checkQ15() {
         result.style.color = "red";
         score--;
     }
+    document.getElementById("btn-export").style.display = "inline-block";
     updateScore();
 }
 
 async function envoyerScore(nom, score, niveau, total) {
   try {
-    await fetch('http://localhost:3001/api/score', {
+    await fetch('http://localhost:3001/api/scores', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nom, score, niveau, total })
@@ -520,5 +558,4 @@ async function envoyerScore(nom, score, niveau, total) {
   }
 }
 
-const nom = prompt("Entrez votre prénom :") || "Anonyme";
-envoyerScore(nom, score, "facile", 15);
+envoyerScore(joueurNom, score, "Difficile", 15);

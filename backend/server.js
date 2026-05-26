@@ -13,7 +13,7 @@ if (!fs.existsSync(DB_PATH)) {
 }
 
 app.post('/api/scores', (req, res) => {
-    const { name, score } = req.body;
+    const { nom, score, niveau, total } = req.body;
 
     if (!nom || score === undefined || !niveau) {
         return res.status(400).json({ error: 'Nom, score et niveau sont requis' });
