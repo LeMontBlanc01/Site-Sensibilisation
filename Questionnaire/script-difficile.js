@@ -1,6 +1,7 @@
 console.log("JS chargé !"); // Affiche un message dans la console pour confirmer que le fichier JS est bien chargé
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
+const quizNiveau = "Difficile";
 
 // Ordre aléatoire des questions
 let questionOrder = [];
@@ -23,7 +24,8 @@ function initRandomQuestions() {
       if (idx < questionOrder.length - 1) {
         nextBtn.onclick = () => showQuestion(questionOrder[idx + 1]);
       } else {
-        nextBtn.onclick = () => { history.back(); };
+        nextBtn.onclick = goToResults;
+        nextBtn.textContent = 'Voir les résultats';
       }
     }
   });
@@ -33,6 +35,14 @@ function initRandomQuestions() {
 }
 
 window.addEventListener('load', initRandomQuestions);
+
+function goToResults() {
+  localStorage.setItem('quizScore', String(score));
+  localStorage.setItem('quizNiveau', quizNiveau);
+  localStorage.setItem('quizNom', joueurNom);
+  localStorage.setItem('quizTotal', '15');
+  window.location.href = 'resultats.html';
+}
 
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
@@ -580,10 +590,7 @@ function checkQ15() {
         result.style.color = "red";
         score--;
     }
-    const exportBtn = document.getElementById("btn-export");
-    if (exportBtn) {
-        exportBtn.style.display = "block";
-    }
+    document.getElementById("btn-suivant-q15").style.display = "inline-block";
     updateScore();
 }
 
