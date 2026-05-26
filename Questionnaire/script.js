@@ -35,6 +35,31 @@ function initRandomQuestions() {
   document.getElementById(questionOrder[0]).style.display = 'block';
 }
 
+function melangerReponses(questionId) {
+  if (['q15', 'q16', 'q17'].includes(questionId)) return;
+
+  const conteneur = document.getElementById(questionId);
+  const labels = Array.from(conteneur.querySelectorAll('label'));
+
+  const paires = labels.map(label => {
+    const br = label.nextSibling?.nodeName === 'BR' ? label.nextSibling : null;
+    return { label, br };
+  });
+
+  paires.forEach(({ label, br }) => {
+    if (br) br.remove();
+    label.remove();
+  });
+
+  shuffle(paires);
+
+  const ancre = conteneur.querySelector('h3');
+  paires.forEach(({ label }) => {
+    ancre.insertAdjacentElement('afterend', label);
+    label.insertAdjacentElement('afterend', document.createElement('br'));
+  });
+}
+
 window.addEventListener('load', initRandomQuestions);
 
 function goToResults() {
@@ -65,6 +90,12 @@ function showQuestion(id) {
     resizeCanvas(n);
     redraw(n);
   }
+
+  const numeroAffiche = questionOrder.indexOf(id) + 1;
+  const h2 = document.querySelector(`#${id} h2`);
+  if (h2) h2.textContent = `Question ${numeroAffiche}`;
+
+  melangerReponses(id);
 
 }
 
