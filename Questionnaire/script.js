@@ -36,7 +36,7 @@ function initRandomQuestions() {
 }
 
 function melangerReponses(questionId) {
-  if (['q15', 'q16', 'q17'].includes(questionId)) return;
+  if (['q15', 'q16', 'q17'].includes(questionId)) return; //Les questions ou il faut relier des éléments ne sont pas mélangées
 
   const conteneur = document.getElementById(questionId);
   const labels = Array.from(conteneur.querySelectorAll('label'));
