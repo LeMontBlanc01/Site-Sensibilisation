@@ -47,7 +47,7 @@ function checkQ15() {
   const result = document.getElementById("result-q15");
 
   if (arraysEqual(selected, ["change"])) {
-    result.textContent = "Bonne réponse !";
+    result.innerHTML = "Bonne réponse !<br><small><!-- Explication Q15 ici --></small>";
     result.style.color = "green";
     score++;
     document.getElementById("btn-valider-q15").style.display = "none";
@@ -72,6 +72,27 @@ const configs = {
 
 //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 const state = {};
+
+//Appelée quand toutes les connexions d'une question sont correctes
+//À compléter avec une explication personnalisée par question
+function onBonneReponse16(result) {
+  result.innerHTML = "Bonne réponse !<br><small>blablablabala</small>";
+}
+
+function onBonneReponse17(result) {
+  result.innerHTML = "Bonne réponse !<br><small>blablablabal222a</small>";
+}
+
+function onBonneReponse18(result) {
+  result.innerHTML = "Bonne réponse !<br><small>blablablabala33</small>";
+}
+
+//Regroupe les callbacks par numéro de question pour les appeler dans la boucle
+const onBonneReponse = {
+  16: onBonneReponse16,
+  17: onBonneReponse17,
+  18: onBonneReponse18,
+};
 
 [16, 17, 18].forEach(n => {
   const canvas = document.getElementById(`lignes${n}`);
@@ -117,7 +138,7 @@ const state = {};
 
     const result = document.getElementById(`result-q${n}`);
     if (bonnes === 3) {
-      result.textContent = "Bonne réponse !";
+      onBonneReponse[n](result); //Appelle la fonction spécifique à la question
       result.style.color = "green";
       score++;
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
