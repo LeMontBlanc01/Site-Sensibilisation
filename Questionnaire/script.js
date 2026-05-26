@@ -1,6 +1,7 @@
 console.log("JS chargé !"); // Affiche un message dans la console pour confirmer que le fichier JS est bien chargé
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
+const quizNiveau = "Facile";
 const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 
 // Ordre aléatoire des questions
@@ -24,7 +25,8 @@ function initRandomQuestions() {
       if (idx < questionOrder.length - 1) {
         nextBtn.onclick = () => showQuestion(questionOrder[idx + 1]);
       } else {
-        nextBtn.onclick = () => { history.back(); };
+        nextBtn.onclick = goToResults;
+        nextBtn.textContent = 'Voir les résultats';
       }
     }
   });
@@ -34,6 +36,14 @@ function initRandomQuestions() {
 }
 
 window.addEventListener('load', initRandomQuestions);
+
+function goToResults() {
+  localStorage.setItem('quizScore', String(score));
+  localStorage.setItem('quizNiveau', quizNiveau);
+  localStorage.setItem('quizNom', joueurNom);
+  localStorage.setItem('quizTotal', '18');
+  window.location.href = 'resultats.html';
+}
 
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
@@ -56,15 +66,6 @@ function showQuestion(id) {
     redraw(n);
   }
 
-  if (id === 'q18') {
-    const exportBtn = document.getElementById('btn-export');
-    const result18 = document.getElementById('result-q18');
-    if (exportBtn && result18 && result18.textContent.trim().length) {
-      exportBtn.style.display = 'block';
-    }
-  }
-
-  
 }
 
 function showResult(id) {
@@ -612,10 +613,7 @@ function checkQ18() {
         result.style.color = "red";
         score--;
     }
-    const exportBtn = document.getElementById("btn-export");
-    if (exportBtn) {
-        exportBtn.style.display = "block";
-    }
+    document.getElementById("btn-suivant-q18").style.display = "inline-block";
     updateScore();
     envoyerScore(joueurNom, score, "Facile", 18);
 }
