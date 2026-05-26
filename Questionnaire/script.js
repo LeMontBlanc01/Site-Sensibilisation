@@ -74,39 +74,8 @@ function showQuestion(id) {
     }
   }
 
-  melangerReponses(id);
-}
-
-
-function melangerReponses(questionId) {
-  if (['q15', 'q16', 'q17'].includes(questionId)) return;
-
-  const conteneur = document.getElementById(questionId);
   
-  //On récupère label + br
-  const labels = Array.from(conteneur.querySelectorAll('label'));
-  const paires = labels.map(label => {
-    const br = label.nextElementSibling?.tagName === 'BR' ? label.nextSibling : null;
-    return { label, br };
-  });
-
-  //On retire tout
-  paires.forEach(({ label, br }) => {
-    if (br) br.remove();
-    label.remove();
-  });
-
-  melangerTableau(paires);
-
-  //On remet dans le bon ordre avec les <br>
-  const ancre = conteneur.querySelector('h3');
-  paires.forEach(({ label }) => {
-    const br = document.createElement('br');
-    ancre.insertAdjacentElement('afterend', label);
-    label.insertAdjacentElement('afterend', br);
-  });
 }
-
 
 
 function showResult(id) {
