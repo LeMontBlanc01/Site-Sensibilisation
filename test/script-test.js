@@ -1,523 +1,166 @@
-console.log("JS chargé !"); // Affiche un message dans la console pour confirmer que le fichier JS est bien chargé
+console.log("JS chargé !");
 let score = 0;
 
+//Utilitaires
 
+//Affiche la question demandée, cache les autres et réinitialise les résultats
 function showQuestion(id) {
-  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
-  document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
-  
-  //Quand on affiche Q16, on redimensionne le canvas
-  //indispensable car Q16 est cachée au chargement, donc le canvas aurait une hauteur 0
-  if (id === 'q16') {
-      resizeCanvas16(); // Donne au canvas la bonne taille réelle
-      redraw16();       // Redessine les lignes déjà créées
-  }
-
-  //Quand on affiche Q17, on redimensionne le canvas
-  //indispensable car Q17 est cachée au chargement, donc le canvas aurait une hauteur 0
-  if (id === 'q17') {
-      resizeCanvas17(); //Donne au canvas la bonne taille réelle
-      redraw17();       //Redessine les lignes déjà créées
-  }
-
-  //Quand on affiche Q18, on redimensionne le canvas
-  //indispensable car Q18 est cachée au chargement, donc le canvas aurait une hauteur 0
-  if (id === 'q18') {
-      resizeCanvas18(); //Donne au canvas la bonne taille réelle
-      redraw18();       //Redessine les lignes déjà créées
-  }
-
-  //Pour Q15
-  if (id !== 'q15') {
-    const result15 = document.getElementById('result-q15');
-    if (result15) {
-      result15.textContent = '';
-    }
-  }
-
-  //Pour Q16
-  if (id !== 'q16') {
-    const result16 = document.getElementById('result-q16');
-    if (result16) {
-      result16.textContent = '';
-    }
-  }
-
-  //Pour Q17
-  if (id !== 'q17') {
-    const result17 = document.getElementById('result-q17');
-    if (result17) {
-      result17.textContent = '';
-    }
-  }
-
-}
-
-function showResult(id) {
-  document.querySelectorAll('.result').forEach(r => r.style.display = 'none');
+  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
   document.getElementById(id).style.display = 'block';
-}
 
-// a = réponses cochées par l'utilisateur
-// b = bonnes réponses définies dans le code
-// La fonction compare les deux tableaux pour vérifier si la réponse est correcte
-function arraysEqual(a, b) {
-    return a.length === b.length && a.every(v => b.includes(v));
-}
-
-function updateScore() {
-    const scoreElement = document.getElementById('score');
-    if (scoreElement) {
-        scoreElement.textContent = `Score : ${score}`;
+  //Vide les messages de résultat quand on change de question
+  ['q15', 'q16', 'q17'].forEach(qid => {
+    if (id !== qid) {
+      const r = document.getElementById(`result-${qid}`);
+      if (r) r.textContent = '';
     }
+  });
+
+  //Les canvas ont une taille 0 quand leur question est cachée,
+  //il faut donc les redimensionner au moment où elles deviennent visibles
+  const match = id.match(/^q(16|17|18)$/);
+  if (match) {
+    const n = match[1];
+    resizeCanvas(n);
+    redraw(n);
+  }
+}
+
+//Compare deux tableaux sans tenir compte de l'ordre
+function arraysEqual(a, b) {
+  return a.length === b.length && a.every(v => b.includes(v));
+}
+
+//Met à jour l'affichage du score
+function updateScore() {
+  const el = document.getElementById('score');
+  if (el) el.textContent = `Score : ${score}`;
 }
 updateScore();
 
 
-//Fonction qui permet de vérifier la réponse de la question 15
+//Q15
+
 function checkQ15() {
-    const selected = Array.from(document.querySelectorAll('input[name="q15"]:checked'))
-                          .map(el => el.value);
+  const selected = Array.from(document.querySelectorAll('input[name="q15"]:checked'))
+                        .map(el => el.value);
+  const result = document.getElementById("result-q15");
 
-    const correct = ["change"]; //La bonne réponse
+  if (arraysEqual(selected, ["change"])) {
+    result.textContent = "Bonne réponse !";
+    result.style.color = "green";
+    score++;
+    document.getElementById("btn-valider-q15").style.display = "none";
+    document.getElementById("btn-suivant-q15").style.display = "inline-block";
+  } else {
+    result.textContent = "Mauvaise réponse.";
+    result.style.color = "red";
+    score--;
+  }
+  updateScore();
+}
 
-    const result = document.getElementById("result-q15");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
-        result.style.color = "green";
-        score++;
-        document.getElementById("btn-valider-q15").style.display = "none";
-        document.getElementById("btn-suivant-q15").style.display = "inline-block";
+//Q16 / Q17 / Q18
+
+//Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
+const configs = {
+  16: { correctMap: { A: "3", B: "1", C: "2" } },
+  17: { correctMap: { A: "2", B: "1", C: "3" } },
+  18: { correctMap: { A: "2", B: "1", C: "3" } },
+};
+
+//État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+const state = {};
+
+[16, 17, 18].forEach(n => {
+  const canvas = document.getElementById(`lignes${n}`);
+  state[n] = { canvas, ctx: canvas.getContext("2d"), connexions: [], selected: null };
+
+  resizeCanvas(n);
+  window.addEventListener("resize", () => { resizeCanvas(n); redraw(n); });
+
+  //Clic sur un bloc gauche : le sélectionne comme point de départ
+  document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(bloc => {
+    bloc.addEventListener("click", () => {
+      document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(b => b.classList.remove("selected"));
+      bloc.classList.add("selected");
+      state[n].selected = bloc.dataset.id;
+    });
+  });
+
+  //Clic sur un bloc droit : crée la connexion avec le bloc gauche sélectionné
+  document.querySelectorAll(`.droite${n} .bloc${n}`).forEach(bloc => {
+    bloc.addEventListener("click", () => {
+      if (!state[n].selected) return;
+
+      //Remplace une éventuelle connexion existante pour ce bloc gauche
+      state[n].connexions = state[n].connexions.filter(c => c.left !== state[n].selected);
+      state[n].connexions.push({ left: state[n].selected, right: bloc.dataset.id, correct: null });
+
+      document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(b => b.classList.remove("selected"));
+      state[n].selected = null;
+      redraw(n);
+    });
+  });
+
+  //Validation : vérifie chaque connexion et met à jour score + affichage
+  document.getElementById(`btn-valider-q${n}`).addEventListener("click", () => {
+    const { correctMap } = configs[n];
+    let bonnes = 0;
+
+    state[n].connexions.forEach(c => {
+      c.correct = c.right === correctMap[c.left];
+      if (c.correct) bonnes++;
+    });
+    redraw(n); //Redessine en rouge (faux) ou bleu (vrai)
+
+    const result = document.getElementById(`result-q${n}`);
+    if (bonnes === 3) {
+      result.textContent = "Bonne réponse !";
+      result.style.color = "green";
+      score++;
+      document.getElementById(`btn-valider-q${n}`).style.display = "none";
+      document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
-        result.style.color = "red";
-        score--;
+      result.textContent = "Mauvaise réponse.";
+      result.style.color = "red";
+      score--;
     }
     updateScore();
-}
-
-
-
-
-
-//Récupération du canvas et de son contexte 2D
-const canvas16 = document.getElementById("lignes16");
-const ctx16 = canvas16.getContext("2d");
-
-//Ajuste la taille du canvas pour qu'il corresponde exactement au conteneur
-//essentiel pour que les lignes soient dessinées dans la bonne zone
-function resizeCanvas16() {
-  canvas16.width = document.getElementById("conteneur16").clientWidth;
-  canvas16.height = document.getElementById("conteneur16").clientHeight;
-}
-resizeCanvas16(); //Premier appel (sera corrigé ensuite par showQuestion('q16'))
-
-
-
-//Recalcule et redessine les lignes quand la fenêtre change de taille
-//évite que les lignes se décalent si l'utilisateur redimensionne la fenêtre
-window.addEventListener("resize", () => {
-  resizeCanvas16();
-  redraw16();
-});
-
-let blocGaucheSelectionne16 = null;   //Stocke le bloc de gauche sélectionné
-let connexions16 = [];                //Liste des connexions créées (gauche → droite)
-
-// Sélection des blocs
-const blocsGauche16 = document.querySelectorAll(".gauche16 .bloc16");
-const blocsDroite16 = document.querySelectorAll(".droite16 .bloc16");
-
-//Fonction pour obtenir le centre d’un bloc
-//permet de tracer une ligne proprement entre deux blocs
-function getCenter16(el) {
-  const r = el.getBoundingClientRect();
-  const cont = document.getElementById("conteneur16").getBoundingClientRect();
-
-  return {
-    x: r.left - cont.left + r.width / 2,
-    y: r.top - cont.top + r.height / 2
-  };
-}
-
-//Efface et redessine toutes les lignes existantes
-//appelé après chaque connexion ou redimensionnement
-function redraw16() {
-  ctx16.clearRect(0, 0, canvas16.width, canvas16.height);
-  ctx16.lineWidth = 3;
-
-  connexions16.forEach(c => {
-    const blocG = document.querySelector(`.gauche16 .bloc16[data-id="${c.left}"]`);
-    const blocD = document.querySelector(`.droite16 .bloc16[data-id="${c.right}"]`);
-
-    const p1 = getCenter16(blocG);
-    const p2 = getCenter16(blocD);
-
-    //Rouge si incorrect, bleu sinon
-    ctx16.strokeStyle = c.correct === false ? "#e74c3c" : "#3498db";
-
-    ctx16.beginPath();
-    ctx16.moveTo(p1.x, p1.y);
-    ctx16.lineTo(p2.x, p2.y);
-    ctx16.stroke();
-  });
-}
-
-//Gestion du clic sur les blocs de gauche
-blocsGauche16.forEach(bloc => {
-  bloc.addEventListener("click", () => {
-
-    //Retire la sélection précédente
-    blocsGauche16.forEach(b => b.classList.remove("selected"));
-
-    //Sélectionne le bloc cliqué
-    bloc.classList.add("selected");
-
-    //Stocke l'identifiant du bloc sélectionné
-    blocGaucheSelectionne16 = bloc.dataset.id;
   });
 });
 
-//Gestion du clic sur les blocs de droite
-blocsDroite16.forEach(bloc => {
-  bloc.addEventListener("click", () => {
 
-    //On ne peut connecter que si un bloc gauche est sélectionné
-    if (!blocGaucheSelectionne16) return;
+//Canvas
 
-    //Supprime une éventuelle connexion précédente pour ce bloc gauche
-    //garantit qu’un bloc gauche ne peut avoir qu’une seule liaison
-    connexions16 = connexions16.filter(c => c.left !== blocGaucheSelectionne16);
-
-    //Ajoute la nouvelle connexion
-    connexions16.push({
-      left: blocGaucheSelectionne16,
-      right: bloc.dataset.id,
-      correct: null //sera défini lors de la validation
-    });
-
-    //Désélectionne le bloc gauche
-    blocsGauche16.forEach(b => b.classList.remove("selected"));
-    blocGaucheSelectionne16 = null;
-
-    redraw16(); //Met à jour les lignes affichées
-  });
-});
-
-//Vérification des réponses
-document.getElementById("btn-valider-q16").addEventListener("click", () => {
-
-    const correctMap16 = { A: "3", B: "1", C: "2" }; //Solutions officielles
-    let bonnesConnexions = 0;
-
-    //Vérifie chaque connexion
-    connexions16.forEach(c => {
-        c.correct = c.right === correctMap16[c.left]; //Compare la réponse donnée avec la bonne
-        if (c.correct) bonnesConnexions++;
-    });
-
-    redraw16(); //Met à jour les couleurs des lignes (rouge/bleu)
-
-    const result = document.getElementById("result-q16");
-
-    //Si toutes les connexions sont correctes
-    if (bonnesConnexions === 3) {
-        result.textContent = "Bonne réponse !";
-        result.style.color = "green";
-        score++;
-        document.getElementById("btn-valider-q16").style.display = "none";
-        document.getElementById("btn-suivant-q16").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse.";
-        result.style.color = "red";
-        score--;
-    }
-
-    updateScore();
-});
-
-
-
-
-//q17
-
-
-//Récupération du canvas et de son contexte 2D
-const canvas17 = document.getElementById("lignes17");
-const ctx17 = canvas17.getContext("2d");
-
-//Ajuste la taille du canvas pour qu'il corresponde exactement au conteneur
-//essentiel pour que les lignes soient dessinées dans la bonne zone
-function resizeCanvas17() {
-  canvas17.width = document.getElementById("conteneur17").clientWidth;
-  canvas17.height = document.getElementById("conteneur17").clientHeight;
-}
-resizeCanvas17(); //Premier appel (sera corrigé ensuite par showQuestion('q17'))
-
-
-
-//Recalcule et redessine les lignes quand la fenêtre change de taille
-//évite que les lignes se décalent si l'utilisateur redimensionne la fenêtre
-window.addEventListener("resize", () => {
-  resizeCanvas17();
-  redraw17();
-});
-
-let blocGaucheSelectionne17 = null;   //Stocke le bloc de gauche sélectionné
-let connexions17 = [];                //Liste des connexions créées (gauche → droite)
-
-//Sélection des blocs
-const blocsGauche17 = document.querySelectorAll(".gauche17 .bloc17");
-const blocsDroite17 = document.querySelectorAll(".droite17 .bloc17");
-
-//Fonction pour obtenir le centre d’un bloc
-//permet de tracer une ligne proprement entre deux blocs
-function getCenter17(el) {
-  const r = el.getBoundingClientRect();
-  const cont = document.getElementById("conteneur17").getBoundingClientRect();
-
-  return {
-    x: r.left - cont.left + r.width / 2,
-    y: r.top - cont.top + r.height / 2
-  };
+//Ajuste la taille du canvas à celle de son conteneur
+function resizeCanvas(n) {
+  const s = state[n];
+  s.canvas.width  = document.getElementById(`conteneur${n}`).clientWidth;
+  s.canvas.height = document.getElementById(`conteneur${n}`).clientHeight;
 }
 
-//Efface et redessine toutes les lignes existantes
-//appelé après chaque connexion ou redimensionnement
-function redraw17() {
-  ctx17.clearRect(0, 0, canvas17.width, canvas17.height);
-  ctx17.lineWidth = 3;
+//Efface et redessine toutes les connexions (bleu = correct, rouge = incorrect)
+function redraw(n) {
+  const { canvas, ctx, connexions } = state[n];
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.lineWidth = 3;
 
-  connexions17.forEach(c => {
-    const blocG = document.querySelector(`.gauche17 .bloc17[data-id="${c.left}"]`);
-    const blocD = document.querySelector(`.droite17 .bloc17[data-id="${c.right}"]`);
+  connexions.forEach(c => {
+    const blocG = document.querySelector(`.gauche${n} .bloc${n}[data-id="${c.left}"]`);
+    const blocD = document.querySelector(`.droite${n} .bloc${n}[data-id="${c.right}"]`);
+    const cont  = document.getElementById(`conteneur${n}`).getBoundingClientRect();
 
-    const p1 = getCenter17(blocG);
-    const p2 = getCenter17(blocD);
+    const center = el => {
+      const r = el.getBoundingClientRect();
+      return { x: r.left - cont.left + r.width / 2, y: r.top - cont.top + r.height / 2 };
+    };
 
-    //Rouge si incorrect, bleu sinon
-    ctx17.strokeStyle = c.correct === false ? "#e74c3c" : "#3498db";
-
-    ctx17.beginPath();
-    ctx17.moveTo(p1.x, p1.y);
-    ctx17.lineTo(p2.x, p2.y);
-    ctx17.stroke();
+    ctx.strokeStyle = c.correct === false ? "#e74c3c" : "#3498db";
+    ctx.beginPath();
+    ctx.moveTo(...Object.values(center(blocG)));
+    ctx.lineTo(...Object.values(center(blocD)));
+    ctx.stroke();
   });
 }
-
-//Gestion du clic sur les blocs de gauche
-blocsGauche17.forEach(bloc => {
-  bloc.addEventListener("click", () => {
-
-    //Retire la sélection précédente
-    blocsGauche17.forEach(b => b.classList.remove("selected"));
-
-    //Sélectionne le bloc cliqué
-    bloc.classList.add("selected");
-
-    //Stocke l'identifiant du bloc sélectionné
-    blocGaucheSelectionne17 = bloc.dataset.id;
-  });
-});
-
-//Gestion du clic sur les blocs de droite
-blocsDroite17.forEach(bloc => {
-  bloc.addEventListener("click", () => {
-
-    //On ne peut connecter que si un bloc gauche est sélectionné
-    if (!blocGaucheSelectionne17) return;
-
-    //Supprime une éventuelle connexion précédente pour ce bloc gauche
-    //garantit qu’un bloc gauche ne peut avoir qu’une seule liaison
-    connexions17 = connexions17.filter(c => c.left !== blocGaucheSelectionne17);
-
-    //Ajoute la nouvelle connexion
-    connexions17.push({
-      left: blocGaucheSelectionne17,
-      right: bloc.dataset.id,
-      correct: null //sera défini lors de la validation
-    });
-
-    //Désélectionne le bloc gauche
-    blocsGauche17.forEach(b => b.classList.remove("selected"));
-    blocGaucheSelectionne17 = null;
-
-    redraw17(); //Met à jour les lignes affichées
-  });
-});
-
-//Vérification des réponses
-document.getElementById("btn-valider-q17").addEventListener("click", () => {
-
-    const correctMap17 = { A: "2", B: "1", C: "3" }; //Solutions officielles
-    let bonnesConnexions = 0;
-
-    //Vérifie chaque connexion
-    connexions17.forEach(c => {
-        c.correct = c.right === correctMap17[c.left]; //Compare la réponse donnée avec la bonne
-        if (c.correct) bonnesConnexions++;
-    });
-
-    redraw17(); //Met à jour les couleurs des lignes (rouge/bleu)
-
-    const result = document.getElementById("result-q17");
-
-    //Si toutes les connexions sont correctes
-    if (bonnesConnexions === 3) {
-        result.textContent = "Bonne réponse !";
-        result.style.color = "green";
-        score++;
-        document.getElementById("btn-valider-q17").style.display = "none";
-        document.getElementById("btn-suivant-q17").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse.";
-        result.style.color = "red";
-        score--;
-    }
-
-    updateScore();
-});
-
-
-
-
-//q18
-
-
-//Récupération du canvas et de son contexte 2D
-const canvas18 = document.getElementById("lignes18");
-const ctx18 = canvas18.getContext("2d");
-
-//Ajuste la taille du canvas pour qu'il corresponde exactement au conteneur
-//essentiel pour que les lignes soient dessinées dans la bonne zone
-function resizeCanvas18() {
-  canvas18.width = document.getElementById("conteneur18").clientWidth;
-  canvas18.height = document.getElementById("conteneur18").clientHeight;
-}
-resizeCanvas18(); //Premier appel (sera corrigé ensuite par showQuestion('q18'))
-
-
-
-//Recalcule et redessine les lignes quand la fenêtre change de taille
-//évite que les lignes se décalent si l'utilisateur redimensionne la fenêtre
-window.addEventListener("resize", () => {
-  resizeCanvas18();
-  redraw18();
-});
-
-let blocGaucheSelectionne18 = null;   //Stocke le bloc de gauche sélectionné
-let connexions18 = [];                //Liste des connexions créées (gauche → droite)
-
-//Sélection des blocs
-const blocsGauche18 = document.querySelectorAll(".gauche18 .bloc18");
-const blocsDroite18 = document.querySelectorAll(".droite18 .bloc18");
-
-//Fonction pour obtenir le centre d’un bloc
-//permet de tracer une ligne proprement entre deux blocs
-function getCenter18(el) {
-  const r = el.getBoundingClientRect();
-  const cont = document.getElementById("conteneur18").getBoundingClientRect();
-
-  return {
-    x: r.left - cont.left + r.width / 2,
-    y: r.top - cont.top + r.height / 2
-  };
-}
-
-//Efface et redessine toutes les lignes existantes
-//appelé après chaque connexion ou redimensionnement
-function redraw18() {
-  ctx18.clearRect(0, 0, canvas18.width, canvas18.height);
-  ctx18.lineWidth = 3;
-
-  connexions18.forEach(c => {
-    const blocG = document.querySelector(`.gauche18 .bloc18[data-id="${c.left}"]`);
-    const blocD = document.querySelector(`.droite18 .bloc18[data-id="${c.right}"]`);
-
-    const p1 = getCenter18(blocG);
-    const p2 = getCenter18(blocD);
-
-    //Rouge si incorrect, bleu sinon
-    ctx18.strokeStyle = c.correct === false ? "#e74c3c" : "#3498db";
-
-    ctx18.beginPath();
-    ctx18.moveTo(p1.x, p1.y);
-    ctx18.lineTo(p2.x, p2.y);
-    ctx18.stroke();
-  });
-}
-
-//Gestion du clic sur les blocs de gauche
-blocsGauche18.forEach(bloc => {
-  bloc.addEventListener("click", () => {
-
-    //Retire la sélection précédente
-    blocsGauche18.forEach(b => b.classList.remove("selected"));
-
-    //Sélectionne le bloc cliqué
-    bloc.classList.add("selected");
-
-    //Stocke l'identifiant du bloc sélectionné
-    blocGaucheSelectionne18 = bloc.dataset.id;
-  });
-});
-
-//Gestion du clic sur les blocs de droite
-blocsDroite18.forEach(bloc => {
-  bloc.addEventListener("click", () => {
-
-    //On ne peut connecter que si un bloc gauche est sélectionné
-    if (!blocGaucheSelectionne18) return;
-
-    //Supprime une éventuelle connexion précédente pour ce bloc gauche
-    //garantit qu’un bloc gauche ne peut avoir qu’une seule liaison
-    connexions18 = connexions18.filter(c => c.left !== blocGaucheSelectionne18);
-
-    //Ajoute la nouvelle connexion
-    connexions18.push({
-      left: blocGaucheSelectionne18,
-      right: bloc.dataset.id,
-      correct: null //sera défini lors de la validation
-    });
-
-    //Désélectionne le bloc gauche
-    blocsGauche18.forEach(b => b.classList.remove("selected"));
-    blocGaucheSelectionne18 = null;
-
-    redraw18(); //Met à jour les lignes affichées
-  });
-});
-
-//Vérification des réponses
-document.getElementById("btn-valider-q18").addEventListener("click", () => {
-
-    const correctMap18 = { A: "2", B: "1", C: "3" }; //Solutions officielles
-    let bonnesConnexions = 0;
-
-    //Vérifie chaque connexion
-    connexions18.forEach(c => {
-        c.correct = c.right === correctMap18[c.left]; //Compare la réponse donnée avec la bonne
-        if (c.correct) bonnesConnexions++;
-    });
-
-    redraw18(); //Met à jour les couleurs des lignes (rouge/bleu)
-
-    const result = document.getElementById("result-q18");
-
-    //Si toutes les connexions sont correctes
-    if (bonnesConnexions === 3) {
-        result.textContent = "Bonne réponse !";
-        result.style.color = "green";
-        score++;
-        document.getElementById("btn-valider-q17").style.display = "none";
-        document.getElementById("btn-suivant-q17").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse.";
-        result.style.color = "red";
-        score--;
-    }
-
-    updateScore();
-});
