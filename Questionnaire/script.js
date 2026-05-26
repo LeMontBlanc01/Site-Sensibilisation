@@ -66,7 +66,6 @@ function showQuestion(id) {
     redraw(n);
   }
 
-<<<<<<< HEAD
   if (id === 'q18') {
     const exportBtn = document.getElementById('btn-export');
     const result18 = document.getElementById('result-q18');
@@ -76,8 +75,6 @@ function showQuestion(id) {
   }
 
   melangerReponses(id);
-=======
->>>>>>> 12bad0d818c1297f134945f4e2473ccf2eb6c1c3
 }
 
 
