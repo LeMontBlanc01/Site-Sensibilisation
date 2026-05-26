@@ -1,7 +1,7 @@
 console.log("JS chargé !"); // Affiche un message dans la console pour confirmer que le fichier JS est bien chargé
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
-var state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
