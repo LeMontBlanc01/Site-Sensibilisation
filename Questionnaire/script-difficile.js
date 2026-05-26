@@ -126,6 +126,13 @@ function showQuestion(id) {
     }
   }
 
+  if (id === 'q15') {
+    const exportBtn = document.getElementById('btn-export');
+    const result15 = document.getElementById('result-q15');
+    if (exportBtn && result15 && result15.textContent.trim().length) {
+      exportBtn.style.display = 'block';
+    }
+  }
 }
 
 function showResult(id) {
@@ -541,7 +548,10 @@ function checkQ15() {
         result.style.color = "red";
         score--;
     }
-    document.getElementById("btn-export").style.display = "inline-block";
+    const exportBtn = document.getElementById("btn-export");
+    if (exportBtn) {
+        exportBtn.style.display = "block";
+    }
     updateScore();
 }
 
