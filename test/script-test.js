@@ -76,15 +76,15 @@ const state = {};
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
 function onBonneReponse16(result) {
-  result.innerHTML = "Bonne réponse !<br><small>blablablabala</small>";
+  result.innerHTML = "Bonne réponse !<br><small>Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).</small>";
 }
 
 function onBonneReponse17(result) {
-  result.innerHTML = "Bonne réponse !<br><small>blablablabal222a</small>";
+  result.innerHTML = "Bonne réponse !<br><small>Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.</small>";
 }
 
 function onBonneReponse18(result) {
-  result.innerHTML = "Bonne réponse !<br><small>blablablabala33</small>";
+  result.innerHTML = "Bonne réponse !<br><small>Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.</small>";
 }
 
 //Regroupe les callbacks par numéro de question pour les appeler dans la boucle
