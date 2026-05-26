@@ -29,15 +29,10 @@ function initRandomQuestions() {
         nextBtn.textContent = 'Voir les résultats';
       }
     }
-    
-    const h2 = document.querySelector(`#${id} h2`);
-    if (h2) h2.textContent = `Question ${idx + 1}`;
-
   });
 
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
   document.getElementById(questionOrder[0]).style.display = 'block';
-  melangerReponses(questionOrder[0]);
 }
 
 function melangerReponses(questionId) {
@@ -96,12 +91,7 @@ function showQuestion(id) {
     redraw(n);
   }
 
-  const numeroAffiche = questionOrder.indexOf(id) + 1;
-  const h2 = document.querySelector(`#${id} h2`);
-  if (h2) h2.textContent = `Question ${numeroAffiche}`;
-
   melangerReponses(id);
-
 }
 
 function showResult(id) {
