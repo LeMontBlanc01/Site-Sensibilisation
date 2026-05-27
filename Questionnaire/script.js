@@ -643,7 +643,6 @@ function checkQ18() {
     }
     document.getElementById("btn-suivant-q18").style.display = "inline-block";
     updateScore();
-    envoyerScore(joueurNom, score, "Facile", 18);
 }
 
 
