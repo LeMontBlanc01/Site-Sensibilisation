@@ -74,19 +74,3 @@ main {
             width: 70px;
             height: 70px;
         }
-
-
-.support {
-
-            display: flex;
-            gap: 20px;
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-
-        }
-
-.support img {
-            width: 70px;
-            height: 70px;
-        }
