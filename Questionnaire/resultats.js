@@ -1,3 +1,5 @@
+
+// Cette fonction formate une date en français avec jour, mois, année, heure et minute
 function formatDate(date) {
   return date.toLocaleString('fr-FR', {
     year: 'numeric',
@@ -8,10 +10,12 @@ function formatDate(date) {
   });
 }
 
+// Cette fonction génère le texte à exporter pour un résultat donné
 function createResultText(score, total, niveau, nom) {
   return `Prénom : ${nom}\nNiveau : ${niveau}\nScore : ${score} / ${total}\nDate : ${formatDate(new Date())}`;
 }
 
+// Cette fonction gère l'export des résultats
 function exportResults() {
   // Si un historique global est présent, exporter tous les résultats
   const histRaw = localStorage.getItem('quizResults');
@@ -108,4 +112,4 @@ function initResultPage() {
   loadResults();
 }
 
-window.addEventListener('load', initResultPage);
+window.addEventListener('load', initResultPage); // Appel de la fonction d'initialisation lorsque la page est chargée
