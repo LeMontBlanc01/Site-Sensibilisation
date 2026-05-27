@@ -497,14 +497,12 @@ function checkQ14() {
 }
 
 //Q15 / Q16 / Q17
-
 //Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
 const configs = {
   15: { correctMap: { A: "1", B: "2", C: "3" } },
   16: { correctMap: { A: "3", B: "2", C: "1" } },
   17: { correctMap: { A: "2", B: "1", C: "3" } },
 };
-
 
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
@@ -658,5 +656,4 @@ async function envoyerScore(nom, score, niveau, total) {
     console.error('Erreur envoi score :', error);
   }
 }
-
 envoyerScore(joueurNom, score, "Moyen", 18);

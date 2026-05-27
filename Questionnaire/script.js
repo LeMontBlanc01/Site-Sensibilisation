@@ -498,14 +498,12 @@ function checkQ14() {
 
 
 //Q15 / Q16 / Q17
-
 //Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
 const configs = {
   15: { correctMap: { A: "3", B: "1", C: "2" } },
   16: { correctMap: { A: "2", B: "1", C: "3" } },
   17: { correctMap: { A: "2", B: "1", C: "3" } },
 };
-
 
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
@@ -621,7 +619,6 @@ function redraw(n) {
 });
 
 
-
 //Fonction qui permet de vérifier la réponse de la question 18
 function checkQ18() {
     const selected = Array.from(document.querySelectorAll('input[name="q18"]:checked'))
@@ -660,5 +657,4 @@ async function envoyerScore(nom, score, niveau, total) {
     console.error('Erreur envoi score :', error);
   }
 }
-
 envoyerScore(joueurNom, score, "Facile", 18);
