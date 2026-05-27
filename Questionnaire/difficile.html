@@ -285,7 +285,11 @@
         <label><input type="radio" name="q18" value="temps"> Vérifier l'heure locale du poste</label><br>
         <p id="result-q18"></p>
         <button id="btn-valider-q18" class="fr-btn" type="button" onclick="checkQ18()">Valider votre réponse</button>
-        <button id="btn-suivant-q18" class="fr-btn" type="button">Voir les résultats</button>
+        <button id="btn-suivant-q18" class="fr-btn" type="button" style="display:none;">Voir les résultats</button>
+    </div>
+
+    <div class="resultats" id="resultats">
+        <p id="feedback"></p>
     </div>
 
     <div class="bouton-revenir">
