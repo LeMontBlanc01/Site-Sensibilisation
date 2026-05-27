@@ -193,14 +193,99 @@
 
     <div class="question" id="q15" style="display:none;">
         <h2>Question 15</h2>
-        <h3>Quelle action est la plus pertinente pour vérifier la validité d'un certificat TLS ?</h3>
-        <label><input type="radio" name="q15" value="chaine"> Vérifier la chaîne de certification et la validité de la signature</label><br>
-        <label><input type="radio" name="q15" value="ping"> Pinger l'adresse IP du serveur</label><br>
-        <label><input type="radio" name="q15" value="taille"> Vérifier la taille du certificat uniquement</label><br>
-        <label><input type="radio" name="q15" value="temps"> Vérifier l'heure locale du poste</label><br>
+        <h3>Associez la menace à son fonctionnement exact :</h3>
+
+        <div id="conteneur15">
+            <div id="zonerelier15">
+
+                <div class="gauche15">
+                    <div class="bloc15" data-id="A">A. Reserve phishing</div><br>
+                    <div class="bloc15" data-id="B">B. Pretexting technique</div><br>
+                    <div class="bloc15" data-id="C">C. Session mirroring</div><br>
+                </div>
+
+                <div class="droite15">
+                    <div class="bloc15" data-id="1">1. L'attaquant pousse la victime à initer elle-même le contact (ex: faux support)</div><br>
+                    <div class="bloc15" data-id="2">2. L'attaquant observe passivement une session légitime via un accès détourné</div><br>
+                    <div class="bloc15" data-id="3">3. L'attaquant se fait passer pour un outil ou un système automatisé</div><br>
+                </div>
+
+            </div>
+            <canvas id="lignes15"></canvas>
+        </div>
+
         <p id="result-q15"></p>
-        <button id="btn-valider-q15" class="fr-btn" type="button" onclick="checkQ15()">Valider votre réponse</button>
-        <button id="btn-suivant-q15" class="fr-btn" type="button">Voir les résultats</button>
+        <button id="btn-valider-q15" class="fr-btn" type="button">Valider votre réponse</button>
+        <button id="btn-suivant-q15" class="fr-btn" type="button" onclick="showQuestion('q16')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q16" style="display:none;">
+        <h2>Question 16</h2>
+        <h3>Associez:</h3>
+
+        <div id="conteneur16">
+            <div id="zonerelier16">
+
+                <div class="gauche16">
+                    <div class="bloc16" data-id="A">A. Le curseur bouge brièvement tout seul, puis plus rien pendant la journée</div><br>
+                    <div class="bloc16" data-id="B">B. Le PC devient très lent pendant 30 secondes, puis redevient normal sans redémarrage</div><br>
+                    <div class="bloc16" data-id="C">C. Une fenêtre "session expirée, veuillez vous reconnecter" apparaît alors que tu étais en train de taper</div><br>
+                </div>
+
+                <div class="droite16">
+                    <div class="bloc16" data-id="1">1. Prise de contrôle distante furtive via un outil légitime</div><br>
+                    <div class="bloc16" data-id="2">2. Processus de sécurité (EDR/antivirus) qui scanne ou isole un élément suspect</div><br>
+                    <div class="bloc16" data-id="3">3. Tentative de détournement ou de réinitialisation de session par un attaquant</div><br>
+                </div>
+
+            </div>
+            <canvas id="lignes16"></canvas>
+        </div>
+
+        <p id="result-q16"></p>
+        <button id="btn-valider-q16" class="fr-btn" type="button">Valider votre réponse</button>
+        <button id="btn-suivant-q16" class="fr-btn" type="button" onclick="showQuestion('q17')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+
+    <div class="question" id="q17" style="display:none;">
+        <h2>Question 17</h2>
+        <h3>Associez:</h3>
+
+        <div id="conteneur17">
+            <div id="zonerelier17">
+
+                <div class="gauche17">
+                    <div class="bloc17" data-id="A">A. Tu reçois une alerte "nouvelle connexion depuis un pays étranger" alors que tu es au bureau</div><br>
+                    <div class="bloc17" data-id="B">B. Le Wi-Fi invité devient soudainement très lent, alors que peu de monde est connecté</div><br>
+                    <div class="bloc17" data-id="C">C. Un serveur interne commence à générer beaucoup plus de trafic sortant que d'habitude</div><br>
+                </div>
+
+                <div class="droite17">
+                    <div class="bloc17" data-id="1">1. Exfiltration de données via un tunnel chiffré mis en place par un attaquant</div><br>
+                    <div class="bloc17" data-id="2">2. Scan ou tentative d'exploitation depuis un appareil connecté au réseau invité</div><br>
+                    <div class="bloc17" data-id="3">3. Test d'identifiants compromis sur un VPN ou un service exposé</div><br>
+                </div>
+
+            </div>
+            <canvas id="lignes17"></canvas>
+        </div>
+
+        <p id="result-q17"></p>
+        <button id="btn-valider-q17" class="fr-btn" type="button">Valider votre réponse</button>
+        <button id="btn-suivant-q17" class="fr-btn" type="button" onclick="showQuestion('q18')" style="display:none;">Passer à la prochaine question</button>
+    </div>
+
+    <div class="question" id="q18" style="display:none;">
+        <h2>Question 18</h2>
+        <h3>Quelle action est la plus pertinente pour vérifier la validité d'un certificat TLS ?</h3>
+        <label><input type="radio" name="q18" value="chaine"> Vérifier la chaîne de certification et la validité de la signature</label><br>
+        <label><input type="radio" name="q18" value="ping"> Pinger l'adresse IP du serveur</label><br>
+        <label><input type="radio" name="q18" value="taille"> Vérifier la taille du certificat uniquement</label><br>
+        <label><input type="radio" name="q18" value="temps"> Vérifier l'heure locale du poste</label><br>
+        <p id="result-q18"></p>
+        <button id="btn-valider-q18" class="fr-btn" type="button" onclick="checkQ18()">Valider votre réponse</button>
+        <button id="btn-suivant-q18" class="fr-btn" type="button">Voir les résultats</button>
     </div>
 
     <div class="bouton-revenir">
