@@ -14,6 +14,7 @@ function shuffle(array) {
   return array;
 }
 
+// Initialise l'ordre aléatoire des questions et configure les boutons "Suivant" en conséquence
 function initRandomQuestions() {
   const qs = Array.from(document.querySelectorAll('.question')).map(q => q.id);
   if (!qs.length) return;
@@ -60,7 +61,7 @@ function melangerReponses(questionId) {
   });
 }
 
-window.addEventListener('load', initRandomQuestions);
+window.addEventListener('load', initRandomQuestions); // Initialise les questions aléatoires au chargement de la page
 
 function goToResults() {
   localStorage.setItem('quizScore', String(score));
@@ -147,6 +148,7 @@ function updateScore() {
 }
 updateScore();
 
+// Fonction qui génère un résumé de la question avec les réponses sélectionnées et le résultat affiché, pour l'export des résultats
 function getQuestionSummary(questionNumber) {
     const selected = Array.from(document.querySelectorAll(`input[name="q${questionNumber}"]:checked`))
                           .map(el => el.value);
@@ -643,6 +645,7 @@ function checkQ18() {
     updateScore();
 }
 
+// Envoi du score au serveur (à appeler à la fin du questionnaire)
 async function envoyerScore(nom, score, niveau, total) {
   try {
     await fetch('http://localhost:3001/api/scores', {
