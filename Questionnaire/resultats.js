@@ -13,6 +13,37 @@ function createResultText(score, total, niveau, nom) {
 }
 
 function exportResults() {
+  // Si un historique global est présent, exporter tous les résultats
+  const histRaw = localStorage.getItem('quizResults');
+  if (histRaw) {
+    try {
+      const hist = JSON.parse(histRaw);
+      if (Array.isArray(hist) && hist.length) {
+        const lines = hist.map((h, i) => {
+          return `--- Résultat ${i + 1} ---\nPrénom : ${h.nom}\nNiveau : ${h.niveau}\nScore : ${h.score} / ${h.total}\nDate : ${new Date(h.date).toLocaleString('fr-FR')}\n`;
+        });
+        const body = lines.join('\n');
+        const blob = new Blob([body], { type: 'text/plain;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `resultats-tous-les-niveaux.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        const mailtoBody = encodeURIComponent(body.replace(/\n/g, '\r\n'));
+        const mailto = `mailto:?subject=Résultats questionnaires&body=${mailtoBody}`;
+        window.location.href = mailto;
+        return;
+      }
+    } catch (e) {
+      console.error('Erreur lecture historique des résultats', e);
+    }
+  }
+
+  // Sinon, comportement historique (export du résultat courant)
   const score = localStorage.getItem('quizScore');
   const niveau = localStorage.getItem('quizNiveau');
   const nom = localStorage.getItem('quizNom');

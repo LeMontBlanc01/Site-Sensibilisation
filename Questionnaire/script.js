@@ -67,6 +67,14 @@ function goToResults() {
   localStorage.setItem('quizNiveau', quizNiveau);
   localStorage.setItem('quizNom', joueurNom);
   localStorage.setItem('quizTotal', '18');
+  // Enregistrer dans l'historique global des résultats
+  try {
+    const hist = JSON.parse(localStorage.getItem('quizResults') || '[]');
+    hist.push({ nom: joueurNom, niveau: quizNiveau, score: score, total: 18, date: new Date().toISOString() });
+    localStorage.setItem('quizResults', JSON.stringify(hist));
+  } catch (e) {
+    console.error('Impossible de sauvegarder l\'historique des résultats', e);
+  }
   window.location.href = 'resultats.html';
 }
 

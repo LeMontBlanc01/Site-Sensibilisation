@@ -2,6 +2,7 @@ console.log("JS chargé !"); // Affiche un message dans la console pour confirme
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Moyen";
+const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 
 // Ordre aléatoire des questions
 let questionOrder = [];
@@ -65,6 +66,14 @@ function goToResults() {
   localStorage.setItem('quizNiveau', quizNiveau);
   localStorage.setItem('quizNom', joueurNom);
   localStorage.setItem('quizTotal', '15');
+  // Enregistrer dans l'historique global des résultats
+  try {
+    const hist = JSON.parse(localStorage.getItem('quizResults') || '[]');
+    hist.push({ nom: joueurNom, niveau: quizNiveau, score: score, total: 15, date: new Date().toISOString() });
+    localStorage.setItem('quizResults', JSON.stringify(hist));
+  } catch (e) {
+    console.error('Impossible de sauvegarder l\'historique des résultats', e);
+  }
   window.location.href = 'resultats.html';
 }
 
@@ -72,11 +81,26 @@ function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
   document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
   
-  //Vide les messages de résultat quand on change de question
-  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14'].forEach(qid => {
+  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15', 'q16', 'q17'].forEach(qid => {
     if (id !== qid) {
       const r = document.getElementById(`result-${qid}`);
       if (r) r.textContent = '';
+    }
+  });
+  
+  const match = id.match(/^q(15|16|17)$/);
+  if (match) {
+    const n = match[1];
+    resizeCanvas(n);
+    redraw(n);
+  }
+
+}
+  //Si on change de question, on efface les résultats de Q1
+  if (id !== 'q1') {
+    const result1 = document.getElementById('result-q1');
+    if (result1) {
+      result1.textContent = '';
     }
   });
 

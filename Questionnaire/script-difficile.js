@@ -2,6 +2,7 @@ console.log("JS chargé !"); // Affiche un message dans la console pour confirme
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Difficile";
+const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 
 // Ordre aléatoire des questions
 let questionOrder = [];
@@ -65,6 +66,14 @@ function goToResults() {
   localStorage.setItem('quizNiveau', quizNiveau);
   localStorage.setItem('quizNom', joueurNom);
   localStorage.setItem('quizTotal', '15');
+    // Enregistrer dans l'historique global des résultats
+    try {
+        const hist = JSON.parse(localStorage.getItem('quizResults') || '[]');
+        hist.push({ nom: joueurNom, niveau: quizNiveau, score: score, total: 15, date: new Date().toISOString() });
+        localStorage.setItem('quizResults', JSON.stringify(hist));
+    } catch (e) {
+        console.error('Impossible de sauvegarder l\'historique des résultats', e);
+    }
   window.location.href = 'resultats.html';
 }
 
