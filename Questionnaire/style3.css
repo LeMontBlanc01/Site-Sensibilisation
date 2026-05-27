@@ -281,9 +281,9 @@ h2 {
 }
 
 .bloc15:hover, .bloc16:hover, .bloc17:hover {
-    background: #eef7ff;
+    background: #dcefff;
 }
 
 .bloc15.selected, .bloc16.selected, .bloc17.selected {
-    background: #cfe4ff;
+    background: #b8d7ff;
 }
