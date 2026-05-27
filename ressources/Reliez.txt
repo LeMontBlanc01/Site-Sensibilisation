@@ -57,3 +57,96 @@ Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à
 
 
 Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.
+
+
+
+
+
+Moyen
+
+Associez le concept à ce qu'il protège réellement :
+
+Données personnelles (RGPD) A                       1 Informations permettant d'identifier une personne, même indirectement.
+
+Données sensibles B                                 2 Catégories nécessitant une protection renforcée (santé, opinions, biométrie...)
+
+Données confidentielles internes C                  3 Informations métier non publiques (procédures, contrats, architecture IT).
+
+
+Bonnes réponses: A->1, B->2, C->3
+
+
+
+
+Associez la pratique à son objectif réel.
+
+Principe du moindre privilège A                     1 Réduction du risque humain grâce à des rappels réguliers et contextualisés
+
+Journalisation centralisée B                        2 Détection plus rapide d'anomalies et corrélations d'évènements
+
+Sensibilisation continue C                          3 Limiter les accès pour réduire l'impact d'un compte compromis
+
+
+Bonnes réponses: A->3, B->2, C->1
+
+
+
+Vous configurez la sécurité de vos communications professionnelles.
+Associez chaque protocole ou technologie à son rôle exact :
+
+VPN (réseau privé virtuel) A                        1 Seuls l'expéditeur et le destinataire peuvent lire le message - même le serveur intermédiaire ne peut pas le déchiffrer
+
+Chiffrement de bout en bout (E2EE) B                2 Chiffre le traffic entre votre appareil et un serveur distant, masque votre IP mais ne rend pas anonyme
+
+Certificat SSL/TLS (cadenas HTTPS) C                3 Chiffre les données en transit entre votre navigateur et le site web - ne garantit pas que le site est légitime
+
+
+Bonnes réponses: A->2, B->1, C->3
+
+Attention: Un site HTTPS avec cadenas peut quand même être un site de phishing - le cadenas certifie le chiffrement, pas la légitimité du site. Un VPN ne rend pas anonyme : votre fournisseur VPN voit votre trafic.
+
+
+
+
+
+
+
+
+
+Difficile:
+
+Associe la menace à son fonctionnement exact :
+
+Reserve phishing A                          1 L'attaquant pousse la victime à initer elle-même le contact (ex: faux support)
+
+Pretexting technique B                      2 L'attaquant observe passivement une session légitime via un accès détourné
+
+Session mirroring C                         3 L'attaquant se fait passer pour un outil ou un système automatisé
+
+
+Bonnes réponses: A->1, B->3, C->2
+
+
+Associez:
+
+Le curseur bouge brièvement tout seul, puis plus rien pendant la journée A                                              1 Prise de contrôle distante furtive via un outil légitime
+
+Le PC devient très lent pendant 30 secondes, puis redevient normal sans redémarrage B                                   2 Processus de sécurité (EDR/antivirus) qui scanne ou isole un élément suspect
+
+Une fenêtre "session expirée, veuillez vous reconnecter" apparaît alors que tu étais en train de taper                  3 Tentative de détournement ou de réinitialisation de session par un attaquant
+
+
+Bonnes réponses: A->1, B->2, C->3
+
+
+
+Associez:
+
+Tu reçois une alerte "nouvelle connexion depuis un pays étranger" alors que tu es au bureau A                   1 Exfiltration de données via un tunnel chiffré mis en place par un attaquant
+
+Le Wi-Fi invité devient soudainement très lent, alors que peu de monde est connecté B                           2 Scan ou tentative d'exploitation depuis un appareil connecté au réseau invité
+
+Un serveur interne commence à générer beaucoup plus de trafic sortant que d'habitude C                          3 Test d'identifiants compromis sur un VPN ou un service exposé
+
+
+Bonnes réponses: A->3, B->2, C->1
