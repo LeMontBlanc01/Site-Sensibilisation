@@ -142,7 +142,7 @@ Bonnes réponses: A->1, B->2, C->3
 
 Associez:
 
-Tu reçois une alerte "nouvelle connexion depuis un pays étranger" alors que tu es au bureau A                   1 Exfiltration de données via un tunnel chiffré mis en place par un attaquant
+Vous recevez une alerte "nouvelle connexion depuis un pays étranger" alors que tu es au bureau A                   1 Exfiltration de données via un tunnel chiffré mis en place par un attaquant
 
 Le Wi-Fi invité devient soudainement très lent, alors que peu de monde est connecté B                           2 Scan ou tentative d'exploitation depuis un appareil connecté au réseau invité
 

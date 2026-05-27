@@ -508,15 +508,15 @@ const configs = {
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
 function onBonneReponse15(result) {
-  result.innerHTML = "Bonne réponse !<br><small>Si</small>";
+  result.innerHTML = "Bonne réponse !<br><small></small>";
 }
 
 function onBonneReponse16(result) {
-  result.innerHTML = "Bonne réponse !<br><small>Si </small>";
+  result.innerHTML = "Bonne réponse !<br><small></small>";
 }
 
 function onBonneReponse17(result) {
-  result.innerHTML = "Bonne réponse !<br><small>Si </small>";
+  result.innerHTML = "Bonne réponse !<br><small></small>";
 }
 
 //Regroupe les callbacks par numéro de question pour les appeler dans la boucle
