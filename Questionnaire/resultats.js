@@ -74,6 +74,7 @@ function exportResults() {
   window.location.href = mailto;
 }
 
+// Cette fonction charge les résultats depuis le localStorage et les affiche sur la page
 function loadResults() {
   const score = localStorage.getItem('quizScore');
   const niveau = localStorage.getItem('quizNiveau');
@@ -102,6 +103,7 @@ function loadResults() {
   exportButton.addEventListener('click', exportResults);
 }
 
+// Fonction d'initialisation de la page des résultats
 function initResultPage() {
   const restartButton = document.getElementById('btn-restart');
   if (restartButton) {
