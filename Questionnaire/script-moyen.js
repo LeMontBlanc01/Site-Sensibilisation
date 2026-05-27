@@ -618,7 +618,7 @@ function redraw(n) {
 });
 
 
-//Fonction qui permet de vérifier la réponse de la question 15
+//Fonction qui permet de vérifier la réponse de la question 18
 function checkQ18() {
     const selected = Array.from(document.querySelectorAll('input[name="q18"]:checked'))
                           .map(el => el.value);
