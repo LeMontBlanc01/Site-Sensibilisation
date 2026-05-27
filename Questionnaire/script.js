@@ -659,3 +659,5 @@ async function envoyerScore(nom, score, niveau, total) {
     console.error('Erreur envoi score :', error);
   }
 }
+
+envoyerScore(joueurNom, score, "Facile", 18);
