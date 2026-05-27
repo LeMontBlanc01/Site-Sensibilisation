@@ -24,10 +24,12 @@ header {
         text-align: center;
     }
 
+
 #score {
         margin: 0 auto;
         display: inline-block;
     }
+
 
 main {
         color: #333;
@@ -37,7 +39,6 @@ main {
         background-color: #fff;
         border-radius: 5px;
     }
-
 
 
 .fr-btn {
@@ -63,6 +64,7 @@ h2 {
 
     }
 
+
 .bouton-revenir {
     display: flex;
     gap: 20px;
@@ -71,6 +73,7 @@ h2 {
     left: 20px;
 }
 
+
 .imgf1 img {
     display: block;
     margin: 2px auto;
@@ -78,7 +81,6 @@ h2 {
     height: 350px;
     margin-top: -120px;
 }
-
 
 .imgf2 img {
     display: block;
@@ -144,7 +146,6 @@ h2 {
     margin-top: -90px;
 }
 
-
 .imgf18 img {
     display: block;
     margin: 2px auto;
@@ -170,7 +171,6 @@ h2 {
     margin-top: -90px;
 }
 
-
 .imgm4 img {
     display: block;
     margin: 2px auto;
@@ -178,7 +178,6 @@ h2 {
     height: 360px;
     margin-top: -90px;
 }
-
 
 .imgm5 img {
     display: block;
@@ -235,6 +234,7 @@ h2 {
     height: 350px;
     margin-top: -90px;
 }
+
 
 .col {
     display: flex;

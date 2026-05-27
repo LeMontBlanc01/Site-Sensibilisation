@@ -34,7 +34,6 @@ header img {
     }
 
 
-
 main {
         color: #333;
         margin: 20px auto;
@@ -62,6 +61,7 @@ main {
             margin-bottom: 50px;
         }
 
+        
 .reseaux {
             display: flex;
             gap: 20px;

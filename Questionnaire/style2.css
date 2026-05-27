@@ -1,7 +1,6 @@
 /* Style pour le choix de la difficulté */
 
 
-
 h1 {
         font-size: 2.5em;
         margin: 0;
@@ -60,6 +59,7 @@ h2 {
 
     }
 
+
 .bouton-revenir {
     display: flex;
     gap: 20px;
@@ -67,6 +67,7 @@ h2 {
     bottom: 20px;
     left: 20px;
 }
+
 
 .img1 img {
     display: block;
