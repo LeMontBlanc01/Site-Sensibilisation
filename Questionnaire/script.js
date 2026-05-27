@@ -496,7 +496,6 @@ function checkQ14() {
     updateScore();
 }
 
-
 //Q15 / Q16 / Q17
 //Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
 const configs = {
@@ -617,7 +616,6 @@ function redraw(n) {
     updateScore();
   });
 });
-
 
 //Fonction qui permet de vérifier la réponse de la question 18
 function checkQ18() {
