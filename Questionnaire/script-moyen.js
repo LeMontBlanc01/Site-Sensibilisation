@@ -81,26 +81,11 @@ function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
   document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
   
-  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15', 'q16', 'q17'].forEach(qid => {
+  //Vide les messages de résultat quand on change de question
+  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14'].forEach(qid => {
     if (id !== qid) {
       const r = document.getElementById(`result-${qid}`);
       if (r) r.textContent = '';
-    }
-  });
-  
-  const match = id.match(/^q(15|16|17)$/);
-  if (match) {
-    const n = match[1];
-    resizeCanvas(n);
-    redraw(n);
-  }
-
-}
-  //Si on change de question, on efface les résultats de Q1
-  if (id !== 'q1') {
-    const result1 = document.getElementById('result-q1');
-    if (result1) {
-      result1.textContent = '';
     }
   });
 
