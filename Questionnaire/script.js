@@ -127,7 +127,6 @@ function checkQ1() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -204,7 +203,6 @@ function checkQ2() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -228,7 +226,6 @@ function checkQ3() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -252,7 +249,6 @@ function checkQ4() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -273,7 +269,6 @@ function checkQ5() {
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
     } else {
-        score--;
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
     }
@@ -299,7 +294,6 @@ function checkQ6() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -323,7 +317,6 @@ function checkQ7() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -347,7 +340,6 @@ function checkQ8() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -371,7 +363,6 @@ function checkQ9() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -395,7 +386,6 @@ function checkQ10() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -419,7 +409,6 @@ function checkQ11() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -443,7 +432,6 @@ function checkQ12() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -467,7 +455,6 @@ function checkQ13() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -491,7 +478,6 @@ function checkQ14() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
@@ -611,7 +597,6 @@ function redraw(n) {
     } else {
       result.textContent = "Mauvaise réponse.";
       result.style.color = "red";
-      score--;
     }
     updateScore();
   });
@@ -636,7 +621,6 @@ function checkQ18() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     document.getElementById("btn-suivant-q18").style.display = "inline-block";
     updateScore();
