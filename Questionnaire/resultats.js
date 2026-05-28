@@ -85,6 +85,7 @@ function loadResults() {
   const resultNiveau = document.getElementById('result-niveau');
   const resultNom = document.getElementById('result-nom');
   const resultMessage = document.getElementById('result-message');
+  const resultReview = document.getElementById('result-review');
   const exportButton = document.getElementById('btn-export-results');
 
   if (!score || !niveau || !nom) {
@@ -99,6 +100,27 @@ function loadResults() {
   resultNiveau.textContent = `Niveau : ${niveau}`;
   resultNom.textContent = `Prénom : ${nom}`;
   resultMessage.textContent = `Bravo ! Tes résultats sont prêts à être exportés.`;
+
+  const reviewRaw = localStorage.getItem('quizReview');
+  let review = [];
+  try {
+    review = JSON.parse(reviewRaw || '[]');
+  } catch (e) {
+    console.error('Impossible de lire les détails du quiz', e);
+  }
+
+  if (review && review.length && resultReview) {
+    const list = document.createElement('ol');
+    review.forEach(item => {
+      const li = document.createElement('li');
+      li.className = item.correct ? 'result-review-ok' : 'result-review-ko';
+      li.innerHTML = `<strong>${item.questionId}</strong> - ${item.correct ? 'Correct' : 'Incorrect'}<br>Réponse : ${item.selected}<br>${item.result}`;
+      list.appendChild(li);
+    });
+    resultReview.appendChild(list);
+  } else if (resultReview) {
+    resultReview.textContent = 'Aucun détail de question disponible.';
+  }
 
   exportButton.addEventListener('click', exportResults);
 }

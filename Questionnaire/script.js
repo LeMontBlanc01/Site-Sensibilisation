@@ -3,6 +3,7 @@ let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Facile";
 const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+let quizReview = [];
 
 // Ordre aléatoire des questions
 let questionOrder = [];
@@ -69,6 +70,7 @@ function melangerReponses(questionId) {
 window.addEventListener('load', initRandomQuestions); // Initialise les questions aléatoires au chargement de la page
 
 function goToResults() {
+  localStorage.setItem('quizReview', JSON.stringify(quizReview));
   localStorage.setItem('quizScore', String(score));
   localStorage.setItem('quizNiveau', quizNiveau);
   localStorage.setItem('quizNom', joueurNom);
@@ -109,6 +111,28 @@ function showQuestion(id) {
   melangerReponses(id);
 }
 
+function showNextQuestion(currentId) {
+  const idx = questionOrder.indexOf(currentId);
+  if (idx < 0) return;
+  if (idx < questionOrder.length - 1) {
+    showQuestion(questionOrder[idx + 1]);
+  } else {
+    goToResults();
+  }
+}
+
+function recordQuestionReview(questionId, selected, resultText, correct) {
+  const reviewEntry = {
+    questionId,
+    selected: selected && selected.length ? selected.join(', ') : 'Aucune réponse',
+    result: resultText,
+    correct,
+  };
+  quizReview = quizReview.filter(entry => entry.questionId !== questionId);
+  quizReview.push(reviewEntry);
+  localStorage.setItem('quizReview', JSON.stringify(quizReview));
+}
+
 function showResult(id) {
   document.querySelectorAll('.result').forEach(r => r.style.display = 'none');
   document.getElementById(id).style.display = 'block';
@@ -129,11 +153,14 @@ function checkQ1() {
         result.textContent = "Bonne réponse ! Un bon mot de passe doit contenir au moins 12 caractères, avec une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q1', selected, result.textContent, true);
         document.getElementById("btn-valider-q1").style.display = "none";
         document.getElementById("btn-suivant-q1").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : un bon mot de passe doit être long et complexe, il ne doit pas contenir des éléments faciles à deviner.";
         result.style.color = "red";
+        recordQuestionReview('q1', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q1'), 1000);
     }
     updateScore();
 }
@@ -205,11 +232,14 @@ function checkQ2() {
         result.textContent = "Bonne réponse ! La clé USB peut être infectée par un virus ou un malware, et en la connectant à votre ordinateur, vous risquez de contaminer votre système. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q2', selected, result.textContent, true);
         document.getElementById("btn-valider-q2").style.display = "none";
         document.getElementById("btn-suivant-q2").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q2', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q2'), 1000);
     }
     updateScore();
 }
@@ -251,11 +281,14 @@ function checkQ4() {
         result.textContent = "Bonne réponse ! Un VPN (Virtual Private Network soit Réseau privé virtuel) est un outil qui permet de sécuriser votre connexion internet en chiffrant vos données et en masquant votre adresse IP. Cela protège votre vie privée en ligne et vous permet d'accéder à des contenus restreints géographiquement.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q4', selected, result.textContent, true);
         document.getElementById("btn-valider-q4").style.display = "none";
         document.getElementById("btn-suivant-q4").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q4', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q4'), 1000);
     }
     updateScore();
 }
@@ -273,11 +306,14 @@ function checkQ5() {
         score ++;
         result.textContent = "Bonne réponse ! Pour vérifier l'authenticité d'un email, il est important de vérifier l'adresse de l'expéditeur, de ne pas cliquer sur les liens ou télécharger les pièces jointes. Il faut aussi faire attention aux fautes d'orthographe ou de grammaire, qui sont souvent présentes dans les emails de phishing. En cas de doute, il est recommandé de contacter directement l'entreprise ou la personne concernée pour vérifier l'authenticité de l'email.";
         result.style.color = "green";
+        recordQuestionReview('q5', selected, result.textContent, true);
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Il faut vérifier plusieurs éléments dans un e-mail pour s'assurer de son authenticité.";
         result.style.color = "red";
+        recordQuestionReview('q5', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q5'), 1000);
     }
     updateScore();
 }
@@ -296,11 +332,14 @@ function checkQ6() {
         result.textContent = "Bonne réponse ! Il est important de maintenir son système d'exploitation et ses logiciels à jour pour bénéficier des dernières protections contre les failles de sécurité. Les mises à jour corrigent souvent des vulnérabilités qui pourraient être exploitées par des cybercriminels.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q6', selected, result.textContent, true);
         document.getElementById("btn-valider-q6").style.display = "none";
         document.getElementById("btn-suivant-q6").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Les mises à jour sont importantes pour la sécurité de votre système.";
         result.style.color = "red";
+        recordQuestionReview('q6', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q6'), 1000);
     }
     updateScore();
 }
@@ -319,11 +358,14 @@ function checkQ7() {
         result.textContent = "Bonne réponse ! Il ne faut pas hésiter à signaler les contenus inappropriés ou les comportements suspects. Ne partagez jamais vos mots de passe ou vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q7', selected, result.textContent, true);
         document.getElementById("btn-valider-q7").style.display = "none";
         document.getElementById("btn-suivant-q7").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Ne partagez jamais vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
         result.style.color = "red";
+        recordQuestionReview('q7', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q7'), 1000);
     }
     updateScore();
 }
@@ -342,11 +384,14 @@ function checkQ8() {
         result.textContent = "Bonne réponse ! Utiliser un gestionnaire de mots de passe est une bonne pratique pour sécuriser ses mots de passe. Un gestionnaire de mots de passe stocke vos mots de passe de manière sécurisée et vous permet de générer des mots de passe forts et uniques pour chaque compte. Exemple: KeePass, LastPass, Dashlane.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q8', selected, result.textContent, true);
         document.getElementById("btn-valider-q8").style.display = "none";
         document.getElementById("btn-suivant-q8").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Un outil peut vous aider à gérer vos mots de passe de manière sécurisée.";
         result.style.color = "red";
+        recordQuestionReview('q8', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q8'), 1000);
     }
     updateScore();
 }
@@ -365,11 +410,14 @@ function checkQ9() {
         result.textContent = "Bonne réponse ! Il faut faire attention aux appareils qui vous sont inconnus, comme les clés USB trouvées ou prêtées par des personnes que vous ne connaissez pas. Ces appareils peuvent être infectés par des virus ou des logiciels malveillants qui peuvent compromettre la sécurité de votre ordinateur.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q9', selected, result.textContent, true);
         document.getElementById("btn-valider-q9").style.display = "none";
         document.getElementById("btn-suivant-q9").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Il faut faire attention aux appareils qui vous sont inconnus.";
         result.style.color = "red";
+        recordQuestionReview('q9', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q9'), 1000);
     }
     updateScore();
 }
@@ -388,11 +436,14 @@ function checkQ10() {
         result.textContent = "Bonne réponse ! Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter. Assurez-vous que l'URL commence par 'https://' et que le nom de domaine est correct pour éviter les sites de phishing.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q10', selected, result.textContent, true);
         document.getElementById("btn-valider-q10").style.display = "none";
         document.getElementById("btn-suivant-q10").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q10', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q10'), 1000);
     }
     updateScore();
 }
@@ -411,11 +462,14 @@ function checkQ11() {
         result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) est une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte. En plus de votre mot de passe, vous devez fournir un code généré par une application d'authentification ou reçu par SMS, ce qui rend plus difficile pour les attaquants d'accéder à votre compte.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q11', selected, result.textContent, true);
         document.getElementById("btn-valider-q11").style.display = "none";
         document.getElementById("btn-suivant-q11").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Il existe une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte.";
         result.style.color = "red";
+        recordQuestionReview('q11', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q11'), 1000);
     }
     updateScore();
 }
@@ -434,11 +488,14 @@ function checkQ12() {
         result.textContent = "Bonne réponse ! Sauvegarder régulièrement ses données est une bonne pratique pour éviter de les perdre en cas d'incident (panne, attaque, etc.). Utilisez des solutions de sauvegarde en ligne ou des disques durs externes pour protéger vos données importantes.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q12', selected, result.textContent, true);
         document.getElementById("btn-valider-q12").style.display = "none";
         document.getElementById("btn-suivant-q12").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Soyez régulier.";
         result.style.color = "red";
+        recordQuestionReview('q12', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q12'), 1000);
     }
     updateScore();
 }
@@ -457,11 +514,14 @@ function checkQ13() {
         result.textContent = "Bonne réponse ! Vérifiez toujours la source d'une application avant de la télécharger. Téléchargez des applications uniquement à partir de sources fiables, comme les boutiques d'applications officielles (Google Play Store, Apple App Store) ou les sites web des éditeurs de logiciels réputés.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q13', selected, result.textContent, true);
         document.getElementById("btn-valider-q13").style.display = "none";
         document.getElementById("btn-suivant-q13").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Faites attention à la provenance des applications que vous téléchargez.";
         result.style.color = "red";
+        recordQuestionReview('q13', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q13'), 1000);
     }
     updateScore();
 }
@@ -480,11 +540,14 @@ function checkQ14() {
         result.textContent = "Bonne réponse ! Un malware (contraction de 'malicious software') est un logiciel malveillant conçu pour infiltrer, endommager ou perturber un système informatique. Les malwares peuvent prendre différentes formes, comme les virus, les ransomwares, etc. Ils peuvent voler des données, espionner les utilisateurs ou rendre un système inutilisable.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q14', selected, result.textContent, true);
         document.getElementById("btn-valider-q14").style.display = "none";
         document.getElementById("btn-suivant-q14").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Un type de logiciel qui peut infiltrer, endommager ou perturber un système informatique.";
         result.style.color = "red";
+        recordQuestionReview('q14', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q14'), 1000);
     }
     updateScore();
 }
@@ -599,11 +662,14 @@ function redraw(n) {
       onBonneReponse[n](result); //Appelle la fonction spécifique à la question
       result.style.color = "green";
       score++;
+      recordQuestionReview(`q${n}`, [], result.textContent, true);
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
       document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
     } else {
       result.textContent = "Mauvaise réponse.";
       result.style.color = "red";
+      recordQuestionReview(`q${n}`, [], result.textContent, false);
+      setTimeout(() => showNextQuestion(`q${n}`), 1000);
     }
     updateScore();
   });
@@ -623,13 +689,15 @@ function checkQ18() {
         result.textContent = "Bonne réponse ! En cas de suspicion de phishing, il est important de changer immédiatement vos mots de passe pour les comptes concernés. De plus, signalez l'incident à votre service informatique ou à l'équipe de sécurité de votre organisation pour qu'ils puissent prendre les mesures nécessaires pour protéger les autres utilisateurs.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q18', selected, result.textContent, true);
         document.getElementById("btn-valider-q18").style.display = "none";
         document.getElementById("btn-suivant-q18").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Priorisez la sécurité de vos comptes.";
         result.style.color = "red";
+        recordQuestionReview('q18', selected, result.textContent, false);
+        setTimeout(goToResults, 1000);
     }
-    document.getElementById("btn-suivant-q18").style.display = "inline-block";
     updateScore();
 }
 
