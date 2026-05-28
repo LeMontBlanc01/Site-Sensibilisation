@@ -33,6 +33,7 @@ function initRandomQuestions() {
   });
 
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
+  document.getElementById(questionOrder[0]).style.display = 'block';
   updateProgress(questionOrder[0]);
 }
 
@@ -640,6 +641,7 @@ async function envoyerScore(nom, score, niveau, total) {
   }
 }
 envoyerScore(joueurNom, score, "Moyen", 18);
+
 
 function updateProgress(questionId) {
   const progress = document.getElementById('progress');
