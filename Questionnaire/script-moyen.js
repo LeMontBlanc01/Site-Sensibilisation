@@ -3,6 +3,7 @@ let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Moyen";
 const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+let quizReview = [];
 
 // Ordre aléatoire des questions
 let questionOrder = [];
@@ -69,6 +70,7 @@ function melangerReponses(questionId) {
 window.addEventListener('load', initRandomQuestions); // Initialise les questions aléatoires au chargement de la page
 
 function goToResults() {
+  localStorage.setItem('quizReview', JSON.stringify(quizReview));
   localStorage.setItem('quizScore', String(score));
   localStorage.setItem('quizNiveau', quizNiveau);
   localStorage.setItem('quizNom', joueurNom);
@@ -111,6 +113,28 @@ function showQuestion(id) {
 
 }
 
+function showNextQuestion(currentId) {
+  const idx = questionOrder.indexOf(currentId);
+  if (idx < 0) return;
+  if (idx < questionOrder.length - 1) {
+    showQuestion(questionOrder[idx + 1]);
+  } else {
+    goToResults();
+  }
+}
+
+function recordQuestionReview(questionId, selected, resultText, correct) {
+  const reviewEntry = {
+    questionId,
+    selected: selected && selected.length ? selected.join(', ') : 'Aucune réponse',
+    result: resultText,
+    correct,
+  };
+  quizReview = quizReview.filter(entry => entry.questionId !== questionId);
+  quizReview.push(reviewEntry);
+  localStorage.setItem('quizReview', JSON.stringify(quizReview));
+}
+
 function showResult(id) {
   document.querySelectorAll('.result').forEach(r => r.style.display = 'none');
   document.getElementById(id).style.display = 'block';
@@ -129,11 +153,15 @@ function checkQ1() {
     result.textContent = "Bonne réponse !Pour un mot de passe fort, il est recommandé d'utiliser au moins 12 caractères, incluant des majuscules, des minuscules, des chiffres et des symboles.";
     result.style.color = "green";
     score++;
+    recordQuestionReview('q1', selected, result.textContent, true);
     document.getElementById("btn-valider-q1").style.display = "none";
     document.getElementById("btn-suivant-q1").style.display = "inline-block";
   } else {
     result.textContent = "Mauvaise réponse.";
-    result.style.color = "red";  }
+    result.style.color = "red";
+    recordQuestionReview('q1', selected, result.textContent, false);
+    setTimeout(() => showNextQuestion('q1'), 1000);
+  }
   updateScore();
 }
 
@@ -204,11 +232,14 @@ function checkQ2() {
         result.textContent = "Bonne réponse ! La segmentation réseau permet de diviser un réseau en sous-réseaux plus petits, ce qui améliore la sécurité en limitant la propagation d'une attaque.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q2', selected, result.textContent, true);
         document.getElementById("btn-valider-q2").style.display = "none";
         document.getElementById("btn-suivant-q2").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Pensez à diviser les différentes parties pour limiter les risques en cas de compromission.";
         result.style.color = "red";
+        recordQuestionReview('q2', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q2'), 1000);
     }
     updateScore();
 }
@@ -227,11 +258,14 @@ function checkQ3() {
         result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) ajoute une couche de sécurité supplémentaire en demandant une preuve d'identité supplémentaire, et l'utilisation de mots de passe uniques pour chaque compte réduit le risque d'accès non autorisé en cas de fuite de données.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q3', selected, result.textContent, true);
         document.getElementById("btn-valider-q3").style.display = "none";
         document.getElementById("btn-suivant-q3").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Évitez de partager et de réutiliser les mêmes mots de passe.";
         result.style.color = "red";
+        recordQuestionReview('q3', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q3'), 1000);
     }
     updateScore();
 }
@@ -250,11 +284,14 @@ function checkQ4() {
         result.textContent = "Bonne réponse ! Une demande urgente est un indicateur classique d'une tentative de phishing, car les attaquants cherchent à créer un sentiment d'urgence pour inciter les victimes à agir rapidement et sans réfléchir.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q4', selected, result.textContent, true);
         document.getElementById("btn-valider-q4").style.display = "none";
         document.getElementById("btn-suivant-q4").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Les attaquants cherchent à vous dépechez.";
         result.style.color = "red";
+        recordQuestionReview('q4', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q4'), 1000);
     }
     updateScore();
 }
@@ -272,11 +309,14 @@ function checkQ5() {
         score ++;
         result.textContent = "Bonne réponse ! Maintenir les systèmes à jour avec les derniers correctifs de sécurité et restreindre les permissions des utilisateurs sont des mesures essentielles pour réduire la surface d'attaque et prévenir les accès non autorisés.";
         result.style.color = "green";
+        recordQuestionReview('q5', selected, result.textContent, true);
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : La localisation et le Bluetooth activés en permanence peut être risqué.";
         result.style.color = "red";
+        recordQuestionReview('q5', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q5'), 1000);
     }
     updateScore();
 }
@@ -295,11 +335,14 @@ function checkQ6() {
         result.textContent = "Bonne réponse ! Un gestionnaire de mots de passe permet de stocker et de générer des mots de passe forts et uniques pour chaque compte, ce qui améliore considérablement la sécurité en réduisant le risque de réutilisation de mots de passe et en facilitant la gestion des identifiants.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q6', selected, result.textContent, true);
         document.getElementById("btn-valider-q6").style.display = "none";
         document.getElementById("btn-suivant-q6").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : C'est comme un coffre-fort pour vos mots de passe.";
         result.style.color = "red";
+        recordQuestionReview('q6', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q6'), 1000);
     }
     updateScore();
 }
@@ -318,11 +361,14 @@ function checkQ7() {
         result.textContent = "Bonne réponse ! Des connexions RDP inhabituelles entre machines internes peuvent être un indicateur d'une attaque par mouvement latéral, où un attaquant qui a compromis une machine tente de se déplacer latéralement à travers le réseau pour accéder à d'autres ressources.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q7', selected, result.textContent, true);
         document.getElementById("btn-valider-q7").style.display = "none";
         document.getElementById("btn-suivant-q7").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q7', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q7'), 1000);
     }
     updateScore();
 }
@@ -341,11 +387,14 @@ function checkQ8() {
         result.textContent = "Bonne réponse ! L'utilisation de HTTPS et l'indication d'un icône cadenas dans la barre d'adresse sont des signes que la connexion est sécurisée.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q8', selected, result.textContent, true);
         document.getElementById("btn-valider-q8").style.display = "none";
         document.getElementById("btn-suivant-q8").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Voyez ce qui est présent sur le site.";
         result.style.color = "red";
+        recordQuestionReview('q8', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q8'), 1000);
     }
     updateScore();
 }
@@ -364,11 +413,14 @@ function checkQ9() {
         result.textContent = "Bonne réponse ! Un trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissant sur le réseau, et des ports ouverts inattendus sur plusieurs machines sont tous des indicateurs potentiels d'une compromission du réseau.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q9', selected, result.textContent, true);
         document.getElementById("btn-valider-q9").style.display = "none";
         document.getElementById("btn-suivant-q9").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q9', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q9'), 1000);
     }
     updateScore();
 }
@@ -387,11 +439,14 @@ function checkQ10() {
         result.textContent = "Bonne réponse ! Des permissions inhabituelles, un éditeur inconnu, ou une taille de fichier anormalement grande ou petite peuvent être des indicateurs d'une compromission ou d'une activité malveillante.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q10', selected, result.textContent, true);
         document.getElementById("btn-valider-q10").style.display = "none";
         document.getElementById("btn-suivant-q10").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Pensez à ce qui semble le plus suspect.";
         result.style.color = "red";
+        recordQuestionReview('q10', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q10'), 1000);
     }
     updateScore();
 }
@@ -410,11 +465,14 @@ function checkQ11() {
         result.textContent = "Bonne réponse ! Le principe du moindre privilège consiste à accorder aux utilisateurs uniquement les permissions nécessaires pour accomplir leurs tâches, réduisant ainsi les risques.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q11', selected, result.textContent, true);
         document.getElementById("btn-valider-q11").style.display = "none";
         document.getElementById("btn-suivant-q11").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q11', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q11'), 1000);
     }
     updateScore();
 }
@@ -433,11 +491,14 @@ function checkQ12() {
         result.textContent = "Bonne réponse ! Stocker une copie locale des données et une copie dans le cloud chiffré offre une protection contre la perte de données due à des incidents locaux (comme un vol ou un incendie) tout en assurant que les données sont sécurisées contre les accès non autorisés grâce au chiffrement.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q12', selected, result.textContent, true);
         document.getElementById("btn-valider-q12").style.display = "none";
         document.getElementById("btn-suivant-q12").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q12', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q12'), 1000);
     }
     updateScore();
 }
@@ -456,11 +517,14 @@ function checkQ13() {
         result.textContent = "Bonne réponse ! Révoquer les sessions et changer les mots de passe est une mesure de sécurité importante en cas de compromission.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q13', selected, result.textContent, true);
         document.getElementById("btn-valider-q13").style.display = "none";
         document.getElementById("btn-suivant-q13").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q13', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q13'), 1000);
     }
     updateScore();
 }
@@ -479,11 +543,14 @@ function checkQ14() {
         result.textContent = "Bonne réponse ! Protéger les données en cas de vol est crucial pour éviter que des informations sensibles ne tombent entre de mauvaises mains, ce qui peut entraîner des conséquences graves comme le vol d'identité.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q14', selected, result.textContent, true);
         document.getElementById("btn-valider-q14").style.display = "none";
         document.getElementById("btn-suivant-q14").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Indice : Ajoute une sécurité supplémentaire.";
         result.style.color = "red";
+        recordQuestionReview('q14', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q14'), 1000);
     }
     updateScore();
 }
@@ -622,11 +689,14 @@ function checkQ18() {
         result.textContent = "Bonne réponse ! La compromission de la clé maître donnant accès à l'ensemble du coffre est un risque majeur en matière de sécurité.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q18', selected, result.textContent, true);
         document.getElementById("btn-valider-q18").style.display = "none";
         document.getElementById("btn-suivant-q18").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
+        recordQuestionReview('q18', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q18'), 1000);
     }
     document.getElementById("btn-suivant-q18").style.display = "inline-block";
     updateScore();
