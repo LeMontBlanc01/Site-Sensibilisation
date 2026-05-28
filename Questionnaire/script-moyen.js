@@ -207,7 +207,7 @@ function checkQ2() {
         document.getElementById("btn-valider-q2").style.display = "none";
         document.getElementById("btn-suivant-q2").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Pensez à diviser les différentes parties pour limiter les risques en cas de compromission.";
         result.style.color = "red";
     }
     updateScore();
@@ -230,7 +230,7 @@ function checkQ3() {
         document.getElementById("btn-valider-q3").style.display = "none";
         document.getElementById("btn-suivant-q3").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Évitez de partager et de réutiliser les mêmes mots de passe.";
         result.style.color = "red";
     }
     updateScore();
@@ -253,7 +253,7 @@ function checkQ4() {
         document.getElementById("btn-valider-q4").style.display = "none";
         document.getElementById("btn-suivant-q4").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Les attaquants cherchent à vous dépechez.";
         result.style.color = "red";
     }
     updateScore();
@@ -275,7 +275,7 @@ function checkQ5() {
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : La localisation et le Bluetooth activés en permanence peut être risqué.";
         result.style.color = "red";
     }
     updateScore();
@@ -298,7 +298,7 @@ function checkQ6() {
         document.getElementById("btn-valider-q6").style.display = "none";
         document.getElementById("btn-suivant-q6").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : C'est comme un coffre-fort pour vos mots de passe.";
         result.style.color = "red";
     }
     updateScore();
@@ -344,7 +344,7 @@ function checkQ8() {
         document.getElementById("btn-valider-q8").style.display = "none";
         document.getElementById("btn-suivant-q8").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Voyez ce qui est présent sur le site.";
         result.style.color = "red";
     }
     updateScore();
@@ -390,7 +390,7 @@ function checkQ10() {
         document.getElementById("btn-valider-q10").style.display = "none";
         document.getElementById("btn-suivant-q10").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Pensez à ce qui semble le plus suspect.";
         result.style.color = "red";
     }
     updateScore();
@@ -482,7 +482,7 @@ function checkQ14() {
         document.getElementById("btn-valider-q14").style.display = "none";
         document.getElementById("btn-suivant-q14").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Ajoute une sécurité supplémentaire.";
         result.style.color = "red";
     }
     updateScore();
