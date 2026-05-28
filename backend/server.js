@@ -1,12 +1,17 @@
 const express = require('express');
 const cors = require('cors');
-const fs = require('fs'); 
+const fs = require('fs');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const DB_PATH = './db.json';
+const TOTAL_BY_LEVEL = {
+    Facile: 18,
+    Moyen: 18,
+    Difficile: 18,
+};
 
 if (!fs.existsSync(DB_PATH)) {
     fs.writeFileSync(DB_PATH, JSON.stringify({ scores: [] }));
@@ -19,13 +24,26 @@ app.post('/api/scores', (req, res) => {
         return res.status(400).json({ error: 'Nom, score et niveau sont requis' });
     }
 
+    if (!Object.prototype.hasOwnProperty.call(TOTAL_BY_LEVEL, niveau)) {
+        return res.status(400).json({ error: 'Niveau invalide' });
+    }
+
+    const expectedTotal = TOTAL_BY_LEVEL[niveau];
+    if (!Number.isInteger(score) || score < 0 || score > expectedTotal) {
+        return res.status(400).json({ error: 'Score invalide' });
+    }
+
+    if (total !== undefined && total !== expectedTotal) {
+        return res.status(400).json({ error: 'Total invalide' });
+    }
+
     const db = JSON.parse(fs.readFileSync(DB_PATH));
     db.scores.push({
         nom,
         score,
         niveau,
-        total,
-        date: new Date().toLocaleDateString('fr-FR')
+        total: expectedTotal,
+        date: new Date().toLocaleDateString('fr-FR'),
     });
 
     fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
