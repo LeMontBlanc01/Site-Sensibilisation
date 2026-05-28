@@ -133,7 +133,7 @@ function checkQ1() {
         document.getElementById("btn-valider-q1").style.display = "none";
         document.getElementById("btn-suivant-q1").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit d'un protocole de chiffrement obsolète.";
         result.style.color = "red";
     }
     updateScore();
@@ -209,7 +209,7 @@ function checkQ2() {
         document.getElementById("btn-valider-q2").style.display = "none";
         document.getElementById("btn-suivant-q2").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit d'une action immédiate à prendre pour limiter les dégâts.";
         result.style.color = "red";
     }
     updateScore();
@@ -232,7 +232,7 @@ function checkQ3() {
         document.getElementById("btn-valider-q3").style.display = "none";
         document.getElementById("btn-suivant-q3").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit de deux étapes clés pour sécuriser les données entrantes dans une application web.";
         result.style.color = "red";
     }
     updateScore();
@@ -249,7 +249,7 @@ function checkQ4() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Un message avec une grammaire parfaite et inattendue est souvent un signe de phishing, car les attaquants utilisent parfois des outils de traduction ou de génération de texte pour créer des messages qui semblent légitimes mais qui contiennent des erreurs subtiles ou un style d'écriture inhabituel.";
+        result.textContent = "Bonne réponse !";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q4").style.display = "none";
@@ -272,7 +272,7 @@ function checkQ5() {
 
     if (arraysEqual(selected, correct)) {
         score ++;
-        result.textContent = "Bonne réponse ! Utiliser un mot de passe unique pour chaque compte est crucial pour la sécurité en ligne, car cela empêche qu'une compromission d'un compte n'entraîne la compromission d'autres comptes, réduisant ainsi les risques de piratage et de vol d'identité.";
+        result.textContent = "Bonne réponse !";
         result.style.color = "green";
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
@@ -300,7 +300,7 @@ function checkQ6() {
         document.getElementById("btn-valider-q6").style.display = "none";
         document.getElementById("btn-suivant-q6").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit d'une mesure de sécurité qui permet de contrôler les sources de contenu autorisées sur une page web.";
         result.style.color = "red";
     }
     updateScore();
@@ -323,7 +323,7 @@ function checkQ7() {
         document.getElementById("btn-valider-q7").style.display = "none";
         document.getElementById("btn-suivant-q7").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Traduction de zero trust en français.";
         result.style.color = "red";
     }
     updateScore();
@@ -346,7 +346,7 @@ function checkQ8() {
         document.getElementById("btn-valider-q8").style.display = "none";
         document.getElementById("btn-suivant-q8").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit d'un acteur clé dans la sécurisation des transactions en ligne.";
         result.style.color = "red";
     }
     updateScore();
@@ -369,7 +369,7 @@ function checkQ9() {
         document.getElementById("btn-valider-q9").style.display = "none";
         document.getElementById("btn-suivant-q9").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Cela permet de s'assurer que les données sont envoyées à la bonne personne ou organisation.";
         result.style.color = "red";
     }
     updateScore();
@@ -392,7 +392,7 @@ function checkQ10() {
         document.getElementById("btn-valider-q10").style.display = "none";
         document.getElementById("btn-suivant-q10").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Cela peut augmenter les risques de fuite d'informations et de compromission de la confidentialité.";
         result.style.color = "red";
     }
     updateScore();
@@ -415,7 +415,7 @@ function checkQ11() {
         document.getElementById("btn-valider-q11").style.display = "none";
         document.getElementById("btn-suivant-q11").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit de trois catégories de facteurs d'authentification qui renforcent la sécurité des comptes en ligne.";
         result.style.color = "red";
     }
     updateScore();
@@ -438,7 +438,7 @@ function checkQ12() {
         document.getElementById("btn-valider-q12").style.display = "none";
         document.getElementById("btn-suivant-q12").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit de deux pratiques essentielles pour maintenir la sécurité des comptes en ligne en stockant les mots de passe de manière sécurisée et en réduisant les risques associés à l'utilisation prolongée d'un même mot de passe.";
         result.style.color = "red";
     }
     updateScore();
@@ -455,13 +455,13 @@ function checkQ13() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Le principe du moindre privilège consiste à accorder aux utilisateurs et aux processus uniquement les permissions nécessaires pour accomplir leurs tâches, ce qui réduit les risques de compromission et de propagation d'attaques en limitant les actions qu'un attaquant peut effectuer en cas de compromission d'un compte ou d'un processus.";
+        result.textContent = "Bonne réponse ! Un rootkit est un type de logiciel malveillant conçu pour donner à un attaquant un accès privilégié et furtif à un système compromis, souvent en cachant sa présence et en permettant à l'attaquant de contrôler le système à distance sans être détecté.";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q13").style.display = "none";
         document.getElementById("btn-suivant-q13").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit d'un type de logiciel conçu pour donner à un attaquant un accès privilégié et furtif à un système compromis.";
         result.style.color = "red";    }
     updateScore();
 }
@@ -483,7 +483,7 @@ function checkQ14() {
         document.getElementById("btn-valider-q14").style.display = "none";
         document.getElementById("btn-suivant-q14").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il s'agit d'une technique de sécurité qui consiste à associer un certificat spécifique à une application ou un site web pour prévenir les attaques de type man-in-the-middle.";
         result.style.color = "red";
     }
     updateScore();
@@ -620,7 +620,7 @@ function checkQ18() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! L'utilisation d'une chaîne de confiance (chain of trust) est essentielle pour garantir la sécurité des communications en ligne, car elle permet de vérifier l'authenticité des certificats et des entités impliquées dans une communication, assurant ainsi que les données sont échangées avec des parties légitimes et de confiance.";
+        result.textContent = "Bonne réponse !";
         result.style.color = "green";
         score++;
         document.getElementById("btn-valider-q18").style.display = "none";
