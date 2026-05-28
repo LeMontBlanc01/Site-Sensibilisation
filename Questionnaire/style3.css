@@ -287,3 +287,15 @@ h2 {
 .bloc15.selected, .bloc16.selected, .bloc17.selected {
     background: #b8d7ff;
 }
+
+.progress-container {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+progress {
+  width: 250px;
+  height: 1rem;
+}
