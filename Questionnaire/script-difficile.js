@@ -478,7 +478,6 @@ function checkQ14() {
     } else {
         result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        score--;
     }
     updateScore();
 }
