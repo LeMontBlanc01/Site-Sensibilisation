@@ -34,6 +34,7 @@ function initRandomQuestions() {
 
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
   document.getElementById(questionOrder[0]).style.display = 'block';
+  updateProgress(questionOrder[0]);
 }
 
 function melangerReponses(questionId) {
@@ -106,6 +107,7 @@ function showQuestion(id) {
 function showResult(id) {
   document.querySelectorAll('.result').forEach(r => r.style.display = 'none');
   document.getElementById(id).style.display = 'block';
+  updateProgress(id);
 }
 
 //Fonction qui permet de vérifier la réponse de la question 1
@@ -640,3 +642,14 @@ async function envoyerScore(nom, score, niveau, total) {
   }
 }
 envoyerScore(joueurNom, score, "Facile", 18);
+
+function updateProgress(questionId) {
+  const progress = document.getElementById('progress');
+  const progressText = document.getElementById('progress-text');
+  const currentIndex = questionOrder.indexOf(questionId) + 1;
+
+  if (progress && progressText && currentIndex > 0) {
+    progress.value = currentIndex;
+    progressText.textContent = `${currentIndex}/${questionOrder.length}`;
+  }
+}

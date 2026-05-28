@@ -34,6 +34,7 @@ function initRandomQuestions() {
 
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
   document.getElementById(questionOrder[0]).style.display = 'block';
+  updateProgress(questionOrder[0]);
 }
 
 function melangerReponses(questionId) {
@@ -82,6 +83,7 @@ function goToResults() {
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
   document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
+  updateProgress(id);
   
   //Vide les messages de résultat quand on change de question
   ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14', 'q15', 'q16', 'q17'].forEach(qid => {
@@ -640,3 +642,14 @@ async function envoyerScore(nom, score, niveau, total) {
   }
 }
 envoyerScore(joueurNom, score, "Difficile", 18);
+
+function updateProgress(questionId) {
+  const progress = document.getElementById('progress');
+  const progressText = document.getElementById('progress-text');
+  const currentIndex = questionOrder.indexOf(questionId) + 1;
+
+  if (progress && progressText && currentIndex > 0) {
+    progress.value = currentIndex;
+    progressText.textContent = `${currentIndex}/${questionOrder.length}`;
+  }
+}
