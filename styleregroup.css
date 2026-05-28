@@ -11,7 +11,7 @@ h1 {
 body {
         font-family: Arial, sans-serif;
         margin: 0;
-        padding: 0;
+        padding: 20px;
         background-color: #f4f4f4;
     }
 
@@ -21,6 +21,7 @@ header {
         color: #fff;
         padding: 20px;
         position: relative;
+        text-align: center;
     }
 
 header img {
@@ -44,6 +45,11 @@ main {
     }
 
 
+.intro {
+            margin-bottom: 50px;
+        }
+
+
 .fr-btn {
             display: block;
             margin: 20px auto;
@@ -54,11 +60,6 @@ main {
             border: black;
             border-radius: 5px;
             cursor: pointer;
-        }
-
-
-.intro {
-            margin-bottom: 50px;
         }
 
         
@@ -76,56 +77,8 @@ main {
         }
 
 
-
-
-body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f4f4f4;
-    }
-
-
-header {
-        background-color: #080035;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-    }
-
-
-main {
-        color: #333;
-        margin: 20px auto;
-        max-width: 800px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-    }
-
-
-.fr-btn {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            color: #fff;
-            background: linear-gradient(70deg, #080035, #0026ff);
-            border: black;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-
-.intro {
-            margin-bottom: 50px;
-        }
-
-
 h2 {
         text-align: center;
-        padding-top: 50px;
-
     }
 
 
@@ -146,71 +99,10 @@ h2 {
 }
 
 
-
-
-body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f4f4f4;
-    }
-
-
-header {
-        background-color: #080035;
-        color: #fff;
-        padding: 20px;
-        text-align: center;
-    }
-
-
 #score {
         margin: 0 auto;
         display: inline-block;
     }
-
-
-main {
-        color: #333;
-        margin: 20px auto;
-        max-width: 800px;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-    }
-
-
-.fr-btn {
-            display: block;
-            margin: 20px auto;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            color: #fff;
-            background: linear-gradient(70deg, #080035, #0026ff);
-            border: black;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-
-.intro {
-            margin-bottom: 50px;
-        }
-
-
-h2 {
-        text-align: center;
-
-    }
-
-
-.bouton-revenir {
-    display: flex;
-    gap: 20px;
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-}
 
 
 .imgf1 img {
