@@ -132,7 +132,7 @@ function checkQ1() {
         document.getElementById("btn-valider-q1").style.display = "none";
         document.getElementById("btn-suivant-q1").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : un bon mot de passe doit être long et complexe, il ne doit pas contenir des éléments faciles à deviner.";
         result.style.color = "red";
     }
     updateScore();
@@ -231,7 +231,7 @@ function checkQ3() {
         document.getElementById("btn-valider-q3").style.display = "none";
         document.getElementById("btn-suivant-q3").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il ne faut pas hésiter à dissocier le professionnel du personnel.";
         result.style.color = "red";
     }
     updateScore();
@@ -276,7 +276,7 @@ function checkQ5() {
         document.getElementById("btn-valider-q5").style.display = "none";
         document.getElementById("btn-suivant-q5").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il faut vérifier plusieurs éléments dans un e-mail pour s'assurer de son authenticité.";
         result.style.color = "red";
     }
     updateScore();
@@ -299,7 +299,7 @@ function checkQ6() {
         document.getElementById("btn-valider-q6").style.display = "none";
         document.getElementById("btn-suivant-q6").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Les mises à jour sont importantes pour la sécurité de votre système.";
         result.style.color = "red";
     }
     updateScore();
@@ -322,7 +322,7 @@ function checkQ7() {
         document.getElementById("btn-valider-q7").style.display = "none";
         document.getElementById("btn-suivant-q7").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Ne partagez jamais vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
         result.style.color = "red";
     }
     updateScore();
@@ -345,7 +345,7 @@ function checkQ8() {
         document.getElementById("btn-valider-q8").style.display = "none";
         document.getElementById("btn-suivant-q8").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Un outil peut vous aider à gérer vos mots de passe de manière sécurisée.";
         result.style.color = "red";
     }
     updateScore();
@@ -368,7 +368,7 @@ function checkQ9() {
         document.getElementById("btn-valider-q9").style.display = "none";
         document.getElementById("btn-suivant-q9").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il faut faire attention aux appareils qui vous sont inconnus.";
         result.style.color = "red";
     }
     updateScore();
@@ -414,7 +414,7 @@ function checkQ11() {
         document.getElementById("btn-valider-q11").style.display = "none";
         document.getElementById("btn-suivant-q11").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Il existe une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte.";
         result.style.color = "red";
     }
     updateScore();
@@ -437,7 +437,7 @@ function checkQ12() {
         document.getElementById("btn-valider-q12").style.display = "none";
         document.getElementById("btn-suivant-q12").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Soyez régulier.";
         result.style.color = "red";
     }
     updateScore();
@@ -460,7 +460,7 @@ function checkQ13() {
         document.getElementById("btn-valider-q13").style.display = "none";
         document.getElementById("btn-suivant-q13").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Faites attention à la provenance des applications que vous téléchargez.";
         result.style.color = "red";
     }
     updateScore();
@@ -483,7 +483,7 @@ function checkQ14() {
         document.getElementById("btn-valider-q14").style.display = "none";
         document.getElementById("btn-suivant-q14").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Un type de logiciel qui peut infiltrer, endommager ou perturber un système informatique.";
         result.style.color = "red";
     }
     updateScore();
@@ -626,7 +626,7 @@ function checkQ18() {
         document.getElementById("btn-valider-q18").style.display = "none";
         document.getElementById("btn-suivant-q18").style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        result.textContent = "Mauvaise réponse. Indice : Priorisez la sécurité de vos comptes.";
         result.style.color = "red";
     }
     document.getElementById("btn-suivant-q18").style.display = "inline-block";
