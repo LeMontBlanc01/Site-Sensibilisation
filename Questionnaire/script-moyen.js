@@ -34,6 +34,10 @@ function initRandomQuestions() {
 
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');
   document.getElementById(questionOrder[0]).style.display = 'block';
+  
+  const progress = document.getElementById('progress');
+  if (progress) progress.max = questionOrder.length;
+  
   updateProgress(questionOrder[0]);
 }
 
@@ -102,6 +106,7 @@ function showQuestion(id) {
     redraw(n);
   }
 
+  updateProgress(id);
   melangerReponses(id);
 
 }
