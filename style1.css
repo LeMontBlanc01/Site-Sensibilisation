@@ -1,0 +1,76 @@
+/* Style pour la page d'accueil */
+
+
+h1 {
+        font-size: 2.5em;
+        margin: 0;
+        text-align: center;
+    }
+
+
+body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+
+
+header {
+        background-color: #080035;
+        color: #fff;
+        padding: 20px;
+        position: relative;
+    }
+
+header img {
+        position: absolute;
+        left: 30px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+    }
+
+
+main {
+        color: #333;
+        margin: 20px auto;
+        max-width: 800px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 5px;
+    }
+
+
+.fr-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            color: #fff;
+            background: linear-gradient(70deg, #080035, #0026ff);
+            border: black;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+
+.intro {
+            margin-bottom: 50px;
+        }
+
+        
+.reseaux {
+            display: flex;
+            gap: 20px;
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+        }
+
+.reseaux img {
+            width: 70px;
+            height: 70px;
+        }
