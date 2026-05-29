@@ -83,7 +83,7 @@ async function goToResults() {
     updateScore();
   }
 
-  const confirmed = confirm('Validez-vous définitivement vos réponses et souhaitez-vous envoyer votre score au serveur ?');
+  const confirmed = confirm('Voulez-vous définitivement valider vos réponses et souhaitez-vous envoyer votre score au serveur ?');
   if (confirmed) {
     try {
       await envoyerScore(joueurNom, score, quizNiveau, 18);
