@@ -665,11 +665,13 @@ function redraw(n) {
       onBonneReponse[n](result); //Appelle la fonction spécifique à la question
       result.style.color = "green";
       score++;
+      recordQuestionReview(`q${n}`, [], result.textContent, true);
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
       document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
     } else {
       result.textContent = "Mauvaise réponse.";
       result.style.color = "red";
+      setTimeout(() => showNextQuestion(`q${n}`), 1000);
     }
     updateScore();
   });
