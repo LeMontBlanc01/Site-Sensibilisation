@@ -701,7 +701,6 @@ function checkQ18() {
         recordQuestionReview('q18', selected, result.textContent, false);
         setTimeout(() => showNextQuestion('q18'), 1000);
     }
-    document.getElementById("btn-suivant-q18").style.display = "inline-block";
     updateScore();
 }
 
