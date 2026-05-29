@@ -3,6 +3,7 @@ let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Difficile";
 const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+let quizReview = [];
 
 // Ordre aléatoire des questions
 let questionOrder = [];
@@ -69,6 +70,7 @@ function melangerReponses(questionId) {
 window.addEventListener('load', initRandomQuestions); // Initialise les questions aléatoires au chargement de la page
 
 function goToResults() {
+  localStorage.setItem('quizReview', JSON.stringify(quizReview));
   localStorage.setItem('quizScore', String(score));
   localStorage.setItem('quizNiveau', quizNiveau);
   localStorage.setItem('quizNom', joueurNom);
@@ -90,7 +92,7 @@ function showQuestion(id) {
   updateProgress(id);
   
   //Vide les messages de résultat quand on change de question
-  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14', 'q15', 'q16', 'q17'].forEach(qid => {
+  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15','q16','q17'].forEach(qid => {
     if (id !== qid) {
       const r = document.getElementById(`result-${qid}`);
       if (r) r.textContent = '';
@@ -109,6 +111,28 @@ function showQuestion(id) {
   updateProgress(id);
   melangerReponses(id);
 
+}
+
+function showNextQuestion(currentId) {
+  const idx = questionOrder.indexOf(currentId);
+  if (idx < 0) return;
+  if (idx < questionOrder.length - 1) {
+    showQuestion(questionOrder[idx + 1]);
+  } else {
+    goToResults();
+  }
+}
+
+function recordQuestionReview(questionId, selected, resultText, correct) {
+  const reviewEntry = {
+    questionId,
+    selected: selected && selected.length ? selected.join(', ') : 'Aucune réponse',
+    result: resultText,
+    correct,
+  };
+  quizReview = quizReview.filter(entry => entry.questionId !== questionId);
+  quizReview.push(reviewEntry);
+  localStorage.setItem('quizReview', JSON.stringify(quizReview));
 }
 
 function showResult(id) {
@@ -130,11 +154,14 @@ function checkQ1() {
         result.textContent = "Bonne réponse ! Utiliser un protocole de chiffrement obsolète comme SSLv3 expose les données à des vulnérabilités connues, ce qui peut permettre à des attaquants d'intercepter et de déchiffrer les informations sensibles transmises entre le client et le serveur.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q1', selected, result.textContent, true);
         document.getElementById("btn-valider-q1").style.display = "none";
         document.getElementById("btn-suivant-q1").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Il s'agit d'un protocole de chiffrement obsolète qui se nomme SSLv3.";
         result.style.color = "red";
+        recordQuestionReview('q1', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q1'), 1000);
     }
     updateScore();
 }
@@ -206,11 +233,14 @@ function checkQ2() {
         result.textContent = "Bonne réponse ! Échapper les données avant l'affichage côté sortie est une mesure de sécurité essentielle pour prévenir les attaques de type cross-site scripting (XSS), car elle permet de neutraliser les caractères spéciaux et les scripts malveillants qui pourraient être injectés dans une page web, protégeant ainsi les utilisateurs contre l'exécution de code malveillant dans leur navigateur.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q2', selected, result.textContent, true);
         document.getElementById("btn-valider-q2").style.display = "none";
         document.getElementById("btn-suivant-q2").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Échapper les données avant l'affichage côté sortie est une mesure de sécurité essentielle pour prévenir les attaques de type cross-site scripting (XSS).";
         result.style.color = "red";
+        recordQuestionReview('q2', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q2'), 1000);
     }
     updateScore();
 }
@@ -229,11 +259,14 @@ function checkQ3() {
         result.textContent = "Bonne réponse ! La validation côté serveur est essentielle pour garantir la sécurité des applications web, car elle permet de vérifier et de filtrer les données entrantes, empêchant ainsi les attaques telles que l'injection SQL, les scripts intersites (XSS) et d'autres formes de manipulation de données malveillantes.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q3', selected, result.textContent, true);
         document.getElementById("btn-valider-q3").style.display = "none";
         document.getElementById("btn-suivant-q3").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Il s'agit de deux étapes clés pour sécuriser les données entrantes dans une application web. La validation côté serveur et utiliser des requêtes paramétrées.";
         result.style.color = "red";
+        recordQuestionReview('q3', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q3'), 1000);
     }
     updateScore();
 }
@@ -252,11 +285,14 @@ function checkQ4() {
         result.textContent = "Bonne réponse ! Utiliser une fonction de hachage à sens unique pour stocker les mots de passe est une pratique de sécurité essentielle, car elle permet de protéger les mots de passe des utilisateurs en les transformant en une valeur hachée qui ne peut pas être inversée, ce qui rend extrêmement difficile pour les attaquants de récupérer les mots de passe d'origine même s'ils parviennent à accéder à la base de données.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q4', selected, result.textContent, true);
         document.getElementById("btn-valider-q4").style.display = "none";
         document.getElementById("btn-suivant-q4").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Utiliser une fonction de hachage à sens unique pour stocker les mots de passe est une pratique de sécurité essentielle, car elle permet de protéger les mots de passe des utilisateurs en les transformant en une valeur hachée qui ne peut pas être inversée, ce qui rend extrêmement difficile pour les attaquants de récupérer les mots de passe d'origine même s'ils parviennent à accéder à la base de données.";
         result.style.color = "red";
+        recordQuestionReview('q4', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q4'), 1000);
     }
     updateScore();
 }
@@ -272,6 +308,7 @@ function checkQ5() {
 
     if (arraysEqual(selected, correct)) {
         score ++;
+        recordQuestionReview('q5', selected, result.textContent, true);
         result.textContent = "Bonne réponse ! La caractéristique qui distingue un jeton anti-CSRF efficace est qu'il doit être unique pour chaque session ou chaque requête, ce qui permet de garantir que les requêtes proviennent bien de l'utilisateur légitime et de prévenir les attaques de type cross-site request forgery (CSRF) en rendant difficile pour les attaquants de prédire ou de réutiliser des jetons valides.";
         result.style.color = "green";
         document.getElementById("btn-valider-q5").style.display = "none";
@@ -279,6 +316,8 @@ function checkQ5() {
     } else {
         result.textContent = "Mauvaise réponse. La caractéristique qui distingue un jeton anti-CSRF efficace est qu'il doit être unique pour chaque session ou chaque requête, ce qui permet de garantir que les requêtes proviennent bien de l'utilisateur légitime et de prévenir les attaques de type cross-site request forgery (CSRF) en rendant difficile pour les attaquants de prédire ou de réutiliser des jetons valides.";
         result.style.color = "red";
+        recordQuestionReview('q5', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q5'), 1000);
     }
     updateScore();
 }
@@ -297,11 +336,14 @@ function checkQ6() {
         result.textContent = "Bonne réponse ! Mettre en place une politique de sécurité du contenu (Content Security Policy - CSP) est une mesure efficace pour prévenir les attaques de type cross-site scripting (XSS), car elle permet de contrôler les sources de contenu autorisées et de limiter l'exécution de scripts malveillants sur une page web.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q6', selected, result.textContent, true);
         document.getElementById("btn-valider-q6").style.display = "none";
         document.getElementById("btn-suivant-q6").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Il s'agit d'une mesure de sécurité qui permet de contrôler les sources de contenu autorisées sur une page web (Content Security Policy - CSP).";
         result.style.color = "red";
+        recordQuestionReview('q6', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q6'), 1000);
     }
     updateScore();
 }
@@ -320,11 +362,14 @@ function checkQ7() {
         result.textContent = "Bonne réponse ! Il est important de ne pas faire confiance à des sources d'information non vérifiées, car elles peuvent diffuser des informations erronées ou biaisées, ce qui peut conduire à de mauvaises décisions ou à la propagation de fausses informations.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q7', selected, result.textContent, true);
         document.getElementById("btn-valider-q7").style.display = "none";
         document.getElementById("btn-suivant-q7").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Il ne faut pas faire confiance à des sources d'information non vérifiées.";
         result.style.color = "red";
+        recordQuestionReview('q7', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q7'), 1000);
     }
     updateScore();
 }
@@ -343,11 +388,14 @@ function checkQ8() {
         result.textContent = "Bonne réponse ! Faire confiance à un fournisseur de paiement réputé est un indicateur clé de la sécurité d'un site de commerce en ligne, car ces fournisseurs mettent en place des mesures de sécurité robustes pour protéger les informations de paiement des clients et réduire les risques de fraude.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q8', selected, result.textContent, true);
         document.getElementById("btn-valider-q8").style.display = "none";
         document.getElementById("btn-suivant-q8").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Il s'agit d'un indicateur clé de la sécurité d'un site de commerce en ligne : faire confiance à un fournisseur de paiement réputé.";
         result.style.color = "red";
+        recordQuestionReview('q8', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q8'), 1000);
     }
     updateScore();
 }
@@ -366,11 +414,14 @@ function checkQ9() {
         result.textContent = "Bonne réponse ! Vérifier l'identité du destinataire avant d'envoyer des informations sensibles est crucial pour éviter les attaques de phishing et les fraudes, car cela permet de s'assurer que les données sont envoyées à la bonne personne ou organisation et non à un imposteur malveillant.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q9', selected, result.textContent, true);
         document.getElementById("btn-valider-q9").style.display = "none";
         document.getElementById("btn-suivant-q9").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Vérifier l'identité du destinataire avant d'envoyer des informations sensibles est crucial pour éviter les attaques de phishing et les fraudes.";
         result.style.color = "red";
+        recordQuestionReview('q9', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q9'), 1000);
     }
     updateScore();
 }
@@ -389,11 +440,14 @@ function checkQ10() {
         result.textContent = "Bonne réponse ! Utiliser la même clé de chiffrement pour plusieurs données sensibles peut compromettre la sécurité, car si un attaquant parvient à découvrir cette clé, il pourra potentiellement accéder à toutes les données protégées par cette clé, augmentant ainsi les risques de fuite d'informations et de compromission de la confidentialité.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q10', selected, result.textContent, true);
         document.getElementById("btn-valider-q10").style.display = "none";
         document.getElementById("btn-suivant-q10").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Utiliser la même clé de chiffrement pour plusieurs données sensibles peut compromettre la sécurité, car si un attaquant parvient à découvrir cette clé, il pourra potentiellement accéder à toutes les données protégées par cette clé.";
         result.style.color = "red";
+        recordQuestionReview('q10', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q10'), 1000);
     }
     updateScore();
 }
@@ -412,11 +466,14 @@ function checkQ11() {
         result.textContent = "Bonne réponse ! Les trois facteurs d'authentification sont : la connaissance (quelque chose que vous savez, comme un mot de passe), la possession (quelque chose que vous avez, comme un téléphone ou une carte) et la biométrie (quelque chose que vous êtes, comme une empreinte digitale ou une reconnaissance faciale). Utiliser plusieurs facteurs d'authentification renforce la sécurité en rendant plus difficile pour les attaquants de compromettre un compte.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q11', selected, result.textContent, true);
         document.getElementById("btn-valider-q11").style.display = "none";
         document.getElementById("btn-suivant-q11").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Il s'agit de trois catégories de facteurs d'authentification qui renforcent la sécurité des comptes en ligne. La connaissance, la possession et la biométrie.";
         result.style.color = "red";
+        recordQuestionReview('q11', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q11'), 1000);
     }
     updateScore();
 }
@@ -435,11 +492,14 @@ function checkQ12() {
         result.textContent = "Bonne réponse ! Utiliser un gestionnaire de mots de passe (vault) et pratiquer la rotation régulière des mots de passe sont des pratiques essentielles pour maintenir la sécurité des comptes en ligne, car elles permettent de stocker les mots de passe de manière sécurisée et de réduire les risques associés à l'utilisation prolongée d'un même mot de passe, qui peut être compromis au fil du temps.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q12', selected, result.textContent, true);
         document.getElementById("btn-valider-q12").style.display = "none";
         document.getElementById("btn-suivant-q12").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Utiliser un gestionnaire de mots de passe (vault) et pratiquer la rotation régulière des mots de passe sont des pratiques essentielles pour maintenir la sécurité des comptes en ligne.";
         result.style.color = "red";
+        recordQuestionReview('q12', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q12'), 1000);
     }
     updateScore();
 }
@@ -458,11 +518,15 @@ function checkQ13() {
         result.textContent = "Bonne réponse ! Un rootkit est un type de logiciel malveillant conçu pour donner à un attaquant un accès privilégié et furtif à un système compromis, souvent en cachant sa présence et en permettant à l'attaquant de contrôler le système à distance sans être détecté.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q13', selected, result.textContent, true);
         document.getElementById("btn-valider-q13").style.display = "none";
         document.getElementById("btn-suivant-q13").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Un rootkit est un type de logiciel conçu pour donner à un attaquant un accès privilégié et furtif à un système compromis.";
-        result.style.color = "red";    }
+        result.style.color = "red";
+        recordQuestionReview('q13', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q13'), 1000);
+    }
     updateScore();
 }
 
@@ -480,11 +544,14 @@ function checkQ14() {
         result.textContent = "Bonne réponse ! Le pinning de certificat est une technique de sécurité qui consiste à associer un certificat spécifique à une application ou un site web, ce qui permet de prévenir les attaques de type man-in-the-middle en s'assurant que l'application ou le site web ne communique qu'avec des serveurs présentant le certificat attendu, même si un attaquant parvient à compromettre une autorité de certification ou à intercepter les communications.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q14', selected, result.textContent, true);
         document.getElementById("btn-valider-q14").style.display = "none";
         document.getElementById("btn-suivant-q14").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Le pinning de certificat est une technique de sécurité qui consiste à associer un certificat spécifique à une application ou un site web pour prévenir les attaques de type man-in-the-middle.";
         result.style.color = "red";
+        recordQuestionReview('q14', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q14'), 1000);
     }
     updateScore();
 }
@@ -599,11 +666,14 @@ function redraw(n) {
       onBonneReponse[n](result); //Appelle la fonction spécifique à la question
       result.style.color = "green";
       score++;
+      recordQuestionReview(`q${n}`, [], result.textContent, true);
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
       document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
     } else {
       result.textContent = "Mauvaise réponse.";
       result.style.color = "red";
+      recordQuestionReview(`q${n}`, [], result.textContent, false);
+      setTimeout(() => showNextQuestion(`q${n}`), 1000);
     }
     updateScore();
   });
@@ -623,11 +693,14 @@ function checkQ18() {
         result.textContent = "Bonne réponse ! L'action qui est la plus pertinente pour vérifier la validité d'un certificat TLS est de vérifier la chaîne de certification, c'est-à-dire s'assurer que le certificat présenté par le serveur est émis par une autorité de certification de confiance et que la chaîne de certificats est complète et valide.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q18', selected, result.textContent, true);
         document.getElementById("btn-valider-q18").style.display = "none";
         document.getElementById("btn-suivant-q18").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. L'action qui est la plus pertinente pour vérifier la validité d'un certificat TLS est de vérifier la chaîne de certification, c'est-à-dire s'assurer que le certificat présenté par le serveur est émis par une autorité de certification de confiance et que la chaîne de certificats est complète et valide.";
         result.style.color = "red";
+        recordQuestionReview('q18', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q18'), 1000);
     }
     document.getElementById("btn-suivant-q18").style.display = "inline-block";
     updateScore();
