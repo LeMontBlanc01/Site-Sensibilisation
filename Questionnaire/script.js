@@ -69,7 +69,29 @@ function melangerReponses(questionId) {
 
 window.addEventListener('load', initRandomQuestions); // Initialise les questions aléatoires au chargement de la page
 
-function goToResults() {
+async function goToResults() {
+  // Vérifier que le score affiché correspond au score calculé
+  const scoreEl = document.getElementById('score');
+  let displayed = score;
+  if (scoreEl) {
+    const parsed = parseInt((scoreEl.textContent || '').replace(/\D/g, ''), 10);
+    if (!Number.isNaN(parsed)) displayed = parsed;
+  }
+  if (displayed !== score) {
+    console.warn('Score affiché différent du score interne, envoi du score affiché :', displayed, 'interne:', score);
+    score = displayed;
+    updateScore();
+  }
+
+  const confirmed = confirm('Validez-vous définitivement vos réponses et souhaitez-vous envoyer votre score au serveur ?');
+  if (confirmed) {
+    try {
+      await envoyerScore(joueurNom, score, quizNiveau, 18);
+    } catch (e) {
+      console.error('Erreur lors de l\'envoi du score :', e);
+    }
+  }
+
   localStorage.setItem('quizReview', JSON.stringify(quizReview));
   localStorage.setItem('quizScore', String(score));
   localStorage.setItem('quizNiveau', quizNiveau);
@@ -160,7 +182,7 @@ function checkQ1() {
         result.textContent = "Mauvaise réponse. Un bon mot de passe doit être long et complexe, contenant une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
         result.style.color = "red";
         recordQuestionReview('q1', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q1'), 1000);
+        setTimeout(() => showNextQuestion('q1'), 2000);
     }
     updateScore();
 }
@@ -239,7 +261,7 @@ function checkQ2() {
         result.textContent = "Mauvaise réponse. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés, car ils peuvent être infectés par des virus ou des malwares qui peuvent contaminer votre système.";
         result.style.color = "red";
         recordQuestionReview('q2', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q2'), 1000);
+        setTimeout(() => showNextQuestion('q2'), 2000);
     }
     updateScore();
 }
@@ -265,7 +287,7 @@ function checkQ3() {
         result.textContent = "Mauvaise réponse. Il ne faut pas hésiter à dissocier le professionnel du personnel.";
         result.style.color = "red";
         recordQuestionReview('q3', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q3'), 1000);
+        setTimeout(() => showNextQuestion('q3'), 2000);
     }
     updateScore();
 }
@@ -291,7 +313,7 @@ function checkQ4() {
         result.textContent = "Mauvaise réponse. Un VPN est un réseau privé virtuel qui sécurise votre connexion internet en chiffrant vos données et en masquant votre adresse IP.";
         result.style.color = "red";
         recordQuestionReview('q4', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q4'), 1000);
+        setTimeout(() => showNextQuestion('q4'), 2000);
     }
     updateScore();
 }
@@ -316,7 +338,7 @@ function checkQ5() {
         result.textContent = "Mauvaise réponse. Il faut vérifier plusieurs éléments dans un e-mail pour s'assurer de son authenticité. Comme l'adresse de l'expéditeur, les liens présents dans le mail, les pièces jointes, et faire attention aux fautes d'orthographe ou de grammaire.";
         result.style.color = "red";
         recordQuestionReview('q5', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q5'), 1000);
+        setTimeout(() => showNextQuestion('q5'), 2000);
     }
     updateScore();
 }
@@ -342,7 +364,7 @@ function checkQ6() {
         result.textContent = "Mauvaise réponse. Les mises à jour sont importantes pour la sécurité de votre système.";
         result.style.color = "red";
         recordQuestionReview('q6', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q6'), 1000);
+        setTimeout(() => showNextQuestion('q6'), 2000);
     }
     updateScore();
 }
@@ -368,7 +390,7 @@ function checkQ7() {
         result.textContent = "Mauvaise réponse. Ne partagez jamais vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
         result.style.color = "red";
         recordQuestionReview('q7', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q7'), 1000);
+        setTimeout(() => showNextQuestion('q7'), 2000);
     }
     updateScore();
 }
@@ -394,7 +416,7 @@ function checkQ8() {
         result.textContent = "Mauvaise réponse. Un gestionnaire de mots de passe est un outil qui peut vous aider à gérer vos mots de passe de manière sécurisée.";
         result.style.color = "red";
         recordQuestionReview('q8', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q8'), 1000);
+        setTimeout(() => showNextQuestion('q8'), 2000);
     }
     updateScore();
 }
@@ -420,7 +442,7 @@ function checkQ9() {
         result.textContent = "Mauvaise réponse. Il faut faire attention aux appareils qui vous sont inconnus, ces appareils peuvent être infectés par des virus ou des logiciels malveillants.";
         result.style.color = "red";
         recordQuestionReview('q9', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q9'), 1000);
+        setTimeout(() => showNextQuestion('q9'), 2000);
     }
     updateScore();
 }
@@ -446,7 +468,7 @@ function checkQ10() {
         result.textContent = "Mauvaise réponse. Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter.";
         result.style.color = "red";
         recordQuestionReview('q10', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q10'), 1000);
+        setTimeout(() => showNextQuestion('q10'), 2000);
     }
     updateScore();
 }
@@ -472,7 +494,7 @@ function checkQ11() {
         result.textContent = "Mauvaise réponse. Il existe une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte, Cette méthode s'appelle l'authentification à deux facteurs (2FA).";
         result.style.color = "red";
         recordQuestionReview('q11', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q11'), 1000);
+        setTimeout(() => showNextQuestion('q11'), 2000);
     }
     updateScore();
 }
@@ -498,7 +520,7 @@ function checkQ12() {
         result.textContent = "Mauvaise réponse. Soyez régulier dans vos sauvegardes.";
         result.style.color = "red";
         recordQuestionReview('q12', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q12'), 1000);
+        setTimeout(() => showNextQuestion('q12'), 2000);
     }
     updateScore();
 }
@@ -524,7 +546,7 @@ function checkQ13() {
         result.textContent = "Mauvaise réponse. Faites attention à la provenance des applications que vous téléchargez.";
         result.style.color = "red";
         recordQuestionReview('q13', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q13'), 1000);
+        setTimeout(() => showNextQuestion('q13'), 2000);
     }
     updateScore();
 }
@@ -550,7 +572,7 @@ function checkQ14() {
         result.textContent = "Mauvaise réponse. Un malware est un type de logiciel qui peut infiltrer, endommager ou perturber un système informatique.";
         result.style.color = "red";
         recordQuestionReview('q14', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q14'), 1000);
+        setTimeout(() => showNextQuestion('q14'), 2000);
     }
     updateScore();
 }
@@ -672,7 +694,7 @@ function redraw(n) {
       result.textContent = "Mauvaise réponse.";
       result.style.color = "red";
       recordQuestionReview(`q${n}`, [], result.textContent, false);
-      setTimeout(() => showNextQuestion(`q${n}`), 1000);
+      setTimeout(() => showNextQuestion(`q${n}`), 2000);
     }
     updateScore();
   });
@@ -699,7 +721,7 @@ function checkQ18() {
         result.textContent = "Mauvaise réponse. Priorisez la sécurité de vos comptes en changeant immédiatement vos mots de passe et signaler l'incident.";
         result.style.color = "red";
         recordQuestionReview('q18', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q18'), 1000);
+        setTimeout(() => showNextQuestion('q18'), 2000);
     }
     updateScore();
 }
@@ -717,7 +739,6 @@ async function envoyerScore(nom, score, niveau, total) {
     console.error('Erreur envoi score :', error);
   }
 }
-envoyerScore(joueurNom, score, "Facile", 18);
 
 function updateProgress(questionId) {
   const progress = document.getElementById('progress');

@@ -69,7 +69,29 @@ function melangerReponses(questionId) {
 
 window.addEventListener('load', initRandomQuestions); // Initialise les questions aléatoires au chargement de la page
 
-function goToResults() {
+async function goToResults() {
+  // Vérifier que le score affiché correspond au score calculé
+  const scoreEl = document.getElementById('score');
+  let displayed = score;
+  if (scoreEl) {
+    const parsed = parseInt((scoreEl.textContent || '').replace(/\D/g, ''), 10);
+    if (!Number.isNaN(parsed)) displayed = parsed;
+  }
+  if (displayed !== score) {
+    console.warn('Score affiché différent du score interne, envoi du score affiché :', displayed, 'interne:', score);
+    score = displayed;
+    updateScore();
+  }
+
+  const confirmed = confirm('Validez-vous définitivement vos réponses et souhaitez-vous envoyer votre score au serveur ?');
+  if (confirmed) {
+    try {
+      await envoyerScore(joueurNom, score, quizNiveau, 18);
+    } catch (e) {
+      console.error('Erreur lors de l\'envoi du score :', e);
+    }
+  }
+
   localStorage.setItem('quizReview', JSON.stringify(quizReview));
   localStorage.setItem('quizScore', String(score));
   localStorage.setItem('quizNiveau', quizNiveau);
@@ -161,7 +183,7 @@ function checkQ1() {
         result.textContent = "Mauvaise réponse. Il s'agit d'un protocole de chiffrement obsolète qui se nomme SSLv3.";
         result.style.color = "red";
         recordQuestionReview('q1', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q1'), 1000);
+        setTimeout(() => showNextQuestion('q1'), 2000);
     }
     updateScore();
 }
@@ -240,7 +262,7 @@ function checkQ2() {
         result.textContent = "Mauvaise réponse. Échapper les données avant l'affichage côté sortie est une mesure de sécurité essentielle pour prévenir les attaques de type cross-site scripting (XSS).";
         result.style.color = "red";
         recordQuestionReview('q2', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q2'), 1000);
+        setTimeout(() => showNextQuestion('q2'), 2000);
     }
     updateScore();
 }
@@ -266,7 +288,7 @@ function checkQ3() {
         result.textContent = "Mauvaise réponse. Il s'agit de deux étapes clés pour sécuriser les données entrantes dans une application web. La validation côté serveur et utiliser des requêtes paramétrées.";
         result.style.color = "red";
         recordQuestionReview('q3', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q3'), 1000);
+        setTimeout(() => showNextQuestion('q3'), 2000);
     }
     updateScore();
 }
@@ -292,7 +314,7 @@ function checkQ4() {
         result.textContent = "Mauvaise réponse. Utiliser une fonction de hachage à sens unique pour stocker les mots de passe est une pratique de sécurité essentielle, car elle permet de protéger les mots de passe des utilisateurs en les transformant en une valeur hachée qui ne peut pas être inversée, ce qui rend extrêmement difficile pour les attaquants de récupérer les mots de passe d'origine même s'ils parviennent à accéder à la base de données.";
         result.style.color = "red";
         recordQuestionReview('q4', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q4'), 1000);
+        setTimeout(() => showNextQuestion('q4'), 2000);
     }
     updateScore();
 }
@@ -317,7 +339,7 @@ function checkQ5() {
         result.textContent = "Mauvaise réponse. La caractéristique qui distingue un jeton anti-CSRF efficace est qu'il doit être unique pour chaque session ou chaque requête, ce qui permet de garantir que les requêtes proviennent bien de l'utilisateur légitime et de prévenir les attaques de type cross-site request forgery (CSRF) en rendant difficile pour les attaquants de prédire ou de réutiliser des jetons valides.";
         result.style.color = "red";
         recordQuestionReview('q5', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q5'), 1000);
+        setTimeout(() => showNextQuestion('q5'), 2000);
     }
     updateScore();
 }
@@ -343,7 +365,7 @@ function checkQ6() {
         result.textContent = "Mauvaise réponse. Il s'agit d'une mesure de sécurité qui permet de contrôler les sources de contenu autorisées sur une page web (Content Security Policy - CSP).";
         result.style.color = "red";
         recordQuestionReview('q6', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q6'), 1000);
+        setTimeout(() => showNextQuestion('q6'), 2000);
     }
     updateScore();
 }
@@ -369,7 +391,7 @@ function checkQ7() {
         result.textContent = "Mauvaise réponse. Il ne faut pas faire confiance à des sources d'information non vérifiées.";
         result.style.color = "red";
         recordQuestionReview('q7', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q7'), 1000);
+        setTimeout(() => showNextQuestion('q7'), 2000);
     }
     updateScore();
 }
@@ -395,7 +417,7 @@ function checkQ8() {
         result.textContent = "Mauvaise réponse. Il s'agit d'un indicateur clé de la sécurité d'un site de commerce en ligne : faire confiance à un fournisseur de paiement réputé.";
         result.style.color = "red";
         recordQuestionReview('q8', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q8'), 1000);
+        setTimeout(() => showNextQuestion('q8'), 2000);
     }
     updateScore();
 }
@@ -421,7 +443,7 @@ function checkQ9() {
         result.textContent = "Mauvaise réponse. Vérifier l'identité du destinataire avant d'envoyer des informations sensibles est crucial pour éviter les attaques de phishing et les fraudes.";
         result.style.color = "red";
         recordQuestionReview('q9', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q9'), 1000);
+        setTimeout(() => showNextQuestion('q9'), 2000);
     }
     updateScore();
 }
@@ -447,7 +469,7 @@ function checkQ10() {
         result.textContent = "Mauvaise réponse. Utiliser la même clé de chiffrement pour plusieurs données sensibles peut compromettre la sécurité, car si un attaquant parvient à découvrir cette clé, il pourra potentiellement accéder à toutes les données protégées par cette clé.";
         result.style.color = "red";
         recordQuestionReview('q10', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q10'), 1000);
+        setTimeout(() => showNextQuestion('q10'), 2000);
     }
     updateScore();
 }
@@ -473,7 +495,7 @@ function checkQ11() {
         result.textContent = "Mauvaise réponse. Il s'agit de trois catégories de facteurs d'authentification qui renforcent la sécurité des comptes en ligne. La connaissance, la possession et la biométrie.";
         result.style.color = "red";
         recordQuestionReview('q11', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q11'), 1000);
+        setTimeout(() => showNextQuestion('q11'), 2000);
     }
     updateScore();
 }
@@ -499,7 +521,7 @@ function checkQ12() {
         result.textContent = "Mauvaise réponse. Utiliser un gestionnaire de mots de passe (vault) et pratiquer la rotation régulière des mots de passe sont des pratiques essentielles pour maintenir la sécurité des comptes en ligne.";
         result.style.color = "red";
         recordQuestionReview('q12', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q12'), 1000);
+        setTimeout(() => showNextQuestion('q12'), 2000);
     }
     updateScore();
 }
@@ -525,7 +547,7 @@ function checkQ13() {
         result.textContent = "Mauvaise réponse. Un rootkit est un type de logiciel conçu pour donner à un attaquant un accès privilégié et furtif à un système compromis.";
         result.style.color = "red";
         recordQuestionReview('q13', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q13'), 1000);
+        setTimeout(() => showNextQuestion('q13'), 2000);
     }
     updateScore();
 }
@@ -551,7 +573,7 @@ function checkQ14() {
         result.textContent = "Mauvaise réponse. Le pinning de certificat est une technique de sécurité qui consiste à associer un certificat spécifique à une application ou un site web pour prévenir les attaques de type man-in-the-middle.";
         result.style.color = "red";
         recordQuestionReview('q14', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q14'), 1000);
+        setTimeout(() => showNextQuestion('q14'), 2000);
     }
     updateScore();
 }
@@ -673,7 +695,7 @@ function redraw(n) {
       result.textContent = "Mauvaise réponse.";
       result.style.color = "red";
       recordQuestionReview(`q${n}`, [], result.textContent, false);
-      setTimeout(() => showNextQuestion(`q${n}`), 1000);
+      setTimeout(() => showNextQuestion(`q${n}`), 2000);
     }
     updateScore();
   });
@@ -700,7 +722,7 @@ function checkQ18() {
         result.textContent = "Mauvaise réponse. L'action qui est la plus pertinente pour vérifier la validité d'un certificat TLS est de vérifier la chaîne de certification, c'est-à-dire s'assurer que le certificat présenté par le serveur est émis par une autorité de certification de confiance et que la chaîne de certificats est complète et valide.";
         result.style.color = "red";
         recordQuestionReview('q18', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q18'), 1000);
+        setTimeout(() => showNextQuestion('q18'), 2000);
     }
     updateScore();
 }
@@ -718,7 +740,6 @@ async function envoyerScore(nom, score, niveau, total) {
     console.error('Erreur envoi score :', error);
   }
 }
-envoyerScore(joueurNom, score, "Difficile", 18);
 
 function updateProgress(questionId) {
   const progress = document.getElementById('progress');

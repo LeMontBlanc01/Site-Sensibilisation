@@ -69,7 +69,29 @@ function melangerReponses(questionId) {
 
 window.addEventListener('load', initRandomQuestions); // Initialise les questions aléatoires au chargement de la page
 
-function goToResults() {
+async function goToResults() {
+  // Vérifier que le score affiché correspond au score calculé
+  const scoreEl = document.getElementById('score');
+  let displayed = score;
+  if (scoreEl) {
+    const parsed = parseInt((scoreEl.textContent || '').replace(/\D/g, ''), 10);
+    if (!Number.isNaN(parsed)) displayed = parsed;
+  }
+  if (displayed !== score) {
+    console.warn('Score affiché différent du score interne, envoi du score affiché :', displayed, 'interne:', score);
+    score = displayed;
+    updateScore();
+  }
+
+  const confirmed = confirm('Validez-vous définitivement vos réponses et souhaitez-vous envoyer votre score au serveur ?');
+  if (confirmed) {
+    try {
+      await envoyerScore(joueurNom, score, quizNiveau, 18);
+    } catch (e) {
+      console.error('Erreur lors de l\'envoi du score :', e);
+    }
+  }
+
   localStorage.setItem('quizReview', JSON.stringify(quizReview));
   localStorage.setItem('quizScore', String(score));
   localStorage.setItem('quizNiveau', quizNiveau);
@@ -160,7 +182,7 @@ function checkQ1() {
     result.textContent = "Mauvaise réponse. Il est recommandé d'utiliser au moins 12 caractères pour un mot de passe fort.";
     result.style.color = "red";
     recordQuestionReview('q1', selected, result.textContent, false);
-    setTimeout(() => showNextQuestion('q1'), 1000);
+    setTimeout(() => showNextQuestion('q1'), 2000);
   }
   updateScore();
 }
@@ -239,7 +261,7 @@ function checkQ2() {
         result.textContent = "Mauvaise réponse. La segmentation réseau consiste à diviser un réseau en sous-réseaux pour limiter les risques en cas de compromission.";
         result.style.color = "red";
         recordQuestionReview('q2', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q2'), 1000);
+        setTimeout(() => showNextQuestion('q2'), 2000);
     }
     updateScore();
 }
@@ -265,7 +287,7 @@ function checkQ3() {
         result.textContent = "Mauvaise réponse. Évitez de partager et de réutiliser les mêmes mots de passe. Il faut plutôt ajouter une couche de sécurité supplémentaire avec l'authentification à deux facteurs (2FA), et utiliser un mot de passe unique pour chaque compte.";
         result.style.color = "red";
         recordQuestionReview('q3', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q3'), 1000);
+        setTimeout(() => showNextQuestion('q3'), 2000);
     }
     updateScore();
 }
@@ -291,7 +313,7 @@ function checkQ4() {
         result.textContent = "Mauvaise réponse. Les attaquants cherchent à vous dépechez.";
         result.style.color = "red";
         recordQuestionReview('q4', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q4'), 1000);
+        setTimeout(() => showNextQuestion('q4'), 2000);
     }
     updateScore();
 }
@@ -316,7 +338,7 @@ function checkQ5() {
         result.textContent = "Mauvaise réponse. La localisation et le Bluetooth activés en permanence peut être risqué. Maintenez les systèmes à jour avec les derniers correctifs de sécurité et restreignez les permissions des applications pour réduire les risques.";
         result.style.color = "red";
         recordQuestionReview('q5', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q5'), 1000);
+        setTimeout(() => showNextQuestion('q5'), 2000);
     }
     updateScore();
 }
@@ -342,7 +364,7 @@ function checkQ6() {
         result.textContent = "Mauvaise réponse. Un gestionnaire de mots de passe est comme un coffre-fort pour vos mots de passe.";
         result.style.color = "red";
         recordQuestionReview('q6', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q6'), 1000);
+        setTimeout(() => showNextQuestion('q6'), 2000);
     }
     updateScore();
 }
@@ -368,7 +390,7 @@ function checkQ7() {
         result.textContent = "Mauvaise réponse. L'indicateur qui permet le mieux de détecter une attaque par mouvement latéral dans un réseau d'entreprise est la présence de connexions RDP inhabituelles entre machines internes.";
         result.style.color = "red";
         recordQuestionReview('q7', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q7'), 1000);
+        setTimeout(() => showNextQuestion('q7'), 2000);
     }
     updateScore();
 }
@@ -394,7 +416,7 @@ function checkQ8() {
         result.textContent = "Mauvaise réponse. Voyez ce qui est présent sur le site (https et icône cadenas).";
         result.style.color = "red";
         recordQuestionReview('q8', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q8'), 1000);
+        setTimeout(() => showNextQuestion('q8'), 2000);
     }
     updateScore();
 }
@@ -420,7 +442,7 @@ function checkQ9() {
         result.textContent = "Mauvaise réponse. Des indicateurs potentiels d'une compromission du réseau incluent un trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissant sur le réseau, et des ports ouverts inattendus sur plusieurs machines.";
         result.style.color = "red";
         recordQuestionReview('q9', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q9'), 1000);
+        setTimeout(() => showNextQuestion('q9'), 2000);
     }
     updateScore();
 }
@@ -446,7 +468,7 @@ function checkQ10() {
         result.textContent = "Mauvaise réponse. Pensez à ce qui semble le plus suspect, un éditeur inconnu, des permissions inhabituelles, ou une taille de fichier anormalement grande ou petite.";
         result.style.color = "red";
         recordQuestionReview('q10', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q10'), 1000);
+        setTimeout(() => showNextQuestion('q10'), 2000);
     }
     updateScore();
 }
@@ -472,7 +494,7 @@ function checkQ11() {
         result.textContent = "Mauvaise réponse. Le principe du moindre privilège consiste à accorder aux utilisateurs uniquement les permissions nécessaires pour accomplir leurs tâches, réduisant ainsi les risques.";
         result.style.color = "red";
         recordQuestionReview('q11', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q11'), 1000);
+        setTimeout(() => showNextQuestion('q11'), 2000);
     }
     updateScore();
 }
@@ -498,7 +520,7 @@ function checkQ12() {
         result.textContent = "Mauvaise réponse. Il est recommandé de stocker une copie locale des données et une copie dans le cloud chiffré pour assurer la sécurité et la disponibilité des données.";
         result.style.color = "red";
         recordQuestionReview('q12', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q12'), 1000);
+        setTimeout(() => showNextQuestion('q12'), 2000);
     }
     updateScore();
 }
@@ -524,7 +546,7 @@ function checkQ13() {
         result.textContent = "Mauvaise réponse. Révoquer les sessions et changer les mots de passe est une mesure de sécurité importante en cas de compromission.";
         result.style.color = "red";
         recordQuestionReview('q13', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q13'), 1000);
+        setTimeout(() => showNextQuestion('q13'), 2000);
     }
     updateScore();
 }
@@ -550,7 +572,7 @@ function checkQ14() {
         result.textContent = "Mauvaise réponse. Protéger vos données.";
         result.style.color = "red";
         recordQuestionReview('q14', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q14'), 1000);
+        setTimeout(() => showNextQuestion('q14'), 2000);
     }
     updateScore();
 }
@@ -672,7 +694,7 @@ function redraw(n) {
       result.textContent = "Mauvaise réponse.";
       result.style.color = "red";
       recordQuestionReview(`q${n}`, [], result.textContent, false);
-      setTimeout(() => showNextQuestion(`q${n}`), 1000);
+      setTimeout(() => showNextQuestion(`q${n}`), 2000);
     }
     updateScore();
   });
@@ -699,7 +721,7 @@ function checkQ18() {
         result.textContent = "Mauvaise réponse. Le risque majeur en matière de sécurité est la compromission de la clé maître donnant accès à l'ensemble du coffre.";
         result.style.color = "red";
         recordQuestionReview('q18', selected, result.textContent, false);
-        setTimeout(() => showNextQuestion('q18'), 1000);
+        setTimeout(() => showNextQuestion('q18'), 2000);
     }
     updateScore();
 }
@@ -717,7 +739,6 @@ async function envoyerScore(nom, score, niveau, total) {
     console.error('Erreur envoi score :', error);
   }
 }
-envoyerScore(joueurNom, score, "Moyen", 18);
 
 
 function updateProgress(questionId) {
