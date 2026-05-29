@@ -263,6 +263,8 @@ function checkQ3() {
     } else {
         result.textContent = "Mauvaise réponse. Il ne faut pas hésiter à dissocier le professionnel du personnel.";
         result.style.color = "red";
+        recordQuestionReview('q3', selected, result.textContent, false);
+        setTimeout(() => showNextQuestion('q3'), 1000);
     }
     updateScore();
 }
