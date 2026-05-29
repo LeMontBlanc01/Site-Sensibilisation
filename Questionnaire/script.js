@@ -698,7 +698,7 @@ function checkQ18() {
         result.textContent = "Mauvaise réponse. Priorisez la sécurité de vos comptes en changeant immédiatement vos mots de passe et signaler l'incident.";
         result.style.color = "red";
         recordQuestionReview('q18', selected, result.textContent, false);
-        setTimeout(goToResults, 1000);
+        setTimeout(() => showNextQuestion('q18'), 1000);
     }
     updateScore();
 }
