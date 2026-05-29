@@ -671,6 +671,7 @@ function redraw(n) {
     } else {
       result.textContent = "Mauvaise réponse.";
       result.style.color = "red";
+      recordQuestionReview(`q${n}`, [], result.textContent, false);
       setTimeout(() => showNextQuestion(`q${n}`), 1000);
     }
     updateScore();
