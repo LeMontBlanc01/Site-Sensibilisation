@@ -5,45 +5,6 @@ const quizNiveau = "Facile";
 const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 let quizReview = [];
 
-const questionTitles = {
-  q1: "Lequel de ces mots de passe remplacerait le vôtre de façon sécurisée ?",
-  q2: "Est-il risqué de brancher une clé USB reçue lors d'une conférence ?",
-  q3: "Quelles sont les bonnes pratiques ? (choix multiples)",
-  q4: "Qu'est-ce qu'un VPN ?",
-  q5: "À quoi reconnaît-on un e-mail de phishing ? (choix multiples)",
-  q6: "Pourquoi faire des mises à jour régulières ?",
-  q7: "Que devez-vous faire face à un e-mail demandant votre mot de passe ?",
-  q8: "Quelle est une bonne pratique pour gérer ses mots de passe ?",
-  q9: "Quel est le risque de connecter un appareil inconnu ?",
-  q10: "Que faut-il vérifier sur un lien avant de cliquer ?",
-  q11: "Que permet l'authentification à deux facteurs (2FA) ?",
-  q12: "Quelle est une bonne pratique pour les sauvegardes ?",
-  q13: "Que faut-il faire avant d'installer un nouveau logiciel ?",
-  q14: "Qu'est-ce qu'un malware ?",
-  q15: "Reliez les situations à leurs solutions (messagerie / carte bancaire / hameçonnage)",
-  q16: "Reliez les situations à leurs solutions (travail extérieur / téléphone volé / jeu mobile)",
-  q17: "Reliez les situations à leurs solutions (messages pro à la maison / stockage / téléchargements illégaux)",
-  q18: "Que faire en cas de suspicion de phishing ?"
-};
-
-const answerLabels = {
-  q1:  { "123456": "123456", "monchien": "monchien", "Lucas2005!ABC": "Lucas2005!ABC", "g7!pl9@vq2#rt": "G7!pL9@vQ2#rT" },
-  q2:  { "oui": "Oui", "non": "Non" },
-  q3:  { "melangez": "Mélanger votre messagerie professionnelle et personnelle", "separez": "Séparer travail et personnel", "utilisez1": "Utiliser plusieurs adresses électroniques", "utilisez2": "Utiliser une seule adresse électronique" },
-  q4:  { "vpn": "Réseau privé virtuel", "virus": "Un virus", "service": "Un service cloud", "notsure": "Je ne sais pas" },
-  q5:  { "pjmail": "Le mail contient une pièce jointe malveillante", "sujetmail": "Le mail a un sujet alarmant", "adressemail": "Le mail a été envoyé par une adresse suspecte", "lienmail": "Le mail contient un lien frauduleux" },
-  q6:  { "esthetique": "Pour l'esthétique", "failles": "Pour corriger des failles de sécurité", "prix": "Pour réduire le prix", "vitesse": "Pour ralentir l'ordinateur" },
-  q7:  { "repondre": "Répondre et donner le mot de passe", "supprimer": "Supprimer sans signaler", "signaler": "Ne pas répondre et signaler", "partager": "Partager avec des collègues" },
-  q8:  { "reutiliser": "Réutiliser le même mot de passe partout", "gestionnaire": "Utiliser un gestionnaire de mots de passe", "ecrire": "Noter les mots de passe sur un post-it", "simple": "Utiliser des mots de passe simples" },
-  q9:  { "partage": "Partage de fichiers sécurisé", "infection": "Risque d'infection par un malware", "aucun": "Aucun risque", "acceleration": "Accélération du système" },
-  q10: { "apparence": "L'apparence du bouton seulement", "adresse": "L'adresse (URL) du lien", "popups": "Les pop-ups autour", "aucun": "Ne rien vérifier" },
-  q11: { "aucune": "Ne rien changer", "2fa": "Ajouter une couche de sécurité supplémentaire", "vitesse": "Accélérer la connexion", "partage": "Permettre le partage de compte" },
-  q12: { "jamais": "Ne jamais sauvegarder", "regulier": "Sauvegarder régulièrement", "onlineonly": "Sauvegarder uniquement en ligne", "partager": "Partager ses sauvegardes publiquement" },
-  q13: { "source": "Vérifier la source et les avis", "tout": "Installer tout ce qu'on trouve", "pirate": "Télécharger depuis un site pirate", "aucune": "Ne rien vérifier" },
-  q14: { "malware": "Un programme malveillant", "jeu": "Un jeu", "outil": "Un outil utile", "aucun": "Rien" },
-  q18: { "ignorer": "Ignorer et ne rien faire", "change": "Changer ses mots de passe et signaler", "repondre": "Répondre à l'expéditeur", "partager": "Partager l'e-mail publiquement" }
-};
-
 // Ordre aléatoire des questions
 let questionOrder = [];
 function shuffle(array) {
@@ -161,12 +122,6 @@ function showNextQuestion(currentId) {
 }
 
 function recordQuestionReview(questionId, selected, resultText, correct) {
-
-  const title = questionTitles[questionId] || questionId;
-  const labels = answerLabels[questionId] || {};
-  const translatedSelected = selected.map(v => labels[v] || v);
-
-
   const reviewEntry = {
     questionId,
     selected: selected && selected.length ? selected.join(', ') : 'Aucune réponse',
