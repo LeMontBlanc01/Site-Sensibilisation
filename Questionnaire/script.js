@@ -258,6 +258,7 @@ function checkQ3() {
         result.textContent = "Bonne réponse ! Les bonnes pratiques pour protéger ses données personnelles en ligne incluent : séparer les comptes professionnels et personnels et limiter les informations personnelles partagées sur les réseaux sociaux.";
         result.style.color = "green";
         score++;
+        recordQuestionReview('q3', selected, result.textContent, true);
         document.getElementById("btn-valider-q3").style.display = "none";
         document.getElementById("btn-suivant-q3").style.display = "inline-block";
     } else {
