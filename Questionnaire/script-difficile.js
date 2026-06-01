@@ -600,11 +600,29 @@ function onBonneReponse17(result) {
   result.innerHTML = "Bonne réponse !<br><small></small>";
 }
 
+function onMauvaiseReponse15(result) {
+  result.innerHTML = "Mauvaise réponse !<br><small></small>";
+}
+
+function onMauvaiseReponse16(result) {
+  result.innerHTML = "Mauvaise réponse !<br><small></small>";
+}
+
+function onMauvaiseReponse17(result) {
+  result.innerHTML = "Mauvaise réponse !<br><small></small>";
+}
+
 //Regroupe les callbacks par numéro de question pour les appeler dans la boucle
 const onBonneReponse = {
   15: onBonneReponse15,
   16: onBonneReponse16,
   17: onBonneReponse17,
+};
+
+const onMauvaiseReponse = {
+  15: onMauvaiseReponse15,
+  16: onMauvaiseReponse16,
+  17: onMauvaiseReponse17,
 };
 
 //Canvas
@@ -692,7 +710,7 @@ function redraw(n) {
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
       document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
     } else {
-      result.textContent = "Mauvaise réponse.";
+      onMauvaiseReponse[n](result); //Appelle la fonction spécifique à la question
       result.style.color = "red";
       recordQuestionReview(`q${n}`, [], result.textContent, false);
       setTimeout(() => showNextQuestion(`q${n}`), 2000);
