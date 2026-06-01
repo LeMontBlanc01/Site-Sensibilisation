@@ -632,7 +632,6 @@ const onBonneReponse = {
   17: onBonneReponse17,
 };
 
-//Regroupe les callbacks par numéro de question pour les appeler dans la boucle
 const onMauvaiseReponse = {
   15: onMauvaiseReponse15,
   16: onMauvaiseReponse16,
