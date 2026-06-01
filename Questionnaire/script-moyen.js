@@ -602,27 +602,27 @@ const configs = {
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
 function onBonneReponse15(result) {
-  result.innerHTML = "Bonne réponse !<br><small>15</small>";
+  result.innerHTML = "Bonne réponse !<br><small>Les données personnelles sont des informations permettant d'identifier une personne, même indirectement. Les données sensibles sont des catégories nécessitant une protection renforcée (santé, opinions, biométrie...). Les données confidentielles internes sont des informations métier non publiques (procédures, contrats, architecture IT).</small>";
 }
 
 function onBonneReponse16(result) {
-  result.innerHTML = "Bonne réponse !<br><small>16</small>";
+  result.innerHTML = "Bonne réponse !<br><small>Le principe du moindre privilège consiste à limiter les accès pour réduire l'impact d'un compte compromis. La journalisation centralisée est une détection plus rapide d'anomalies et corrélations d'évènements. La sensibilisation continue est une réduction du risque humain grâce à des rappels réguliers et contextualisés.</small>";
 }
 
 function onBonneReponse17(result) {
-  result.innerHTML = "Bonne réponse !<br><small>17</small>";
+  result.innerHTML = "Bonne réponse !<br><small>Le VPN (réseau virtuel) chiffre le traffic entre votre appareil et un serveur distant, il masque votre IP mais ne rend pas anonyme. Le chiffrement de bout en bout (E2EE) garantit que seuls l'expéditeur et le destinataire peuvent lire le message, même le serveur intermédiaire ne peut pas le déchiffrer. Le certificat SSL/TLS (cadenas HTTPS) chiffre les données en transit entre votre navigateur et le site web, il ne garantit pas que le site est légitime.</small>";
 }
 
 function onMauvaiseReponse15(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small>15</small>";
+  result.innerHTML = "Mauvaise réponse !<br><small>Les données personnelles sont des informations permettant d'identifier une personne, même indirectement. Les données sensibles sont des catégories nécessitant une protection renforcée (santé, opinions, biométrie...). Les données confidentielles internes sont des informations métier non publiques (procédures, contrats, architecture IT).</small>";
 }
 
 function onMauvaiseReponse16(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small>16</small>";
+  result.innerHTML = "Mauvaise réponse !<br><small>Le principe du moindre privilège consiste à limiter les accès pour réduire l'impact d'un compte compromis. La journalisation centralisée est une détection plus rapide d'anomalies et corrélations d'évènements. La sensibilisation continue est une réduction du risque humain grâce à des rappels réguliers et contextualisés.</small>";
 }
 
 function onMauvaiseReponse17(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small>17</small>";
+  result.innerHTML = "Mauvaise réponse !<br><small>Le VPN (réseau virtuel) chiffre le traffic entre votre appareil et un serveur distant, il masque votre IP mais ne rend pas anonyme. Le chiffrement de bout en bout (E2EE) garantit que seuls l'expéditeur et le destinataire peuvent lire le message. Le certificat SSL/TLS (cadenas HTTPS) chiffre les données en transit entre votre navigateur et le site web, il ne garantit pas que le site est légitime.</small>";
 }
 
 //Regroupe les callbacks par numéro de question pour les appeler dans la boucle
