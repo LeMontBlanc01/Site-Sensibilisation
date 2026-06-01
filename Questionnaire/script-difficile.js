@@ -611,7 +611,7 @@ function onBonneReponse16(result) {
 }
 
 function onBonneReponse17(result) {
-  result.innerHTML = "Bonne réponse !<br><small>17</small>";
+  result.innerHTML = "Bonne réponse !<br><small>Quand vous recevez une alerte &quot;nouvelle connexion depuis un pays étranger&quot; alors que vous êtes au bureau. C'est un test d'identifiants compromis sur un VPN ou un service exposé. Quand le Wi-Fi invité devient soudainement très lent, alors que peu de monde est connecté. C'est un scan ou une tentative d'exploitation depuis un appareil connecté au réseau invité. Quand un serveur interne commence à générer beaucoup plus de trafic sortant que d'habitude. C'est une exfiltration de données via un tunnel chiffré mis en place par un attaquant.</small>";
 }
 
 function onMauvaiseReponse15(result) {
@@ -623,7 +623,7 @@ function onMauvaiseReponse16(result) {
 }
 
 function onMauvaiseReponse17(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small>17</small>";
+  result.innerHTML = "Mauvaise réponse !<br><small>Quand vous recevez une alerte &quot;nouvelle connexion depuis un pays étranger&quot; alors que vous êtes au bureau. C'est un test d'identifiants compromis sur un VPN ou un service exposé. Quand le Wi-Fi invité devient soudainement très lent, alors que peu de monde est connecté. C'est un scan ou une tentative d'exploitation depuis un appareil connecté au réseau invité. Quand un serveur interne commence à générer beaucoup plus de trafic sortant que d'habitude. C'est une exfiltration de données via un tunnel chiffré mis en place par un attaquant.</small>";
 }
 
 //Regroupe les callbacks par numéro de question pour les appeler dans la boucle
