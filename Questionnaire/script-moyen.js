@@ -588,27 +588,27 @@ const configs = {
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
 function onBonneReponse15(result) {
-  result.innerHTML = "Bonne réponse !<br><small></small>";
+  result.innerHTML = "Bonne réponse !<br><small>15</small>";
 }
 
 function onBonneReponse16(result) {
-  result.innerHTML = "Bonne réponse !<br><small></small>";
+  result.innerHTML = "Bonne réponse !<br><small>16</small>";
 }
 
 function onBonneReponse17(result) {
-  result.innerHTML = "Bonne réponse !<br><small></small>";
+  result.innerHTML = "Bonne réponse !<br><small>17</small>";
 }
 
 function onMauvaiseReponse15(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small></small>";
+  result.innerHTML = "Mauvaise réponse !<br><small>15</small>";
 }
 
 function onMauvaiseReponse16(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small></small>";
+  result.innerHTML = "Mauvaise réponse !<br><small>16</small>";
 }
 
 function onMauvaiseReponse17(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small></small>";
+  result.innerHTML = "Mauvaise réponse !<br><small>17</small>";
 }
 
 //Regroupe les callbacks par numéro de question pour les appeler dans la boucle
