@@ -728,15 +728,17 @@ function checkQ18() {
 
     const result = document.getElementById("result-q18");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
+    document.getElementById("btn-valider-q18").addEventListener("click", function() {
+          this.style.display = "none";
+        });
+
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! En cas de suspicion de phishing, il est important de changer immédiatement vos mots de passe pour les comptes concernés. De plus, signalez l'incident à votre service informatique ou à l'équipe de sécurité de votre organisation pour qu'ils puissent prendre les mesures nécessaires pour protéger les autres utilisateurs.";
         result.style.color = "green";
         score++;
         recordQuestionReview('q18', selected, result.textContent, true);
-        document.getElementById("btn-valider-q18").addEventListener("click", function() {
-          this.style.display = "none";
-        });
+        document.getElementById("btn-valider-q18").style.display = "none";
         document.getElementById("btn-suivant-q18").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Priorisez la sécurité de vos comptes en changeant immédiatement vos mots de passe et signaler l'incident.";
