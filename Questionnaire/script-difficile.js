@@ -603,7 +603,7 @@ const configs = {
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
 function onBonneReponse15(result) {
-  result.innerHTML = "Bonne réponse !<br><small>15</small>";
+  result.innerHTML = "Bonne réponse !<br><small>Le reserve phishing est une menace où l'attaquant pousse la victime à initer elle-même le contact (ex: faux support). Le pretexting technique est une menace où l'attaquant se fait passer pour un outil ou un système automatisé. La session mirroring est une menace où l'attaquant observe passivement une session légitime via un accès détourné.</small>";
 }
 
 function onBonneReponse16(result) {
@@ -615,7 +615,7 @@ function onBonneReponse17(result) {
 }
 
 function onMauvaiseReponse15(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small>15</small>";
+  result.innerHTML = "Mauvaise réponse !<br><small>Le reserve phishing est une menace où l'attaquant pousse la victime à initer elle-même le contact. Le pretexting technique est une menace où l'attaquant se fait passer pour un outil ou un système automatisé. La session mirroring est une menace où l'attaquant observe passivement une session légitime via un accès détourné.</small>";
 }
 
 function onMauvaiseReponse16(result) {
