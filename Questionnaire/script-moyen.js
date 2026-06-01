@@ -4,6 +4,68 @@ const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Moyen";
 const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 let quizReview = [];
+const flagStorageKey = 'quizFlags_moyen';
+let quizFlags = {};
+
+function loadQuizFlags() {
+  try {
+    quizFlags = JSON.parse(localStorage.getItem(flagStorageKey) || '{}');
+  } catch (e) {
+    quizFlags = {};
+    console.error('Impossible de charger l\'état des flags', e);
+  }
+}
+
+function saveQuizFlags() {
+  localStorage.setItem(flagStorageKey, JSON.stringify(quizFlags));
+}
+
+function updateFlagUI(questionId) {
+  const question = document.getElementById(questionId);
+  if (!question) return;
+  const btn = question.querySelector('.flag-btn');
+  const flagged = Boolean(quizFlags[questionId]);
+  if (btn) {
+    btn.textContent = flagged ? 'Retirer le marqueur' : 'Marquer cette question à revoir';
+    btn.setAttribute('aria-pressed', String(flagged));
+  }
+  question.classList.toggle('flagged', flagged);
+}
+
+function initFlagCheckboxes() {
+  document.querySelectorAll('.question').forEach(question => {
+    const questionId = question.id;
+
+    // create a small button placed after the validate button
+    if (!question.querySelector('.flag-btn')) {
+      const validerBtn = document.getElementById(`btn-valider-${questionId}`);
+      const flagBtn = document.createElement('button');
+      flagBtn.type = 'button';
+      flagBtn.className = 'flag-btn';
+      flagBtn.dataset.questionId = questionId;
+      flagBtn.addEventListener('click', () => {
+        quizFlags[questionId] = !Boolean(quizFlags[questionId]);
+        saveQuizFlags();
+        updateFlagUI(questionId);
+      });
+
+      // insert right after the validate button, otherwise at the end
+      if (validerBtn && validerBtn.parentNode) {
+        validerBtn.parentNode.insertBefore(flagBtn, validerBtn.nextSibling);
+      } else {
+        question.appendChild(flagBtn);
+      }
+    }
+
+    // set initial state
+    const btn = question.querySelector('.flag-btn');
+    if (btn) {
+      btn.textContent = Boolean(quizFlags[questionId]) ? 'Retirer le marqueur' : 'Marquer cette question à revoir';
+      btn.setAttribute('aria-pressed', String(Boolean(quizFlags[questionId])));
+    }
+    updateFlagUI(questionId);
+  });
+}
 
 // Ordre aléatoire des questions
 let questionOrder = [];
@@ -67,7 +129,11 @@ function melangerReponses(questionId) {
   });
 }
 
-window.addEventListener('load', initRandomQuestions); // Initialise les questions aléatoires au chargement de la page
+window.addEventListener('load', () => {
+  loadQuizFlags();
+  initFlagCheckboxes();
+  initRandomQuestions();
+}); // Initialise les questions aléatoires et les flags au chargement de la page
 
 async function goToResults() {
   // Vérifier que le score affiché correspond au score calculé

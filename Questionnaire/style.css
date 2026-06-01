@@ -218,6 +218,55 @@ h2 {
     margin-top: -90px;
 }
 
+.flag-container {
+    margin: 16px 0 18px;
+    font-size: 0.95em;
+    color: #222;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.flag-container label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.flag-container input[type="checkbox"] {
+    margin: 0;
+}
+
+.question.flagged {
+    border: 2px solid #ffb300;
+    background-color: #fff8e1;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+/* Bouton de marqueur : placé sous le bouton Valider */
+.flag-btn {
+    display: block;
+    margin: 10px 0 0;
+    padding: 6px 10px;
+    font-size: 0.95em;
+    background: transparent;
+    color: #ff8c00;
+    border: 1px dashed #ff8c00;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.flag-btn[aria-pressed="true"] {
+    background: #ffb300;
+    color: #000;
+    border-style: solid;
+}
+
+.question .fr-btn + .flag-btn {
+    margin-top: 8px; /* small gap under main buttons */
+}
+
 .imgm8 img {
     display: block;
     margin: 2px auto;
