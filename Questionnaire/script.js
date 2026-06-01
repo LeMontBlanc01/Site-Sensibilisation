@@ -734,7 +734,9 @@ function checkQ18() {
         result.style.color = "green";
         score++;
         recordQuestionReview('q18', selected, result.textContent, true);
-        document.getElementById("btn-valider-q18").style.display = "none";
+        document.getElementById("btn-valider-q18").addEventListener("click", function() {
+          this.style.display = "none";
+        });
         document.getElementById("btn-suivant-q18").style.display = "inline-block";
     } else {
         result.textContent = "Mauvaise réponse. Priorisez la sécurité de vos comptes en changeant immédiatement vos mots de passe et signaler l'incident.";
