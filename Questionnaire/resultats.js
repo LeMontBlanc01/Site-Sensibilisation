@@ -129,8 +129,9 @@ function loadResults() {
 function initResultPage() {
   const restartButton = document.getElementById('btn-restart');
   if (restartButton) {
+    const lastQuizPage = localStorage.getItem('lastQuizPage') || 'questionnaire.html';
     restartButton.addEventListener('click', () => {
-      window.location.href = 'questionnaire.html';
+      window.location.href = lastQuizPage;
     });
   }
   loadResults();

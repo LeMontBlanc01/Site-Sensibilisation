@@ -158,6 +158,7 @@ async function goToResults() {
     }
   }
 
+  localStorage.setItem('lastQuizPage', 'moyen.html');
   localStorage.setItem('quizReview', JSON.stringify(quizReview));
   localStorage.setItem('quizScore', String(score));
   localStorage.setItem('quizNiveau', quizNiveau);
