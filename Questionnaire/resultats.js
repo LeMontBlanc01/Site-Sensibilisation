@@ -1,5 +1,4 @@
 
-// Cette fonction formate une date en français avec jour, mois, année, heure et minute
 function formatDate(date) {
   return date.toLocaleString('fr-FR', {
     year: 'numeric',
@@ -10,14 +9,30 @@ function formatDate(date) {
   });
 }
 
-// Cette fonction génère le texte à exporter pour un résultat donné
+function editQuestionReview(questionId, correct, selected, result) {
+  const quizReviewRaw = localStorage.getItem('quizReview');
+  let quizReview = [];
+  try {
+    quizReview = JSON.parse(quizReviewRaw || '[]');
+  } catch (e) {
+    console.error('Impossible de lire les détails du quiz', e);
+  }
+  const reviewEntry = {
+    questionId,
+    correct,
+    selected,
+    result
+  };
+  quizReview = quizReview.filter(entry => entry.questionId !== questionId);
+  quizReview.push(reviewEntry);
+  localStorage.setItem('quizReview', JSON.stringify(quizReview));
+}
+
 function createResultText(score, total, niveau, nom) {
   return `Prénom : ${nom}\nNiveau : ${niveau}\nScore : ${score} / ${total}\nDate : ${formatDate(new Date())}`;
 }
 
-// Cette fonction gère l'export des résultats
 function exportResults() {
-  // Si un historique global est présent, exporter tous les résultats
   const histRaw = localStorage.getItem('quizResults');
   if (histRaw) {
     try {
@@ -47,7 +62,6 @@ function exportResults() {
     }
   }
 
-  // Sinon, comportement historique (export du résultat courant)
   const score = localStorage.getItem('quizScore');
   const niveau = localStorage.getItem('quizNiveau');
   const nom = localStorage.getItem('quizNom');
@@ -74,7 +88,6 @@ function exportResults() {
   window.location.href = mailto;
 }
 
-// Cette fonction charge les résultats depuis le localStorage et les affiche sur la page
 function loadResults() {
   const score = localStorage.getItem('quizScore');
   const niveau = localStorage.getItem('quizNiveau');
@@ -137,4 +150,4 @@ function initResultPage() {
   loadResults();
 }
 
-window.addEventListener('load', initResultPage); // Appel de la fonction d'initialisation lorsque la page est chargée
+window.addEventListener('load', initResultPage);
