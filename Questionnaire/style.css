@@ -518,4 +518,95 @@ progress {
         width: 100%;
         height: 100%;
     }
+
+    .imgf1 img {
+        display: none;
+    }
+
+    .imgf2 img {
+        display: none;
+    }
+
+    .imgf4 img {
+        display: none;
+    }
+
+    .imgf5 img {
+        display: none;
+    }
+
+    .imgf6 img {
+        display: none;
+    }
+
+    .imgf7 img {
+        display: none;
+    }
+
+    .imgf9 img {
+        display: none;
+    }
+
+    .imgf10 img {
+        display: none;
+    }
+
+    .imgf11 img {
+        display: none;
+    }
+
+    .imgf12 img {
+        display: none;
+    }
+
+    .imgf13 img {
+        display: none;
+    }
+
+    .imgf18 img {
+        display: none;
+    }
+
+
+    .imgm1 img {
+        display: none;
+
+    }
+
+    .imgm2 img {
+        display: none;
+    }
+
+    .imgm4 img {
+        display: none;
+    }
+
+    .imgm5 img {
+        display: none;
+    }
+
+    .imgm8 img {
+        display: none;
+    }
+
+    .imgm10 img {
+        display: none;
+    }
+
+    .imgm12 img {
+        display: none;
+    }
+
+    .imgm14 img {
+        display: none;
+    }
+
+    .imgd7 img {
+        display: none;
+    }
+
+    .imgd9 img {
+        display: none;
+    }
+
 }
