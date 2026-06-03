@@ -479,13 +479,8 @@ progress {
         align-items: center;
         gap: 24px;
         padding: 10px 0;
-        background: rgba(8, 0, 53, 0.92);
         border-top: 1px solid rgba(255,255,255,0.15);
         box-sizing: border-box;
-    }
- 
-    .reseaux p {
-        color:#fff;
     }
  
     .reseaux img {
