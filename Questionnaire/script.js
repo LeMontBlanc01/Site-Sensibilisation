@@ -16,6 +16,12 @@ function loadQuizFlags() {
   }
 }
 
+function editQuizQuestion(questionId, newContent) {
+  const question = document.getElementById(questionId);
+  if (question) {
+    question.innerHTML = newContent;
+
+
 function saveQuizFlags() {
   localStorage.setItem(flagStorageKey, JSON.stringify(quizFlags));
 }

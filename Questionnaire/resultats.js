@@ -9,24 +9,7 @@ function formatDate(date) {
   });
 }
 
-function editQuestionReview(questionId, correct, selected, result) {
-  const quizReviewRaw = localStorage.getItem('quizReview');
-  let quizReview = [];
-  try {
-    quizReview = JSON.parse(quizReviewRaw || '[]');
-  } catch (e) {
-    console.error('Impossible de lire les détails du quiz', e);
-  }
-  const reviewEntry = {
-    questionId,
-    correct,
-    selected,
-    result
-  };
-  quizReview = quizReview.filter(entry => entry.questionId !== questionId);
-  quizReview.push(reviewEntry);
-  localStorage.setItem('quizReview', JSON.stringify(quizReview));
-}
+
 
 function createResultText(score, total, niveau, nom) {
   return `Prénom : ${nom}\nNiveau : ${niveau}\nScore : ${score} / ${total}\nDate : ${formatDate(new Date())}`;
