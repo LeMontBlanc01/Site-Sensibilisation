@@ -911,7 +911,7 @@ async function envoyerScore(nom, score, niveau, total) {
   }
 }
 
-
+// Met à jour la barre de progression et le texte associé
 function updateProgress(questionId) {
   const progress = document.getElementById('progress');
   const progressText = document.getElementById('progress-text');
