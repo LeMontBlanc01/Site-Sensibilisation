@@ -107,6 +107,7 @@ let quizFlags = {};
 let quizAnswers = {};
 let questionOrder = [];
 
+// Fonction pour charger l'état des flags de révision depuis le localStorage
 function loadQuizFlags() {
   try {
     quizFlags = JSON.parse(localStorage.getItem(pageConfig.flagStorageKey) || '{}');
@@ -116,6 +117,7 @@ function loadQuizFlags() {
   }
 }
 
+// Fonction pour charger l'état sauvegardé du quiz (score, review, réponses sélectionnées) depuis le localStorage
 function loadSavedQuizState() {
   try {
     quizReview = JSON.parse(localStorage.getItem('quizReview') || '[]');
@@ -133,10 +135,12 @@ function loadSavedQuizState() {
   }
 }
 
+// Fonction pour sauvegarder les réponses sélectionnées par l'utilisateur dans le localStorage, afin de les restaurer en cas de retour à une question déjà répondue
 function saveQuizAnswers() {
   localStorage.setItem(pageConfig.quizAnswersKey, JSON.stringify(quizAnswers));
 }
 
+// Fonction pour restaurer les réponses sélectionnées par l'utilisateur lorsqu'il revient sur une question déjà répondue, en cochant les cases correspondantes
 function restoreSavedAnswers(questionId) {
   const selected = quizAnswers[questionId];
   if (!Array.isArray(selected)) return;
@@ -146,12 +150,14 @@ function restoreSavedAnswers(questionId) {
   });
 }
 
+// Fonction pour recalculer le score à partir de la revue
 function recomputeScoreFromReview() {
   score = quizReview.filter(entry => entry.correct).length;
   updateScore();
   localStorage.setItem('quizScore', String(score));
 }
 
+// Fonction pour éditer le contenu d'une question, utilisée depuis la page de résultats pour permettre à l'utilisateur de corriger une question mal comprise
 function editQuizQuestion(questionId, newContent) {
   const question = document.getElementById(questionId);
   if (question) {
@@ -159,10 +165,12 @@ function editQuizQuestion(questionId, newContent) {
   }
 }
 
+// Fonction pour sauvegarder l'état des flags de révision dans le localStorage, afin de les restaurer lors du prochain chargement de la page
 function saveQuizFlags() {
   localStorage.setItem(pageConfig.flagStorageKey, JSON.stringify(quizFlags));
 }
 
+// Fonction pour mettre à jour l'interface d'une question en fonction de son état de flag de révision, en changeant le texte du bouton et la classe CSS de la question
 function updateFlagUI(questionId) {
   const question = document.getElementById(questionId);
   if (!question) return;
@@ -175,6 +183,7 @@ function updateFlagUI(questionId) {
   question.classList.toggle('flagged', flagged);
 }
 
+// Fonction pour initialiser les boutons de flag de révision sur chaque question, en les créant s'ils n'existent pas et en configurant leur comportement au clic pour basculer l'état de flag de la question et mettre à jour l'interface en conséquence
 function initFlagButtons() {
   document.querySelectorAll('.question').forEach(question => {
     const questionId = question.id;
@@ -244,7 +253,7 @@ function initRandomQuestions() {
 }
 
 function melangerReponses(questionId) {
-  if (['q15', 'q16', 'q17'].includes(questionId)) return; //Les questions ou il faut relier des éléments ne sont pas mélangées
+  if (['q15', 'q16', 'q17'].includes(questionId)) return; // Les questions ou il faut relier des éléments ne sont pas mélangées
 
   const conteneur = document.getElementById(questionId);
   const labels = Array.from(conteneur.querySelectorAll('label'));
@@ -330,11 +339,12 @@ async function goToResults() {
   window.location.href = 'resultats.html';
 }
 
+// Affiche la question dont l'id est passé en paramètre et cache les autres, tout en mettant à jour la barre de progression et en redimensionnant les canvas si nécessaire
 function showQuestion(id) {
-  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
-  document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
+  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  // On récupère toutes les divs de la classe "question" et on les cache
+  document.getElementById(id).style.display = 'block';  // On affiche uniquement la question dont l'id est passé en paramètre
   
-  //Vide les messages de résultat quand on change de question
+  // Vide les messages de résultat quand on change de question
   ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15', 'q16', 'q17'].forEach(qid => {
     if (id !== qid) {
       const r = document.getElementById(`result-${qid}`);
@@ -342,8 +352,8 @@ function showQuestion(id) {
     }
   });
 
-  //Les canvas ont une taille 0 quand leur question est cachée,
-  //il faut donc les redimensionner au moment où elles deviennent visibles
+  // Les canvas ont une taille 0 quand leur question est cachée,
+  // il faut donc les redimensionner au moment où elles deviennent visibles
   const match = id.match(/^q(15|16|17)$/);
   if (match) {
     const n = match[1];
@@ -490,62 +500,62 @@ function checkQ2() {
     checkQuestion('q2');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 3
+// Fonction qui permet de vérifier la réponse de la question 3
 function checkQ3() {
     checkQuestion('q3');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 4
+// Fonction qui permet de vérifier la réponse de la question 4
 function checkQ4() {
     checkQuestion('q4');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 5
+// Fonction qui permet de vérifier la réponse de la question 5
 function checkQ5() {
     checkQuestion('q5');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 6
+// Fonction qui permet de vérifier la réponse de la question 6
 function checkQ6() {
     checkQuestion('q6');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 7
+// Fonction qui permet de vérifier la réponse de la question 7
 function checkQ7() {
     checkQuestion('q7');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 8
+// Fonction qui permet de vérifier la réponse de la question 8
 function checkQ8() {
     checkQuestion('q8');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 9
+// Fonction qui permet de vérifier la réponse de la question 9
 function checkQ9() {
     checkQuestion('q9');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 10
+// Fonction qui permet de vérifier la réponse de la question 10
 function checkQ10() {
     checkQuestion('q10');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 11
+// Fonction qui permet de vérifier la réponse de la question 11
 function checkQ11() {
     checkQuestion('q11');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 12
+// Fonction qui permet de vérifier la réponse de la question 12
 function checkQ12() {
     checkQuestion('q12');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 13
+// Fonction qui permet de vérifier la réponse de la question 13
 function checkQ13() {
     checkQuestion('q13');
 }
 
-//Fonction qui permet de vérifier la réponse de la question 14
+// Fonction qui permet de vérifier la réponse de la question 14
 function checkQ14() {
     checkQuestion('q14');
 }
@@ -693,7 +703,7 @@ function onMauvaiseReponse17(result) {
   result.textContent = "Mauvaise réponse !Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.";
 }
 
-//Regroupe les callbacks par numéro de question pour les appeler dans la boucle
+// Regroupe les callbacks par numéro de question pour les appeler dans la boucle
 const onBonneReponse = {
   1: onBonneReponse1,
   2: onBonneReponse2,
@@ -734,16 +744,16 @@ const onMauvaiseReponse = {
   17: onMauvaiseReponse17,
 };
 
-//Canvas
+// Canvas
 
-//Ajuste la taille du canvas à celle de son conteneur
+// Ajuste la taille du canvas à celle de son conteneur
 function resizeCanvas(n) {
   const s = state[n];
   s.canvas.width  = document.getElementById(`conteneur${n}`).clientWidth;
   s.canvas.height = document.getElementById(`conteneur${n}`).clientHeight;
 }
 
-//Efface et redessine toutes les connexions (bleu = correct, rouge = incorrect)
+// Efface et redessine toutes les connexions (bleu = correct, rouge = incorrect)
 function redraw(n) {
   const { canvas, ctx, connexions } = state[n];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -831,7 +841,7 @@ window.addEventListener('load', () => {
   });
 });
 
-//Fonction qui permet de vérifier la réponse de la question 18
+// Fonction qui permet de vérifier la réponse de la question 18
 function checkQ18() {
     checkQuestion('q18');
 }
@@ -850,6 +860,7 @@ async function envoyerScore(nom, score, niveau, total) {
   }
 }
 
+// Met à jour la barre de progression et le texte associé
 function updateProgress(questionId) {
   const progress = document.getElementById('progress');
   const progressText = document.getElementById('progress-text');

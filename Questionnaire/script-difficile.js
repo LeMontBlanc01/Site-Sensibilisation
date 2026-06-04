@@ -2,13 +2,14 @@ console.log("JS chargé !"); // Affiche un message dans la console pour confirme
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Difficile";
-const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+const state = {};   // État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 let quizReview = [];
-const flagStorageKey = 'quizFlags_difficile';
-const quizAnswersKey = 'quizAnswers_difficile';
+const flagStorageKey = 'quizFlags_difficile'; // Clé de stockage pour les flags de révision
+const quizAnswersKey = 'quizAnswers_difficile'; // Clé de stockage pour les réponses sélectionnées par l'utilisateur, afin de les restaurer en cas de retour à une question déjà répondue
 let quizFlags = {};
 let quizAnswers = {};
 
+// Fonction pour charger l'état des flags de révision depuis le localStorage
 function loadQuizFlags() {
   try {
     quizFlags = JSON.parse(localStorage.getItem(flagStorageKey) || '{}');
@@ -18,6 +19,7 @@ function loadQuizFlags() {
   }
 }
 
+// Fonction pour charger l'état sauvegardé du quiz (score, review, réponses sélectionnées) depuis le localStorage
 function loadSavedQuizState() {
   try {
     quizReview = JSON.parse(localStorage.getItem('quizReview') || '[]');
@@ -35,10 +37,12 @@ function loadSavedQuizState() {
   }
 }
 
+// Fonction pour sauvegarder les réponses sélectionnées par l'utilisateur dans le localStorage, afin de les restaurer en cas de retour à une question déjà répondue
 function saveQuizAnswers() {
   localStorage.setItem(quizAnswersKey, JSON.stringify(quizAnswers));
 }
 
+// Fonction pour restaurer les réponses sélectionnées par l'utilisateur lorsqu'il revient sur une question déjà répondue, en cochant les cases correspondantes
 function restoreSavedAnswers(questionId) {
   const selected = quizAnswers[questionId];
   if (!Array.isArray(selected)) return;
@@ -48,16 +52,19 @@ function restoreSavedAnswers(questionId) {
   });
 }
 
+// Fonction pour recalculer le score à partir de la revue
 function recomputeScoreFromReview() {
   score = quizReview.filter(entry => entry.correct).length;
   updateScore();
   localStorage.setItem('quizScore', String(score));
 }
 
+// Fonction pour sauvegarder l'état des flags de révision dans le localStorage, afin de les restaurer lors du prochain chargement de la page
 function saveQuizFlags() {
   localStorage.setItem(flagStorageKey, JSON.stringify(quizFlags));
 }
 
+// Fonction pour mettre à jour l'interface d'une question en fonction de son état de flag de révision, en changeant le texte du bouton et la classe CSS de la question
 function updateFlagUI(questionId) {
   const question = document.getElementById(questionId);
   if (!question) return;
@@ -140,7 +147,7 @@ function initRandomQuestions() {
 }
 
 function melangerReponses(questionId) {
-  if (['q15', 'q16', 'q17'].includes(questionId)) return; //Les questions ou il faut relier des éléments ne sont pas mélangées
+  if (['q15', 'q16', 'q17'].includes(questionId)) return; // Les questions ou il faut relier des éléments ne sont pas mélangées
 
   const conteneur = document.getElementById(questionId);
   const labels = Array.from(conteneur.querySelectorAll('label'));
@@ -226,11 +233,11 @@ async function goToResults() {
 }
 
 function showQuestion(id) {
-  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
-  document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
+  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  // On récupère toutes les divs de la classe "question" et on les cache
+  document.getElementById(id).style.display = 'block';  // On affiche uniquement la question dont l'id est passé en paramètre
   updateProgress(id);
   
-  //Vide les messages de résultat quand on change de question
+  // Vide les messages de résultat quand on change de question
   ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15','q16','q17'].forEach(qid => {
     if (id !== qid) {
       const r = document.getElementById(`result-${qid}`);
@@ -238,8 +245,8 @@ function showQuestion(id) {
     }
   });
 
-  //Les canvas ont une taille 0 quand leur question est cachée,
-  //il faut donc les redimensionner au moment où elles deviennent visibles
+  // Les canvas ont une taille 0 quand leur question est cachée,
+  // il faut donc les redimensionner au moment où elles deviennent visibles
   const match = id.match(/^q(15|16|17)$/);
   if (match) {
     const n = match[1];
@@ -289,16 +296,16 @@ function showResult(id) {
   document.getElementById(id).style.display = 'block';
 }
 
-//Fonction qui permet de vérifier la réponse de la question 1
+// Fonction qui permet de vérifier la réponse de la question 1
 function checkQ1() {
-    const selected = Array.from(document.querySelectorAll('input[name="q1"]:checked'))  //Récupère toutes les cases cochées de la question 1 et on prend leur valeur
+    const selected = Array.from(document.querySelectorAll('input[name="q1"]:checked'))  // Récupère toutes les cases cochées de la question 1 et on prend leur valeur
                           .map(el => el.value);
 
-    const correct = ["sslv3"]; //La bonne réponse
+    const correct = ["sslv3"]; // La bonne réponse
 
-    const result = document.getElementById("result-q1");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q1");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Utiliser un protocole de chiffrement obsolète comme SSLv3 expose les données à des vulnérabilités connues, ce qui peut permettre à des attaquants d'intercepter et de déchiffrer les informations sensibles transmises entre le client et le serveur.";
         result.style.color = "green";
@@ -369,16 +376,16 @@ function exportResults() {
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
-//Fonction qui permet de vérifier la réponse de la question 2
+// Fonction qui permet de vérifier la réponse de la question 2
 function checkQ2() {
     const selected = Array.from(document.querySelectorAll('input[name="q2"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["sortie"];  //La bonne réponse
+    const correct = ["sortie"];  // La bonne réponse
 
-    const result = document.getElementById("result-q2");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q2");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Échapper les données avant l'affichage côté sortie est une mesure de sécurité essentielle pour prévenir les attaques de type cross-site scripting (XSS), car elle permet de neutraliser les caractères spéciaux et les scripts malveillants qui pourraient être injectés dans une page web, protégeant ainsi les utilisateurs contre l'exécution de code malveillant dans leur navigateur.";
         result.style.color = "green";
@@ -396,16 +403,16 @@ function checkQ2() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 3
+// Fonction qui permet de vérifier la réponse de la question 3
 function checkQ3() {
     const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["param", "validation"]; //Les bonnes réponses
+    const correct = ["param", "validation"]; // Les bonnes réponses
 
-    const result = document.getElementById("result-q3");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q3");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! La validation côté serveur est essentielle pour garantir la sécurité des applications web, car elle permet de vérifier et de filtrer les données entrantes, empêchant ainsi les attaques telles que l'injection SQL, les scripts intersites (XSS) et d'autres formes de manipulation de données malveillantes.";
         result.style.color = "green";
@@ -423,16 +430,16 @@ function checkQ3() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 4
+// Fonction qui permet de vérifier la réponse de la question 4
 function checkQ4() {
     const selected = Array.from(document.querySelectorAll('input[name="q4"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["oneway"]; //La bonne réponse
+    const correct = ["oneway"]; // La bonne réponse
 
-    const result = document.getElementById("result-q4");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q4");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Utiliser une fonction de hachage à sens unique pour stocker les mots de passe est une pratique de sécurité essentielle, car elle permet de protéger les mots de passe des utilisateurs en les transformant en une valeur hachée qui ne peut pas être inversée, ce qui rend extrêmement difficile pour les attaquants de récupérer les mots de passe d'origine même s'ils parviennent à accéder à la base de données.";
         result.style.color = "green";
@@ -450,17 +457,17 @@ function checkQ4() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 5
+// Fonction qui permet de vérifier la réponse de la question 5
 function checkQ5() {
     const selected = Array.from(document.querySelectorAll('input[name="q5"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["unique"]; //La bonne réponse
+    const correct = ["unique"]; // La bonne réponse
 
-    const result = document.getElementById("result-q5");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q5");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     if (arraysEqual(selected, correct)) {
-        score ++;
+        score++;
         recordQuestionReview('q5', selected, result.textContent, true);
         result.textContent = "Bonne réponse ! La caractéristique qui distingue un jeton anti-CSRF efficace est qu'il doit être unique pour chaque session ou chaque requête, ce qui permet de garantir que les requêtes proviennent bien de l'utilisateur légitime et de prévenir les attaques de type cross-site request forgery (CSRF) en rendant difficile pour les attaquants de prédire ou de réutiliser des jetons valides.";
         result.style.color = "green";
@@ -476,16 +483,16 @@ function checkQ5() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 6
+// Fonction qui permet de vérifier la réponse de la question 6
 function checkQ6() {
     const selected = Array.from(document.querySelectorAll('input[name="q6"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["csp"]; //La bonne réponse
+    const correct = ["csp"]; // La bonne réponse
 
-    const result = document.getElementById("result-q6");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q6");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Mettre en place une politique de sécurité du contenu (Content Security Policy - CSP) est une mesure efficace pour prévenir les attaques de type cross-site scripting (XSS), car elle permet de contrôler les sources de contenu autorisées et de limiter l'exécution de scripts malveillants sur une page web.";
         result.style.color = "green";
@@ -503,16 +510,16 @@ function checkQ6() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 7
+// Fonction qui permet de vérifier la réponse de la question 7
 function checkQ7() {
     const selected = Array.from(document.querySelectorAll('input[name="q7"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["nepasfaireconfiance"]; //La bonne réponse
+    const correct = ["nepasfaireconfiance"]; // La bonne réponse
 
-    const result = document.getElementById("result-q7");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q7");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Il est important de ne pas faire confiance à des sources d'information non vérifiées, car elles peuvent diffuser des informations erronées ou biaisées, ce qui peut conduire à de mauvaises décisions ou à la propagation de fausses informations.";
         result.style.color = "green";
@@ -530,16 +537,16 @@ function checkQ7() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 8
+// Fonction qui permet de vérifier la réponse de la question 8
 function checkQ8() {
     const selected = Array.from(document.querySelectorAll('input[name="q8"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["fournisseur"]; //La bonne réponse
+    const correct = ["fournisseur"]; // La bonne réponse
 
-    const result = document.getElementById("result-q8");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q8");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Faire confiance à un fournisseur de paiement réputé est un indicateur clé de la sécurité d'un site de commerce en ligne, car ces fournisseurs mettent en place des mesures de sécurité robustes pour protéger les informations de paiement des clients et réduire les risques de fraude.";
         result.style.color = "green";
@@ -557,16 +564,16 @@ function checkQ8() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 9
+// Fonction qui permet de vérifier la réponse de la question 9
 function checkQ9() {
     const selected = Array.from(document.querySelectorAll('input[name="q9"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["identite"]; //La bonne réponse
+    const correct = ["identite"]; // La bonne réponse
 
-    const result = document.getElementById("result-q9");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q9");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Vérifier l'identité du destinataire avant d'envoyer des informations sensibles est crucial pour éviter les attaques de phishing et les fraudes, car cela permet de s'assurer que les données sont envoyées à la bonne personne ou organisation et non à un imposteur malveillant.";
         result.style.color = "green";
@@ -584,16 +591,16 @@ function checkQ9() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 10
+// Fonction qui permet de vérifier la réponse de la question 10
 function checkQ10() {
     const selected = Array.from(document.querySelectorAll('input[name="q10"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["samekey"]; //La bonne réponse
+    const correct = ["samekey"]; // La bonne réponse
 
-    const result = document.getElementById("result-q10");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q10");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Utiliser la même clé de chiffrement pour plusieurs données sensibles peut compromettre la sécurité, car si un attaquant parvient à découvrir cette clé, il pourra potentiellement accéder à toutes les données protégées par cette clé, augmentant ainsi les risques de fuite d'informations et de compromission de la confidentialité.";
         result.style.color = "green";
@@ -611,16 +618,16 @@ function checkQ10() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 11
+// Fonction qui permet de vérifier la réponse de la question 11
 function checkQ11() {
     const selected = Array.from(document.querySelectorAll('input[name="q11"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["connaissance", "possession", "biometrie"]; //La bonne réponse
+    const correct = ["connaissance", "possession", "biometrie"]; // La bonne réponse
 
-    const result = document.getElementById("result-q11");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q11");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Les trois facteurs d'authentification sont : la connaissance (quelque chose que vous savez, comme un mot de passe), la possession (quelque chose que vous avez, comme un téléphone ou une carte) et la biométrie (quelque chose que vous êtes, comme une empreinte digitale ou une reconnaissance faciale). Utiliser plusieurs facteurs d'authentification renforce la sécurité en rendant plus difficile pour les attaquants de compromettre un compte.";
         result.style.color = "green";
@@ -638,16 +645,16 @@ function checkQ11() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 12
+// Fonction qui permet de vérifier la réponse de la question 12
 function checkQ12() {
     const selected = Array.from(document.querySelectorAll('input[name="q12"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["vault", "rotation"]; //La bonne réponse
+    const correct = ["vault", "rotation"]; // La bonne réponse
 
-    const result = document.getElementById("result-q12");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q12");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Utiliser un gestionnaire de mots de passe (vault) et pratiquer la rotation régulière des mots de passe sont des pratiques essentielles pour maintenir la sécurité des comptes en ligne, car elles permettent de stocker les mots de passe de manière sécurisée et de réduire les risques associés à l'utilisation prolongée d'un même mot de passe, qui peut être compromis au fil du temps.";
         result.style.color = "green";
@@ -665,16 +672,16 @@ function checkQ12() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 13
+// Fonction qui permet de vérifier la réponse de la question 13
 function checkQ13() {
     const selected = Array.from(document.querySelectorAll('input[name="q13"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["privilege"]; //La bonne réponse
+    const correct = ["privilege"]; // La bonne réponse
 
-    const result = document.getElementById("result-q13");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q13");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Un rootkit est un type de logiciel malveillant conçu pour donner à un attaquant un accès privilégié et furtif à un système compromis, souvent en cachant sa présence et en permettant à l'attaquant de contrôler le système à distance sans être détecté.";
         result.style.color = "green";
@@ -692,16 +699,16 @@ function checkQ13() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 14
+// Fonction qui permet de vérifier la réponse de la question 14
 function checkQ14() {
     const selected = Array.from(document.querySelectorAll('input[name="q14"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["pinning"]; //La bonne réponse
+    const correct = ["pinning"]; // La bonne réponse
 
-    const result = document.getElementById("result-q14");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q14");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Le pinning de certificat est une technique de sécurité qui consiste à associer un certificat spécifique à une application ou un site web, ce qui permet de prévenir les attaques de type man-in-the-middle en s'assurant que l'application ou le site web ne communique qu'avec des serveurs présentant le certificat attendu, même si un attaquant parvient à compromettre une autorité de certification ou à intercepter les communications.";
         result.style.color = "green";
@@ -720,15 +727,15 @@ function checkQ14() {
 }
 
 //Q15 / Q16 / Q17
-//Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
+// Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
 const configs = {
   15: { correctMap: { A: "1", B: "3", C: "2" } },
   16: { correctMap: { A: "1", B: "2", C: "3" } },
   17: { correctMap: { A: "3", B: "2", C: "1" } },
 };
 
-//Appelée quand toutes les connexions d'une question sont correctes
-//À compléter avec une explication personnalisée par question
+// Appelée quand toutes les connexions d'une question sont correctes
+// À compléter avec une explication personnalisée par question
 function onBonneReponse15(result) {
   result.innerHTML = "Bonne réponse !<br><small>Le reserve phishing est une menace où l'attaquant pousse la victime à initer elle-même le contact (ex: faux support). Le pretexting technique est une menace où l'attaquant se fait passer pour un outil ou un système automatisé. La session mirroring est une menace où l'attaquant observe passivement une session légitime via un accès détourné.</small>";
 }
@@ -753,7 +760,7 @@ function onMauvaiseReponse17(result) {
   result.innerHTML = "Mauvaise réponse !<br><small>Quand vous recevez une alerte &quot;nouvelle connexion depuis un pays étranger&quot; alors que vous êtes au bureau. C'est un test d'identifiants compromis sur un VPN ou un service exposé. Quand le Wi-Fi invité devient soudainement très lent, alors que peu de monde est connecté. C'est un scan ou une tentative d'exploitation depuis un appareil connecté au réseau invité. Quand un serveur interne commence à générer beaucoup plus de trafic sortant que d'habitude. C'est une exfiltration de données via un tunnel chiffré mis en place par un attaquant.</small>";
 }
 
-//Regroupe les callbacks par numéro de question pour les appeler dans la boucle
+// Regroupe les callbacks par numéro de question pour les appeler dans la boucle
 const onBonneReponse = {
   15: onBonneReponse15,
   16: onBonneReponse16,
@@ -766,16 +773,16 @@ const onMauvaiseReponse = {
   17: onMauvaiseReponse17,
 };
 
-//Canvas
+// Canvas
 
-//Ajuste la taille du canvas à celle de son conteneur
+// Ajuste la taille du canvas à celle de son conteneur
 function resizeCanvas(n) {
   const s = state[n];
   s.canvas.width  = document.getElementById(`conteneur${n}`).clientWidth;
   s.canvas.height = document.getElementById(`conteneur${n}`).clientHeight;
 }
 
-//Efface et redessine toutes les connexions (bleu = correct, rouge = incorrect)
+// Efface et redessine toutes les connexions (bleu = correct, rouge = incorrect)
 function redraw(n) {
   const { canvas, ctx, connexions } = state[n];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -807,7 +814,7 @@ function redraw(n) {
   resizeCanvas(n);
   window.addEventListener("resize", () => { resizeCanvas(n); redraw(n); });
 
-  //Clic sur un bloc gauche : le sélectionne comme point de départ
+  // Clic sur un bloc gauche : le sélectionne comme point de départ
   document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(bloc => {
     bloc.addEventListener("click", () => {
       document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(b => b.classList.remove("selected"));
@@ -816,12 +823,12 @@ function redraw(n) {
     });
   });
 
-  //Clic sur un bloc droit : crée la connexion avec le bloc gauche sélectionné
+  // Clic sur un bloc droit : crée la connexion avec le bloc gauche sélectionné
   document.querySelectorAll(`.droite${n} .bloc${n}`).forEach(bloc => {
     bloc.addEventListener("click", () => {
       if (!state[n].selected) return;
 
-      //Remplace une éventuelle connexion existante pour ce bloc gauche
+      // Remplace une éventuelle connexion existante pour ce bloc gauche
       state[n].connexions = state[n].connexions.filter(c => c.left !== state[n].selected);
       state[n].connexions.push({ left: state[n].selected, right: bloc.dataset.id, correct: null });
 
@@ -831,7 +838,7 @@ function redraw(n) {
     });
   });
 
-  //Validation : vérifie chaque connexion et met à jour score + affichage
+  // Validation : vérifie chaque connexion et met à jour score + affichage
   document.getElementById(`btn-valider-q${n}`).addEventListener("click", () => {
     const { correctMap } = configs[n];
     let bonnes = 0;
@@ -840,18 +847,18 @@ function redraw(n) {
       c.correct = c.right === correctMap[c.left];
       if (c.correct) bonnes++;
     });
-    redraw(n); //Redessine en rouge (faux) ou bleu (vrai)
+    redraw(n); // Redessine en rouge (faux) ou bleu (vrai)
 
     const result = document.getElementById(`result-q${n}`);
     if (bonnes === 3) {
-      onBonneReponse[n](result); //Appelle la fonction spécifique à la question
+      onBonneReponse[n](result); // Appelle la fonction spécifique à la question
       result.style.color = "green";
       score++;
       recordQuestionReview(`q${n}`, [], result.textContent, true);
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
       document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
     } else {
-      onMauvaiseReponse[n](result); //Appelle la fonction spécifique à la question
+      onMauvaiseReponse[n](result); // Appelle la fonction spécifique à la question
       result.style.color = "red";
       recordQuestionReview(`q${n}`, [], result.textContent, false);
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
@@ -861,16 +868,16 @@ function redraw(n) {
   });
 });
 
-//Fonction qui permet de vérifier la réponse de la question 18
+// Fonction qui permet de vérifier la réponse de la question 18
 function checkQ18() {
     const selected = Array.from(document.querySelectorAll('input[name="q18"]:checked'))
                           .map(el => el.value);
 
-    const correct = ["chaine"]; //La bonne réponse
+    const correct = ["chaine"]; // La bonne réponse
 
-    const result = document.getElementById("result-q18");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q18");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! L'action qui est la plus pertinente pour vérifier la validité d'un certificat TLS est de vérifier la chaîne de certification, c'est-à-dire s'assurer que le certificat présenté par le serveur est émis par une autorité de certification de confiance et que la chaîne de certificats est complète et valide.";
         result.style.color = "green";
@@ -902,6 +909,7 @@ async function envoyerScore(nom, score, niveau, total) {
   }
 }
 
+// Met à jour la barre de progression et le texte associé
 function updateProgress(questionId) {
   const progress = document.getElementById('progress');
   const progressText = document.getElementById('progress-text');
