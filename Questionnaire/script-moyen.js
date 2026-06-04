@@ -2,7 +2,7 @@ console.log("JS chargé !"); // Affiche un message dans la console pour confirme
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Moyen";
-const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+const state = {};   // État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 let quizReview = [];
 const flagStorageKey = 'quizFlags_moyen'; // Clé de stockage pour les flags de révision
 const quizAnswersKey = 'quizAnswers_moyen'; // Clé de stockage pour les réponses sélectionnées par l'utilisateur, afin de les restaurer en cas de retour à une question déjà répondue
@@ -81,7 +81,7 @@ function initFlagCheckboxes() {
   document.querySelectorAll('.question').forEach(question => {
     const questionId = question.id;
 
-    // create a small button placed after the validate button
+    // Ajouter un bouton de flag de révision s'il n'existe pas déjà pour cette question
     if (!question.querySelector('.flag-btn')) {
       const validerBtn = document.getElementById(`btn-valider-${questionId}`);
       const flagBtn = document.createElement('button');
@@ -94,7 +94,7 @@ function initFlagCheckboxes() {
         updateFlagUI(questionId);
       });
 
-      // insert right after the validate button, otherwise at the end
+      // Insérer le bouton de flag après le bouton de validation s'il existe, sinon à la fin de la question
       if (validerBtn && validerBtn.parentNode) {
         validerBtn.parentNode.insertBefore(flagBtn, validerBtn.nextSibling);
       } else {
@@ -102,7 +102,7 @@ function initFlagCheckboxes() {
       }
     }
 
-    // set initial state
+    // Mettre à jour l'interface du bouton de flag en fonction de l'état actuel
     const btn = question.querySelector('.flag-btn');
     if (btn) {
       btn.textContent = Boolean(quizFlags[questionId]) ? 'Retirer le marqueur' : 'Marquer cette question à revoir';
@@ -150,7 +150,7 @@ function initRandomQuestions() {
 }
 
 function melangerReponses(questionId) {
-  if (['q15', 'q16', 'q17'].includes(questionId)) return; //Les questions ou il faut relier des éléments ne sont pas mélangées
+  if (['q15', 'q16', 'q17'].includes(questionId)) return; // Les questions ou il faut relier des éléments ne sont pas mélangées
 
   const conteneur = document.getElementById(questionId);
   const labels = Array.from(conteneur.querySelectorAll('label'));
@@ -236,11 +236,11 @@ async function goToResults() {
 }
 
 function showQuestion(id) {
-  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
-  document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
+  document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  // On récupère toutes les divs de la classe "question" et on les cache
+  document.getElementById(id).style.display = 'block';  // On affiche uniquement la question dont l'id est passé en paramètre
   updateProgress(id);
   
-  //Vide les messages de résultat quand on change de question
+  // Vide les messages de résultat quand on change de question
   ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15','q16','q17'].forEach(qid => {
     if (id !== qid) {
       const r = document.getElementById(`result-${qid}`);
@@ -248,8 +248,8 @@ function showQuestion(id) {
     }
   });
 
-  //Les canvas ont une taille 0 quand leur question est cachée,
-  //il faut donc les redimensionner au moment où elles deviennent visibles
+  // Les canvas ont une taille 0 quand leur question est cachée,
+  // il faut donc les redimensionner au moment où elles deviennent visibles
   const match = id.match(/^q(15|16|17)$/);
   if (match) {
     const n = match[1];
@@ -299,12 +299,12 @@ function showResult(id) {
   document.getElementById(id).style.display = 'block';
 }
 
-//Fonction qui permet de vérifier la réponse de la question 1
+// Fonction qui permet de vérifier la réponse de la question 1
 function checkQ1() {
   const selected = Array.from(document.querySelectorAll('input[name="q1"]:checked'))
               .map(el => el.value);
 
-  const correct = ["12"]; //La bonne réponse: 12 caractères
+  const correct = ["12"]; // La bonne réponse: 12 caractères
 
   const result = document.getElementById("result-q1");
 
@@ -378,16 +378,16 @@ function exportResults() {
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
-//Fonction qui permet de vérifier la réponse de la question 2
+// Fonction qui permet de vérifier la réponse de la question 2
 function checkQ2() {
     const selected = Array.from(document.querySelectorAll('input[name="q2"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["segmentation"];  //La bonne réponse: la segmentation réseau
+  const correct = ["segmentation"];  // La bonne réponse: la segmentation réseau
 
-    const result = document.getElementById("result-q2");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q2");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! La segmentation réseau permet de diviser un réseau en sous-réseaux plus petits, ce qui améliore la sécurité en limitant la propagation d'une attaque.";
         result.style.color = "green";
@@ -405,16 +405,16 @@ function checkQ2() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 3
+// Fonction qui permet de vérifier la réponse de la question 3
 function checkQ3() {
     const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["2fa", "unique"]; //Les bonnes réponses: 2FA + mot de passe unique
+  const correct = ["2fa", "unique"]; // Les bonnes réponses: 2FA + mot de passe unique
 
-    const result = document.getElementById("result-q3");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q3");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) ajoute une couche de sécurité supplémentaire en demandant une preuve d'identité supplémentaire, et l'utilisation de mots de passe uniques pour chaque compte réduit le risque d'accès non autorisé en cas de fuite de données.";
         result.style.color = "green";
@@ -432,16 +432,16 @@ function checkQ3() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 4
+// Fonction qui permet de vérifier la réponse de la question 4
 function checkQ4() {
     const selected = Array.from(document.querySelectorAll('input[name="q4"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["urgent"]; //La bonne réponse: demande urgente
+  const correct = ["urgent"]; // La bonne réponse: demande urgente
 
-    const result = document.getElementById("result-q4");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q4");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Une demande urgente est un indicateur classique d'une tentative de phishing, car les attaquants cherchent à créer un sentiment d'urgence pour inciter les victimes à agir rapidement et sans réfléchir.";
         result.style.color = "green";
@@ -459,14 +459,14 @@ function checkQ4() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 5
+// Fonction qui permet de vérifier la réponse de la question 5
 function checkQ5() {
     const selected = Array.from(document.querySelectorAll('input[name="q5"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["maj", "permissions"]; //Bonnes réponses: mises à jour + restreindre permissions
+  const correct = ["maj", "permissions"]; // Bonnes réponses: mises à jour + restreindre permissions
 
-    const result = document.getElementById("result-q5");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q5");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     if (arraysEqual(selected, correct)) {
         score ++;
@@ -485,16 +485,16 @@ function checkQ5() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 6
+// Fonction qui permet de vérifier la réponse de la question 6
 function checkQ6() {
     const selected = Array.from(document.querySelectorAll('input[name="q6"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["stocker"]; //La bonne réponse: stocker et générer des mots de passe
+  const correct = ["stocker"]; // La bonne réponse: stocker et générer des mots de passe
 
-    const result = document.getElementById("result-q6");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q6");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Un gestionnaire de mots de passe permet de stocker et de générer des mots de passe forts et uniques pour chaque compte, ce qui améliore considérablement la sécurité en réduisant le risque de réutilisation de mots de passe et en facilitant la gestion des identifiants.";
         result.style.color = "green";
@@ -512,16 +512,16 @@ function checkQ6() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 7
+// Fonction qui permet de vérifier la réponse de la question 7
 function checkQ7() {
     const selected = Array.from(document.querySelectorAll('input[name="q7"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["rdp"]; //La bonne réponse: des connexions RDP inhabituelles entre machines internes, indicateur d'une attaque par mouvement latéral
+  const correct = ["rdp"]; // La bonne réponse: des connexions RDP inhabituelles entre machines internes, indicateur d'une attaque par mouvement latéral
 
-    const result = document.getElementById("result-q7");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q7");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Des connexions RDP inhabituelles entre machines internes peuvent être un indicateur d'une attaque par mouvement latéral, où un attaquant qui a compromis une machine tente de se déplacer latéralement à travers le réseau pour accéder à d'autres ressources.";
         result.style.color = "green";
@@ -539,16 +539,16 @@ function checkQ7() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 8
+// Fonction qui permet de vérifier la réponse de la question 8
 function checkQ8() {
     const selected = Array.from(document.querySelectorAll('input[name="q8"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["https", "icone"]; //Bonnes réponses: HTTPS et icône cadenas
+  const correct = ["https", "icone"]; // Bonnes réponses: HTTPS et icône cadenas
 
-    const result = document.getElementById("result-q8");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q8");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! L'utilisation de HTTPS et l'indication d'un icône cadenas dans la barre d'adresse sont des signes que la connexion est sécurisée.";
         result.style.color = "green";
@@ -566,16 +566,16 @@ function checkQ8() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 9
+// Fonction qui permet de vérifier la réponse de la question 9
 function checkQ9() {
     const selected = Array.from(document.querySelectorAll('input[name="q9"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["trafic", "inconnus", "ports"]; //Les bonnes réponses: trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissent sur le réseau, des ports ouverts inattendus sur plusieurs machines
+  const correct = ["trafic", "inconnus", "ports"]; // Les bonnes réponses: trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissent sur le réseau, des ports ouverts inattendus sur plusieurs machines
 
-    const result = document.getElementById("result-q9");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q9");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Un trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissant sur le réseau, et des ports ouverts inattendus sur plusieurs machines sont tous des indicateurs potentiels d'une compromission du réseau.";
         result.style.color = "green";
@@ -593,16 +593,16 @@ function checkQ9() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 10
+// Fonction qui permet de vérifier la réponse de la question 10
 function checkQ10() {
     const selected = Array.from(document.querySelectorAll('input[name="q10"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["permissions", "editeur", "taille"]; //Bonnes réponses indicatrices
+  const correct = ["permissions", "editeur", "taille"]; // Bonnes réponses indicatrices
 
-    const result = document.getElementById("result-q10");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q10");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Des permissions inhabituelles, un éditeur inconnu, ou une taille de fichier anormalement grande ou petite peuvent être des indicateurs d'une compromission ou d'une activité malveillante.";
         result.style.color = "green";
@@ -620,16 +620,16 @@ function checkQ10() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 11
+// Fonction qui permet de vérifier la réponse de la question 11
 function checkQ11() {
     const selected = Array.from(document.querySelectorAll('input[name="q11"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["least"]; //La bonne réponse: moindre privilège
+  const correct = ["least"]; // La bonne réponse: moindre privilège
 
-    const result = document.getElementById("result-q11");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q11");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Le principe du moindre privilège consiste à accorder aux utilisateurs uniquement les permissions nécessaires pour accomplir leurs tâches, réduisant ainsi les risques.";
         result.style.color = "green";
@@ -647,16 +647,16 @@ function checkQ11() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 12
+// Fonction qui permet de vérifier la réponse de la question 12
 function checkQ12() {
     const selected = Array.from(document.querySelectorAll('input[name="q12"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["local+cloud"]; //La bonne réponse: copie locale + cloud chiffré
+  const correct = ["local+cloud"]; // La bonne réponse: copie locale + cloud chiffré
 
-    const result = document.getElementById("result-q12");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q12");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Stocker une copie locale des données et une copie dans le cloud chiffré offre une protection contre la perte de données due à des incidents locaux (comme un vol ou un incendie) tout en assurant que les données sont sécurisées contre les accès non autorisés grâce au chiffrement.";
         result.style.color = "green";
@@ -674,16 +674,16 @@ function checkQ12() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 13
+// Fonction qui permet de vérifier la réponse de la question 13
 function checkQ13() {
     const selected = Array.from(document.querySelectorAll('input[name="q13"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["changer"]; //La bonne réponse: révoquer les sessions et changer les mots de passe
+  const correct = ["changer"]; // La bonne réponse: révoquer les sessions et changer les mots de passe
 
-    const result = document.getElementById("result-q13");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q13");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Révoquer les sessions et changer les mots de passe est une mesure de sécurité importante en cas de compromission.";
         result.style.color = "green";
@@ -701,16 +701,16 @@ function checkQ13() {
     updateScore();
 }
 
-//Fonction qui permet de vérifier la réponse de la question 14
+// Fonction qui permet de vérifier la réponse de la question 14
 function checkQ14() {
     const selected = Array.from(document.querySelectorAll('input[name="q14"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["protection"]; //La bonne réponse: protéger les données en cas de vol
+  const correct = ["protection"]; // La bonne réponse: protéger les données en cas de vol
 
-    const result = document.getElementById("result-q14");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q14");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! Protéger les données en cas de vol est crucial pour éviter que des informations sensibles ne tombent entre de mauvaises mains, ce qui peut entraîner des conséquences graves comme le vol d'identité.";
         result.style.color = "green";
@@ -729,15 +729,15 @@ function checkQ14() {
 }
 
 //Q15 / Q16 / Q17
-//Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
+// Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
 const configs = {
   15: { correctMap: { A: "1", B: "2", C: "3" } },
   16: { correctMap: { A: "3", B: "2", C: "1" } },
   17: { correctMap: { A: "2", B: "1", C: "3" } },
 };
 
-//Appelée quand toutes les connexions d'une question sont correctes
-//À compléter avec une explication personnalisée par question
+// Appelée quand toutes les connexions d'une question sont correctes
+// À compléter avec une explication personnalisée par question
 function onBonneReponse15(result) {
   result.innerHTML = "Bonne réponse !<br><small>Les données personnelles sont des informations permettant d'identifier une personne, même indirectement. Les données sensibles sont des catégories nécessitant une protection renforcée (santé, opinions, biométrie...). Les données confidentielles internes sont des informations métier non publiques (procédures, contrats, architecture IT).</small>";
 }
@@ -762,7 +762,7 @@ function onMauvaiseReponse17(result) {
   result.innerHTML = "Mauvaise réponse !<br><small>Le VPN (réseau virtuel) chiffre le traffic entre votre appareil et un serveur distant, il masque votre IP mais ne rend pas anonyme. Le chiffrement de bout en bout (E2EE) garantit que seuls l'expéditeur et le destinataire peuvent lire le message. Le certificat SSL/TLS (cadenas HTTPS) chiffre les données en transit entre votre navigateur et le site web, il ne garantit pas que le site est légitime.</small>";
 }
 
-//Regroupe les callbacks par numéro de question pour les appeler dans la boucle
+// Regroupe les callbacks par numéro de question pour les appeler dans la boucle
 const onBonneReponse = {
   15: onBonneReponse15,
   16: onBonneReponse16,
@@ -775,16 +775,16 @@ const onMauvaiseReponse = {
   17: onMauvaiseReponse17,
 };
 
-//Canvas
+// Canvas
 
-//Ajuste la taille du canvas à celle de son conteneur
+// Ajuste la taille du canvas à celle de son conteneur
 function resizeCanvas(n) {
   const s = state[n];
   s.canvas.width  = document.getElementById(`conteneur${n}`).clientWidth;
   s.canvas.height = document.getElementById(`conteneur${n}`).clientHeight;
 }
 
-//Efface et redessine toutes les connexions (bleu = correct, rouge = incorrect)
+// Efface et redessine toutes les connexions (bleu = correct, rouge = incorrect)
 function redraw(n) {
   const { canvas, ctx, connexions } = state[n];
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -816,7 +816,7 @@ function redraw(n) {
   resizeCanvas(n);
   window.addEventListener("resize", () => { resizeCanvas(n); redraw(n); });
 
-  //Clic sur un bloc gauche : le sélectionne comme point de départ
+  // Clic sur un bloc gauche : le sélectionne comme point de départ
   document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(bloc => {
     bloc.addEventListener("click", () => {
       document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(b => b.classList.remove("selected"));
@@ -825,12 +825,12 @@ function redraw(n) {
     });
   });
 
-  //Clic sur un bloc droit : crée la connexion avec le bloc gauche sélectionné
+  // Clic sur un bloc droit : crée la connexion avec le bloc gauche sélectionné
   document.querySelectorAll(`.droite${n} .bloc${n}`).forEach(bloc => {
     bloc.addEventListener("click", () => {
       if (!state[n].selected) return;
 
-      //Remplace une éventuelle connexion existante pour ce bloc gauche
+      // Remplace une éventuelle connexion existante pour ce bloc gauche
       state[n].connexions = state[n].connexions.filter(c => c.left !== state[n].selected);
       state[n].connexions.push({ left: state[n].selected, right: bloc.dataset.id, correct: null });
 
@@ -840,7 +840,7 @@ function redraw(n) {
     });
   });
 
-  //Validation : vérifie chaque connexion et met à jour score + affichage
+  // Validation : vérifie chaque connexion et met à jour score + affichage
   document.getElementById(`btn-valider-q${n}`).addEventListener("click", () => {
     const { correctMap } = configs[n];
     let bonnes = 0;
@@ -849,18 +849,18 @@ function redraw(n) {
       c.correct = c.right === correctMap[c.left];
       if (c.correct) bonnes++;
     });
-    redraw(n); //Redessine en rouge (faux) ou bleu (vrai)
+    redraw(n); // Redessine en rouge (faux) ou bleu (vrai)
 
     const result = document.getElementById(`result-q${n}`);
     if (bonnes === 3) {
-      onBonneReponse[n](result); //Appelle la fonction spécifique à la question
+      onBonneReponse[n](result); // Appelle la fonction spécifique à la question
       result.style.color = "green";
       score++;
       recordQuestionReview(`q${n}`, [], result.textContent, true);
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
       document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
     } else {
-      onMauvaiseReponse[n](result); //Appelle la fonction spécifique à la question
+      onMauvaiseReponse[n](result); // Appelle la fonction spécifique à la question
       result.style.color = "red";
       recordQuestionReview(`q${n}`, [], result.textContent, false);
       document.getElementById(`btn-valider-q${n}`).style.display = "none";
@@ -870,16 +870,16 @@ function redraw(n) {
   });
 });
 
-//Fonction qui permet de vérifier la réponse de la question 18
+// Fonction qui permet de vérifier la réponse de la question 18
 function checkQ18() {
     const selected = Array.from(document.querySelectorAll('input[name="q18"]:checked'))
                           .map(el => el.value);
 
-  const correct = ["compromission"]; //La bonne réponse: la compromission de la clé maître donnant accès à l'ensemble du coffre
+  const correct = ["compromission"]; // La bonne réponse: la compromission de la clé maître donnant accès à l'ensemble du coffre
 
-    const result = document.getElementById("result-q18");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
+    const result = document.getElementById("result-q18");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    // Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
         result.textContent = "Bonne réponse ! La compromission de la clé maître donnant accès à l'ensemble du coffre est un risque majeur en matière de sécurité.";
         result.style.color = "green";
