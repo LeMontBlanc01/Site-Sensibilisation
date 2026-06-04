@@ -1,17 +1,115 @@
-console.log("JS chargé !"); // Affiche un message dans la console pour confirmer que le fichier JS est bien chargé
+console.log("JS chargé !");
+
+// Déterminer la page actuelle et charger la configuration correspondante
+let joueurNom = "Anonyme";
+try {
+  const nom = prompt("Entrez votre prénom :");
+  if (nom) joueurNom = nom;
+} catch (e) {
+  console.warn("prompt() not available:", e);
+}
+
+const pageName = window.location.pathname.split('/').pop().toLowerCase();
+
+const pageConfigs = {
+  'facile.html': {
+    niveau: 'Facile',
+    lastQuizPage: 'facile.html',
+    flagStorageKey: 'quizFlags_facile',
+    quizAnswersKey: 'quizAnswers_facile',
+    questions: {
+      q1: { correct: ['g7!pl9@vq2#rt'] },
+      q2: { correct: ['oui'] },
+      q3: { correct: ['separez', 'utilisez1'] },
+      q4: { correct: ['vpn'] },
+      q5: { correct: ['pjmail', 'sujetmail', 'adressemail', 'lienmail'] },
+      q6: { correct: ['failles'] },
+      q7: { correct: ['signaler'] },
+      q8: { correct: ['gestionnaire'] },
+      q9: { correct: ['infection'] },
+      q10: { correct: ['adresse'] },
+      q11: { correct: ['2fa'] },
+      q12: { correct: ['regulier'] },
+      q13: { correct: ['source'] },
+      q14: { correct: ['malware'] },
+      q18: { correct: ['change'] },
+    },
+    matchingQuestions: {
+      15: { correctMap: { A: '3', B: '1', C: '2' } },
+      16: { correctMap: { A: '2', B: '1', C: '3' } },
+      17: { correctMap: { A: '2', B: '1', C: '3' } },
+    },
+  },
+  'moyen.html': {
+    niveau: 'Moyen',
+    lastQuizPage: 'moyen.html',
+    flagStorageKey: 'quizFlags_moyen',
+    quizAnswersKey: 'quizAnswers_moyen',
+    questions: {
+      q1: { correct: ['12'] },
+      q2: { correct: ['segmentation'] },
+      q3: { correct: ['2fa', 'unique'] },
+      q4: { correct: ['urgent'] },
+      q5: { correct: ['maj', 'permissions'] },
+      q6: { correct: ['stocker'] },
+      q7: { correct: ['rdp'] },
+      q8: { correct: ['https', 'icone'] },
+      q9: { correct: ['trafic', 'inconnus', 'ports'] },
+      q10: { correct: ['permissions', 'editeur', 'taille'] },
+      q11: { correct: ['least'] },
+      q12: { correct: ['local+cloud'] },
+      q13: { correct: ['changer'] },
+      q14: { correct: ['protection'] },
+      q18: { correct: ['compromission'] },
+    },
+    matchingQuestions: {
+      15: { correctMap: { A: '1', B: '2', C: '3' } },
+      16: { correctMap: { A: '3', B: '2', C: '1' } },
+      17: { correctMap: { A: '2', B: '1', C: '3' } },
+    },
+  },
+  'difficile.html': {
+    niveau: 'Difficile',
+    lastQuizPage: 'difficile.html',
+    flagStorageKey: 'quizFlags_difficile',
+    quizAnswersKey: 'quizAnswers_difficile',
+    questions: {
+      q1: { correct: ['sslv3'] },
+      q2: { correct: ['sortie'] },
+      q3: { correct: ['param', 'validation'] },
+      q4: { correct: ['oneway'] },
+      q5: { correct: ['unique'] },
+      q6: { correct: ['csp'] },
+      q7: { correct: ['nepasfaireconfiance'] },
+      q8: { correct: ['fournisseur'] },
+      q9: { correct: ['identite'] },
+      q10: { correct: ['samekey'] },
+      q11: { correct: ['connaissance', 'possession', 'biometrie'] },
+      q12: { correct: ['vault', 'rotation'] },
+      q13: { correct: ['privilege'] },
+      q14: { correct: ['pinning'] },
+      q18: { correct: ['chaine'] },
+    },
+    matchingQuestions: {
+      15: { correctMap: { A: '1', B: '3', C: '2' } },
+      16: { correctMap: { A: '1', B: '2', C: '3' } },
+      17: { correctMap: { A: '3', B: '2', C: '1' } },
+    },
+  },
+};
+
+const pageConfig = pageConfigs[pageName] || pageConfigs['facile.html'];
+
 let score = 0;
-const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
-const quizNiveau = "Facile";
-const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+const state = {};
 let quizReview = [];
-const flagStorageKey = 'quizFlags_facile';
-const quizAnswersKey = 'quizAnswers_facile';
 let quizFlags = {};
 let quizAnswers = {};
+let questionOrder = [];
 
 function loadQuizFlags() {
   try {
-    quizFlags = JSON.parse(localStorage.getItem(flagStorageKey) || '{}');
+    quizFlags = JSON.parse(localStorage.getItem(pageConfig.flagStorageKey) || '{}');
   } catch (e) {
     quizFlags = {};
     console.error('Impossible de charger l\'état des flags', e);
@@ -25,7 +123,7 @@ function loadSavedQuizState() {
     quizReview = [];
   }
   try {
-    quizAnswers = JSON.parse(localStorage.getItem(quizAnswersKey) || '{}');
+    quizAnswers = JSON.parse(localStorage.getItem(pageConfig.quizAnswersKey) || '{}');
   } catch (e) {
     quizAnswers = {};
   }
@@ -36,7 +134,7 @@ function loadSavedQuizState() {
 }
 
 function saveQuizAnswers() {
-  localStorage.setItem(quizAnswersKey, JSON.stringify(quizAnswers));
+  localStorage.setItem(pageConfig.quizAnswersKey, JSON.stringify(quizAnswers));
 }
 
 function restoreSavedAnswers(questionId) {
@@ -62,7 +160,7 @@ function editQuizQuestion(questionId, newContent) {
 }
 
 function saveQuizFlags() {
-  localStorage.setItem(flagStorageKey, JSON.stringify(quizFlags));
+  localStorage.setItem(pageConfig.flagStorageKey, JSON.stringify(quizFlags));
 }
 
 function updateFlagUI(questionId) {
@@ -110,7 +208,6 @@ function initFlagButtons() {
 }
 
 // Ordre aléatoire des questions
-let questionOrder = [];
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -194,7 +291,7 @@ window.addEventListener('load', () => {
 });
 
 async function goToResults() {
-  localStorage.setItem('lastQuizPage', 'facile.html');
+  localStorage.setItem('lastQuizPage', pageConfig.lastQuizPage);
   // Vérifier que le score affiché correspond au score calculé
   const scoreEl = document.getElementById('score');
   let displayed = score;
@@ -211,7 +308,7 @@ async function goToResults() {
   const confirmed = confirm('Voulez-vous définitivement valider vos réponses et souhaitez-vous envoyer votre score au serveur ?');
   if (confirmed) {
     try {
-      await envoyerScore(joueurNom, score, quizNiveau, 18);
+      await envoyerScore(joueurNom, score, pageConfig.niveau, 18);
     } catch (e) {
       console.error('Erreur lors de l\'envoi du score :', e);
     }
@@ -219,13 +316,13 @@ async function goToResults() {
 
   localStorage.setItem('quizReview', JSON.stringify(quizReview));
   localStorage.setItem('quizScore', String(score));
-  localStorage.setItem('quizNiveau', quizNiveau);
+  localStorage.setItem('quizNiveau', pageConfig.niveau);
   localStorage.setItem('quizNom', joueurNom);
   localStorage.setItem('quizTotal', '18');
   // Enregistrer dans l'historique global des résultats
   try {
     const hist = JSON.parse(localStorage.getItem('quizResults') || '[]');
-    hist.push({ nom: joueurNom, niveau: quizNiveau, score: score, total: 18, date: new Date().toISOString() });
+    hist.push({ nom: joueurNom, niveau: pageConfig.niveau, score: score, total: 18, date: new Date().toISOString() });
     localStorage.setItem('quizResults', JSON.stringify(hist));
   } catch (e) {
     console.error('Impossible de sauvegarder l\'historique des résultats', e);
@@ -296,32 +393,39 @@ function showResult(id) {
   updateProgress(id);
 }
 
-//Fonction qui permet de vérifier la réponse de la question 1
-function checkQ1() {
-    const selected = Array.from(document.querySelectorAll('input[name="q1"]:checked'))  //Récupère toutes les cases cochées de la question 1 et on prend leur valeur
+// Fonction générique de vérification pour les questions 1-14 et 18
+function checkQuestion(questionId) {
+    // Vérifier que pageConfig est défini
+    if (typeof pageConfig === 'undefined') {
+        console.error('pageConfig is not defined yet. Page config:', typeof pageConfig);
+        alert('Le script n\'est pas encore chargé. Veuillez attendre.');
+        return;
+    }
+    
+    const selected = Array.from(document.querySelectorAll(`input[name="${questionId}"]:checked`))
                           .map(el => el.value);
-
-    const correct = ["g7!pl9@vq2#rt"]; //La bonne réponse
-
-    const result = document.getElementById("result-q1");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
+    
+    const correct = pageConfig.questions[questionId].correct;
+    const result = document.getElementById(`result-${questionId}`);
+    
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Un bon mot de passe doit contenir au moins 12 caractères, avec une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
+        result.textContent = "Bonne réponse !";
         result.style.color = "green";
         score++;
-        recordQuestionReview('q1', selected, result.textContent, true);
-        document.getElementById("btn-valider-q1").style.display = "none";
-        document.getElementById("btn-suivant-q1").style.display = "inline-block";
+        recordQuestionReview(questionId, selected, result.textContent, true);
+        document.getElementById(`btn-valider-${questionId}`).style.display = "none";
+        document.getElementById(`btn-suivant-${questionId}`).style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse. Un bon mot de passe doit être long et complexe, contenant une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
+        result.textContent = "Mauvaise réponse.";
         result.style.color = "red";
-        recordQuestionReview('q1', selected, result.textContent, false);
-        document.getElementById("btn-valider-q1").style.display = "none";
-        setTimeout(() => showNextQuestion('q1'), 2000);
+        recordQuestionReview(questionId, selected, result.textContent, false);
+        document.getElementById(`btn-valider-${questionId}`).style.display = "none";
+        setTimeout(() => showNextQuestion(questionId), 2000);
     }
     updateScore();
 }
+
+
 
 
 // a = réponses cochées par l'utilisateur
@@ -349,7 +453,7 @@ function getQuestionSummary(questionNumber) {
 }
 
 function exportResults() {
-    const niveau = "Facile";
+    const niveau = pageConfig.niveau;
     const lines = [
         `Nom : ${joueurNom}`,
         `Niveau : ${niveau}`,
@@ -376,398 +480,255 @@ function exportResults() {
     window.location.href = `mailto:?subject=${subject}&body=${body}`;
 }
 
+//Fonction qui permet de vérifier la réponse de la question 1
+function checkQ1() {
+    checkQuestion('q1');
+}
+
 //Fonction qui permet de vérifier la réponse de la question 2
 function checkQ2() {
-    const selected = Array.from(document.querySelectorAll('input[name="q2"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["oui"];  //La bonne réponse
-
-    const result = document.getElementById("result-q2");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! La clé USB peut être infectée par un virus ou un malware, et en la connectant à votre ordinateur, vous risquez de contaminer votre système. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q2', selected, result.textContent, true);
-        document.getElementById("btn-valider-q2").style.display = "none";
-        document.getElementById("btn-suivant-q2").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés, car ils peuvent être infectés par des virus ou des malwares qui peuvent contaminer votre système.";
-        result.style.color = "red";
-        recordQuestionReview('q2', selected, result.textContent, false);
-        document.getElementById("btn-valider-q2").style.display = "none";
-        setTimeout(() => showNextQuestion('q2'), 2000);
-    }
-    updateScore();
+    checkQuestion('q2');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 3
 function checkQ3() {
-    const selected = Array.from(document.querySelectorAll('input[name="q3"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["separez", "utilisez1"]; //Les bonnes réponses
-
-    const result = document.getElementById("result-q3");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Les bonnes pratiques pour protéger ses données personnelles en ligne incluent : séparer les comptes professionnels et personnels et limiter les informations personnelles partagées sur les réseaux sociaux.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q3', selected, result.textContent, true);
-        document.getElementById("btn-valider-q3").style.display = "none";
-        document.getElementById("btn-suivant-q3").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Il ne faut pas hésiter à dissocier le professionnel du personnel.";
-        result.style.color = "red";
-        recordQuestionReview('q3', selected, result.textContent, false);
-        document.getElementById("btn-valider-q3").style.display = "none";
-        setTimeout(() => showNextQuestion('q3'), 2000);
-    }
-    updateScore();
+    checkQuestion('q3');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 4
 function checkQ4() {
-    const selected = Array.from(document.querySelectorAll('input[name="q4"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["vpn"]; //La bonne réponse
-
-    const result = document.getElementById("result-q4");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Un VPN (Virtual Private Network soit Réseau privé virtuel) est un outil qui permet de sécuriser votre connexion internet en chiffrant vos données et en masquant votre adresse IP. Cela protège votre vie privée en ligne et vous permet d'accéder à des contenus restreints géographiquement.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q4', selected, result.textContent, true);
-        document.getElementById("btn-valider-q4").style.display = "none";
-        document.getElementById("btn-suivant-q4").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Un VPN est un réseau privé virtuel qui sécurise votre connexion internet en chiffrant vos données et en masquant votre adresse IP.";
-        result.style.color = "red";
-        recordQuestionReview('q4', selected, result.textContent, false);
-        document.getElementById("btn-valider-q4").style.display = "none";
-        setTimeout(() => showNextQuestion('q4'), 2000);
-    }
-    updateScore();
+    checkQuestion('q4');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 5
 function checkQ5() {
-    const selected = Array.from(document.querySelectorAll('input[name="q5"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["pjmail", "sujetmail", "adressemail", "lienmail"]; //La bonne réponse
-
-    const result = document.getElementById("result-q5");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    if (arraysEqual(selected, correct)) {
-        score ++;
-        result.textContent = "Bonne réponse ! Pour vérifier l'authenticité d'un email, il est important de vérifier l'adresse de l'expéditeur, de ne pas cliquer sur les liens ou télécharger les pièces jointes. Il faut aussi faire attention aux fautes d'orthographe ou de grammaire, qui sont souvent présentes dans les emails de phishing. En cas de doute, il est recommandé de contacter directement l'entreprise ou la personne concernée pour vérifier l'authenticité de l'email.";
-        result.style.color = "green";
-        recordQuestionReview('q5', selected, result.textContent, true);
-        document.getElementById("btn-valider-q5").style.display = "none";
-        document.getElementById("btn-suivant-q5").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Il faut vérifier plusieurs éléments dans un e-mail pour s'assurer de son authenticité. Comme l'adresse de l'expéditeur, les liens présents dans le mail, les pièces jointes, et faire attention aux fautes d'orthographe ou de grammaire.";
-        result.style.color = "red";
-        recordQuestionReview('q5', selected, result.textContent, false);
-        document.getElementById("btn-valider-q5").style.display = "none";
-        setTimeout(() => showNextQuestion('q5'), 2000);
-    }
-    updateScore();
+    checkQuestion('q5');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 6
 function checkQ6() {
-    const selected = Array.from(document.querySelectorAll('input[name="q6"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["failles"]; //La bonne réponse
-
-    const result = document.getElementById("result-q6");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Il est important de maintenir son système d'exploitation et ses logiciels à jour pour bénéficier des dernières protections contre les failles de sécurité. Les mises à jour corrigent souvent des vulnérabilités qui pourraient être exploitées par des cybercriminels.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q6', selected, result.textContent, true);
-        document.getElementById("btn-valider-q6").style.display = "none";
-        document.getElementById("btn-suivant-q6").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Les mises à jour sont importantes pour la sécurité de votre système.";
-        result.style.color = "red";
-        recordQuestionReview('q6', selected, result.textContent, false);
-        document.getElementById("btn-valider-q6").style.display = "none";
-        setTimeout(() => showNextQuestion('q6'), 2000);
-    }
-    updateScore();
+    checkQuestion('q6');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 7
 function checkQ7() {
-    const selected = Array.from(document.querySelectorAll('input[name="q7"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["signaler"]; //La bonne réponse
-
-    const result = document.getElementById("result-q7");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Il ne faut pas hésiter à signaler les contenus inappropriés ou les comportements suspects. Ne partagez jamais vos mots de passe ou vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q7', selected, result.textContent, true);
-        document.getElementById("btn-valider-q7").style.display = "none";
-        document.getElementById("btn-suivant-q7").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Ne partagez jamais vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
-        result.style.color = "red";
-        recordQuestionReview('q7', selected, result.textContent, false);
-        document.getElementById("btn-valider-q7").style.display = "none";
-        setTimeout(() => showNextQuestion('q7'), 2000);
-    }
-    updateScore();
+    checkQuestion('q7');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 8
 function checkQ8() {
-    const selected = Array.from(document.querySelectorAll('input[name="q8"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["gestionnaire"]; //La bonne réponse
-
-    const result = document.getElementById("result-q8");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Utiliser un gestionnaire de mots de passe est une bonne pratique pour sécuriser ses mots de passe. Un gestionnaire de mots de passe stocke vos mots de passe de manière sécurisée et vous permet de générer des mots de passe forts et uniques pour chaque compte. Exemple: KeePass, LastPass, Dashlane.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q8', selected, result.textContent, true);
-        document.getElementById("btn-valider-q8").style.display = "none";
-        document.getElementById("btn-suivant-q8").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Un gestionnaire de mots de passe est un outil qui peut vous aider à gérer vos mots de passe de manière sécurisée.";
-        result.style.color = "red";
-        recordQuestionReview('q8', selected, result.textContent, false);
-        document.getElementById("btn-valider-q8").style.display = "none";
-        setTimeout(() => showNextQuestion('q8'), 2000);
-    }
-    updateScore();
+    checkQuestion('q8');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 9
 function checkQ9() {
-    const selected = Array.from(document.querySelectorAll('input[name="q9"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["infection"]; //La bonne réponse
-
-    const result = document.getElementById("result-q9");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Il faut faire attention aux appareils qui vous sont inconnus, comme les clés USB trouvées ou prêtées par des personnes que vous ne connaissez pas. Ces appareils peuvent être infectés par des virus ou des logiciels malveillants qui peuvent compromettre la sécurité de votre ordinateur.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q9', selected, result.textContent, true);
-        document.getElementById("btn-valider-q9").style.display = "none";
-        document.getElementById("btn-suivant-q9").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Il faut faire attention aux appareils qui vous sont inconnus, ces appareils peuvent être infectés par des virus ou des logiciels malveillants.";
-        result.style.color = "red";
-        recordQuestionReview('q9', selected, result.textContent, false);
-        document.getElementById("btn-valider-q9").style.display = "none";
-        setTimeout(() => showNextQuestion('q9'), 2000);
-    }
-    updateScore();
+    checkQuestion('q9');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 10
 function checkQ10() {
-    const selected = Array.from(document.querySelectorAll('input[name="q10"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["adresse"]; //La bonne réponse
-
-    const result = document.getElementById("result-q10");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter. Assurez-vous que l'URL commence par 'https://' et que le nom de domaine est correct pour éviter les sites de phishing.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q10', selected, result.textContent, true);
-        document.getElementById("btn-valider-q10").style.display = "none";
-        document.getElementById("btn-suivant-q10").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter.";
-        result.style.color = "red";
-        recordQuestionReview('q10', selected, result.textContent, false);
-        document.getElementById("btn-valider-q10").style.display = "none";
-        setTimeout(() => showNextQuestion('q10'), 2000);
-    }
-    updateScore();
+    checkQuestion('q10');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 11
 function checkQ11() {
-    const selected = Array.from(document.querySelectorAll('input[name="q11"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["2fa"]; //La bonne réponse
-
-    const result = document.getElementById("result-q11");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) est une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte. En plus de votre mot de passe, vous devez fournir un code généré par une application d'authentification ou reçu par SMS, ce qui rend plus difficile pour les attaquants d'accéder à votre compte.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q11', selected, result.textContent, true);
-        document.getElementById("btn-valider-q11").style.display = "none";
-        document.getElementById("btn-suivant-q11").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Il existe une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte, Cette méthode s'appelle l'authentification à deux facteurs (2FA).";
-        result.style.color = "red";
-        recordQuestionReview('q11', selected, result.textContent, false);
-        document.getElementById("btn-valider-q11").style.display = "none";
-        setTimeout(() => showNextQuestion('q11'), 2000);
-    }
-    updateScore();
+    checkQuestion('q11');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 12
 function checkQ12() {
-    const selected = Array.from(document.querySelectorAll('input[name="q12"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["regulier"]; //La bonne réponse
-
-    const result = document.getElementById("result-q12");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Sauvegarder régulièrement ses données est une bonne pratique pour éviter de les perdre en cas d'incident (panne, attaque, etc.). Utilisez des solutions de sauvegarde en ligne ou des disques durs externes pour protéger vos données importantes.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q12', selected, result.textContent, true);
-        document.getElementById("btn-valider-q12").style.display = "none";
-        document.getElementById("btn-suivant-q12").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Soyez régulier dans vos sauvegardes.";
-        result.style.color = "red";
-        recordQuestionReview('q12', selected, result.textContent, false);
-        document.getElementById("btn-valider-q12").style.display = "none";
-        setTimeout(() => showNextQuestion('q12'), 2000);
-    }
-    updateScore();
+    checkQuestion('q12');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 13
 function checkQ13() {
-    const selected = Array.from(document.querySelectorAll('input[name="q13"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["source"]; //La bonne réponse
-
-    const result = document.getElementById("result-q13");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Vérifiez toujours la source d'un logiciel ou d'une application avant de le télécharger. Téléchargez uniquement à partir de sites officiels ou de sources fiables pour éviter les logiciels malveillants.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q13', selected, result.textContent, true);
-        document.getElementById("btn-valider-q13").style.display = "none";
-        document.getElementById("btn-suivant-q13").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Faites attention à la provenance des applications que vous téléchargez.";
-        result.style.color = "red";
-        recordQuestionReview('q13', selected, result.textContent, false);
-        document.getElementById("btn-valider-q13").style.display = "none";
-        setTimeout(() => showNextQuestion('q13'), 2000);
-    }
-    updateScore();
+    checkQuestion('q13');
 }
 
 //Fonction qui permet de vérifier la réponse de la question 14
 function checkQ14() {
-    const selected = Array.from(document.querySelectorAll('input[name="q14"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["malware"]; //La bonne réponse
-
-    const result = document.getElementById("result-q14");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Un malware (contraction de 'malicious software') est un logiciel malveillant conçu pour infiltrer, endommager ou perturber un système informatique. Les malwares peuvent prendre différentes formes, comme les virus, les ransomwares, etc. Ils peuvent voler des données, espionner les utilisateurs ou rendre un système inutilisable.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q14', selected, result.textContent, true);
-        document.getElementById("btn-valider-q14").style.display = "none";
-        document.getElementById("btn-suivant-q14").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Un malware est un type de logiciel qui peut infiltrer, endommager ou perturber un système informatique.";
-        result.style.color = "red";
-        recordQuestionReview('q14', selected, result.textContent, false);
-        document.getElementById("btn-valider-q14").style.display = "none";
-        setTimeout(() => showNextQuestion('q14'), 2000);
-    }
-    updateScore();
+    checkQuestion('q14');
 }
 
 //Q15 / Q16 / Q17
 //Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
-const configs = {
-  15: { correctMap: { A: "3", B: "1", C: "2" } },
-  16: { correctMap: { A: "2", B: "1", C: "3" } },
-  17: { correctMap: { A: "2", B: "1", C: "3" } },
-};
+const configs = pageConfig.matchingQuestions;
 
 //Appelée quand toutes les connexions d'une question sont correctes
 //À compléter avec une explication personnalisée par question
+function onBonneReponse1(result) {
+        result.textContent = "Bonne réponse ! Un bon mot de passe doit contenir au moins 12 caractères, avec une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
+}
+
+function onBonneReponse2(result) {
+  result.textContent = "Bonne réponse ! La clé USB peut être infectée par un virus ou un malware, et en la connectant à votre ordinateur, vous risquez de contaminer votre système. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés.";
+}
+
+
+function onBonneReponse3(result) {
+  result.textContent = "Bonne réponse ! Les bonnes pratiques pour protéger ses données personnelles en ligne incluent : séparer les comptes professionnels et personnels et limiter les informations personnelles partagées sur les réseaux sociaux.";
+}
+
+function onBonneReponse4(result) {
+        result.textContent = "Bonne réponse ! Un VPN (Virtual Private Network soit Réseau privé virtuel) est un outil qui permet de sécuriser votre connexion internet en chiffrant vos données et en masquant votre adresse IP. Cela protège votre vie privée en ligne et vous permet d'accéder à des contenus restreints géographiquement.";
+}
+
+function onBonneReponse5(result) {
+        result.textContent = "Bonne réponse ! Pour vérifier l'authenticité d'un email, il est important de vérifier l'adresse de l'expéditeur, de ne pas cliquer sur les liens ou télécharger les pièces jointes. Il faut aussi faire attention aux fautes d'orthographe ou de grammaire, qui sont souvent présentes dans les emails de phishing. En cas de doute, il est recommandé de contacter directement l'entreprise ou la personne concernée pour vérifier l'authenticité de l'email.";
+}
+
+function onBonneReponse6(result) {
+        result.textContent = "Bonne réponse ! Il est important de maintenir son système d'exploitation et ses logiciels à jour pour bénéficier des dernières protections contre les failles de sécurité. Les mises à jour corrigent souvent des vulnérabilités qui pourraient être exploitées par des cybercriminels.";
+}
+
+function onBonneReponse7(result) {
+        result.textContent = "Bonne réponse ! Il ne faut pas hésiter à signaler les contenus inappropriés ou les comportements suspects. Ne partagez jamais vos mots de passe ou vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
+}
+
+function onBonneReponse8(result) {
+        result.textContent = "Bonne réponse ! Utiliser un gestionnaire de mots de passe est une bonne pratique pour sécuriser ses mots de passe. Un gestionnaire de mots de passe stocke vos mots de passe de manière sécurisée et vous permet de générer des mots de passe forts et uniques pour chaque compte. Exemple: KeePass, LastPass, Dashlane.";
+}
+
+function onBonneReponse9(result) {
+        result.textContent = "Bonne réponse ! Il faut faire attention aux appareils qui vous sont inconnus, comme les clés USB trouvées ou prêtées par des personnes que vous ne connaissez pas. Ces appareils peuvent être infectés par des virus ou des logiciels malveillants qui peuvent compromettre la sécurité de votre ordinateur.";
+}
+
+function onBonneReponse10(result) {
+        result.textContent = "Bonne réponse ! Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter. Assurez-vous que l'URL commence par 'https://' et que le nom de domaine est correct pour éviter les sites de phishing.";
+}
+
+function onBonneReponse11(result) {
+        result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) est une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte. En plus de votre mot de passe, vous devez fournir un code généré par une application d'authentification ou reçu par SMS, ce qui rend plus difficile pour les attaquants d'accéder à votre compte.";
+}
+
+function onBonneReponse12(result) {
+        result.textContent = "Bonne réponse ! Sauvegarder régulièrement ses données est une bonne pratique pour éviter de les perdre en cas d'incident (panne, attaque, etc.). Utilisez des solutions de sauvegarde en ligne ou des disques durs externes pour protéger vos données importantes.";
+}
+
+function onBonneReponse13(result) {
+        result.textContent = "Bonne réponse ! Vérifiez toujours la source d'un logiciel ou d'une application avant de le télécharger. Téléchargez uniquement à partir de sites officiels ou de sources fiables pour éviter les logiciels malveillants.";
+}
+
+function onBonneReponse14(result) {
+        result.textContent = "Bonne réponse ! Un malware (contraction de 'malicious software') est un logiciel malveillant conçu pour infiltrer, endommager ou perturber un système informatique. Les malwares peuvent prendre différentes formes, comme les virus, les ransomwares, etc. Ils peuvent voler des données, espionner les utilisateurs ou rendre un système inutilisable.";
+}
+
 function onBonneReponse15(result) {
-  result.innerHTML = "Bonne réponse !<br><small>Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).</small>";
+  result.textContent = "Bonne réponse !Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).";
 }
 
 function onBonneReponse16(result) {
-  result.innerHTML = "Bonne réponse !<br><small>Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.</small>";
+  result.textContent = "Bonne réponse !Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.";
 }
 
 function onBonneReponse17(result) {
-  result.innerHTML = "Bonne réponse !<br><small>Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.</small>";
+  result.textContent = "Bonne réponse !Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.";
+}
+
+function onMauvaiseReponse1(result) {
+        result.textContent = "Mauvaise réponse. Un bon mot de passe doit être long et complexe, contenant une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
+}
+
+function onMauvaiseReponse2(result) {
+        result.textContent = "Mauvaise réponse. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés, car ils peuvent être infectés par des virus ou des malwares qui peuvent contaminer votre système.";
+}
+
+function onMauvaiseReponse3(result) {
+        result.textContent = "Mauvaise réponse. Il ne faut pas hésiter à dissocier le professionnel du personnel.";
+}
+
+function onMauvaiseReponse4(result) {
+        result.textContent = "Mauvaise réponse. Un VPN est un réseau privé virtuel qui sécurise votre connexion internet en chiffrant vos données et en masquant votre adresse IP.";
+}
+
+function onMauvaiseReponse5(result) {
+        result.textContent = "Mauvaise réponse. Il faut vérifier plusieurs éléments dans un e-mail pour s'assurer de son authenticité. Comme l'adresse de l'expéditeur, les liens présents dans le mail, les pièces jointes, et faire attention aux fautes d'orthographe ou de grammaire.";
+}
+
+function onMauvaiseReponse6(result) {
+  result.textContent = "Mauvaise réponse. Les mises à jour sont importantes pour la sécurité de votre système.";
+}
+
+function onMauvaiseReponse7(result) {
+  result.textContent = "Mauvaise réponse. Ne partagez jamais vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
+}
+
+function onMauvaiseReponse8(result) {
+  result.textContent = "Mauvaise réponse. Un gestionnaire de mots de passe est un outil qui peut vous aider à gérer vos mots de passe de manière sécurisée.";
+}
+
+function onMauvaiseReponse9(result) {
+  result.textContent = "Mauvaise réponse. Il faut faire attention aux appareils qui vous sont inconnus, ces appareils peuvent être infectés par des virus ou des logiciels malveillants.";
+}
+
+function onMauvaiseReponse10(result) {
+  result.textContent = "Mauvaise réponse. Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter.";
+}
+
+function onMauvaiseReponse11(result) {
+  result.textContent = "Mauvaise réponse. Il existe une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte, Cette méthode s'appelle l'authentification à deux facteurs (2FA).";
+}
+
+function onMauvaiseReponse12(result) {
+  result.textContent = "Mauvaise réponse. Soyez régulier dans vos sauvegardes.";
+}
+
+function onMauvaiseReponse13(result) {
+  result.textContent = "Mauvaise réponse. Faites attention à la provenance des applications que vous téléchargez.";
+}
+
+function onMauvaiseReponse14(result) {
+  result.textContent = "Mauvaise réponse. Un malware est un type de logiciel qui peut infiltrer, endommager ou perturber un système informatique.";
 }
 
 function onMauvaiseReponse15(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small>Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).</small>";
+  result.textContent = "Mauvaise réponse !Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).";
 }
 
 function onMauvaiseReponse16(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small>Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.</small>";
+  result.textContent = "Mauvaise réponse !Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.";
 }
 
 function onMauvaiseReponse17(result) {
-  result.innerHTML = "Mauvaise réponse !<br><small>Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.</small>";
+  result.textContent = "Mauvaise réponse !Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.";
 }
 
 //Regroupe les callbacks par numéro de question pour les appeler dans la boucle
 const onBonneReponse = {
+  1: onBonneReponse1,
+  2: onBonneReponse2,
+  3: onBonneReponse3,
+  4: onBonneReponse4,
+  5: onBonneReponse5,
+  6: onBonneReponse6,
+  7: onBonneReponse7,
+  8: onBonneReponse8,
+  9: onBonneReponse9,
+  10: onBonneReponse10,
+  11: onBonneReponse11,
+  12: onBonneReponse12,
+  13: onBonneReponse13,
+  14: onBonneReponse14,
   15: onBonneReponse15,
   16: onBonneReponse16,
   17: onBonneReponse17,
 };
 
 const onMauvaiseReponse = {
+  1: onMauvaiseReponse1,
+  2: onMauvaiseReponse2,
+  3: onMauvaiseReponse3,
+  4: onMauvaiseReponse4,
+  5: onMauvaiseReponse5,
+  6: onMauvaiseReponse6,
+  7: onMauvaiseReponse7,
+  8: onMauvaiseReponse8,
+  9: onMauvaiseReponse9,
+  10: onMauvaiseReponse10,
+  11: onMauvaiseReponse11,
+  12: onMauvaiseReponse12,
+  13: onMauvaiseReponse13,
+  14: onMauvaiseReponse14,
   15: onMauvaiseReponse15,
   16: onMauvaiseReponse16,
   17: onMauvaiseReponse17,
@@ -807,92 +768,72 @@ function redraw(n) {
 }
 
 
-[15, 16, 17].forEach(n => {
-  const canvas = document.getElementById(`lignes${n}`);
-  state[n] = { canvas, ctx: canvas.getContext("2d"), connexions: [], selected: null };
+window.addEventListener('load', () => {
+  [15, 16, 17].forEach(n => {
+    const canvas = document.getElementById(`lignes${n}`);
+    state[n] = { canvas, ctx: canvas.getContext("2d"), connexions: [], selected: null };
 
-  resizeCanvas(n);
-  window.addEventListener("resize", () => { resizeCanvas(n); redraw(n); });
+    resizeCanvas(n);
+    window.addEventListener("resize", () => { resizeCanvas(n); redraw(n); });
 
-  //Clic sur un bloc gauche : le sélectionne comme point de départ
-  document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(bloc => {
-    bloc.addEventListener("click", () => {
-      document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(b => b.classList.remove("selected"));
-      bloc.classList.add("selected");
-      state[n].selected = bloc.dataset.id;
+    //Clic sur un bloc gauche : le sélectionne comme point de départ
+    document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(bloc => {
+      bloc.addEventListener("click", () => {
+        document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(b => b.classList.remove("selected"));
+        bloc.classList.add("selected");
+        state[n].selected = bloc.dataset.id;
+      });
     });
-  });
 
-  //Clic sur un bloc droit : crée la connexion avec le bloc gauche sélectionné
-  document.querySelectorAll(`.droite${n} .bloc${n}`).forEach(bloc => {
-    bloc.addEventListener("click", () => {
-      if (!state[n].selected) return;
+    //Clic sur un bloc droit : crée la connexion avec le bloc gauche sélectionné
+    document.querySelectorAll(`.droite${n} .bloc${n}`).forEach(bloc => {
+      bloc.addEventListener("click", () => {
+        if (!state[n].selected) return;
 
-      //Remplace une éventuelle connexion existante pour ce bloc gauche
-      state[n].connexions = state[n].connexions.filter(c => c.left !== state[n].selected);
-      state[n].connexions.push({ left: state[n].selected, right: bloc.dataset.id, correct: null });
+        //Remplace une éventuelle connexion existante pour ce bloc gauche
+        state[n].connexions = state[n].connexions.filter(c => c.left !== state[n].selected);
+        state[n].connexions.push({ left: state[n].selected, right: bloc.dataset.id, correct: null });
 
-      document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(b => b.classList.remove("selected"));
-      state[n].selected = null;
-      redraw(n);
+        document.querySelectorAll(`.gauche${n} .bloc${n}`).forEach(b => b.classList.remove("selected"));
+        state[n].selected = null;
+        redraw(n);
+      });
     });
-  });
 
-  //Validation : vérifie chaque connexion et met à jour score + affichage
-  document.getElementById(`btn-valider-q${n}`).addEventListener("click", () => {
-    const { correctMap } = configs[n];
-    let bonnes = 0;
+    //Validation : vérifie chaque connexion et met à jour score + affichage
+    document.getElementById(`btn-valider-q${n}`).addEventListener("click", () => {
+      const { correctMap } = configs[n];
+      let bonnes = 0;
 
-    state[n].connexions.forEach(c => {
-      c.correct = c.right === correctMap[c.left];
-      if (c.correct) bonnes++;
+      state[n].connexions.forEach(c => {
+        c.correct = c.right === correctMap[c.left];
+        if (c.correct) bonnes++;
+      });
+      redraw(n); //Redessine en rouge (faux) ou bleu (vrai)
+
+      const result = document.getElementById(`result-q${n}`);
+      if (bonnes === 3) {
+        onBonneReponse[n](result); //Appelle la fonction spécifique à la question
+        result.style.color = "green";
+        score++;
+        recordQuestionReview(`q${n}`, [], result.textContent, true);
+        document.getElementById(`btn-valider-q${n}`).style.display = "none";
+        document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
+      } else {
+        onMauvaiseReponse[n](result); //Appelle la fonction spécifique à la question
+        result.style.color = "red";
+        recordQuestionReview(`q${n}`, [], result.textContent, false);
+        document.getElementById(`btn-valider-q${n}`).style.display = "none";
+        setTimeout(() => showNextQuestion(`q${n}`), 2000);
+      }
+      updateScore();
     });
-    redraw(n); //Redessine en rouge (faux) ou bleu (vrai)
-
-    const result = document.getElementById(`result-q${n}`);
-    if (bonnes === 3) {
-      onBonneReponse[n](result); //Appelle la fonction spécifique à la question
-      result.style.color = "green";
-      score++;
-      recordQuestionReview(`q${n}`, [], result.textContent, true);
-      document.getElementById(`btn-valider-q${n}`).style.display = "none";
-      document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
-    } else {
-      onMauvaiseReponse[n](result); //Appelle la fonction spécifique à la question
-      result.style.color = "red";
-      recordQuestionReview(`q${n}`, [], result.textContent, false);
-      document.getElementById(`btn-valider-q${n}`).style.display = "none";
-      setTimeout(() => showNextQuestion(`q${n}`), 2000);
-    }
-    updateScore();
   });
 });
 
 //Fonction qui permet de vérifier la réponse de la question 18
 function checkQ18() {
-    const selected = Array.from(document.querySelectorAll('input[name="q18"]:checked'))
-                          .map(el => el.value);
-
-    const correct = ["change"]; //La bonne réponse
-
-    const result = document.getElementById("result-q18");  //Récupère l'élément HTML où sera affiché le message de résultat pour la question
-
-    //Bonne réponse ou mauvaise réponse selon les cases cochées
-    if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! En cas de suspicion de phishing, il est important de changer immédiatement vos mots de passe pour les comptes concernés. De plus, signalez l'incident à votre service informatique ou à l'équipe de sécurité de votre organisation pour qu'ils puissent prendre les mesures nécessaires pour protéger les autres utilisateurs.";
-        result.style.color = "green";
-        score++;
-        recordQuestionReview('q18', selected, result.textContent, true);
-        document.getElementById("btn-valider-q18").style.display = "none";
-        document.getElementById("btn-suivant-q18").style.display = "inline-block";
-    } else {
-        result.textContent = "Mauvaise réponse. Priorisez la sécurité de vos comptes en changeant immédiatement vos mots de passe et signaler l'incident.";
-        result.style.color = "red";
-        recordQuestionReview('q18', selected, result.textContent, false);
-        document.getElementById("btn-valider-q18").style.display = "none";
-        setTimeout(() => showNextQuestion('q18'), 2000);
-    }
-    updateScore();
+    checkQuestion('q18');
 }
 
 // Envoi du score au serveur (à appeler à la fin du questionnaire)
