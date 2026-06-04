@@ -5,7 +5,9 @@ const quizNiveau = "Moyen";
 const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 let quizReview = [];
 const flagStorageKey = 'quizFlags_moyen';
+const quizAnswersKey = 'quizAnswers_moyen';
 let quizFlags = {};
+let quizAnswers = {};
 
 function loadQuizFlags() {
   try {
@@ -14,6 +16,42 @@ function loadQuizFlags() {
     quizFlags = {};
     console.error('Impossible de charger l\'état des flags', e);
   }
+}
+
+function loadSavedQuizState() {
+  try {
+    quizReview = JSON.parse(localStorage.getItem('quizReview') || '[]');
+  } catch (e) {
+    quizReview = [];
+  }
+  try {
+    quizAnswers = JSON.parse(localStorage.getItem(quizAnswersKey) || '{}');
+  } catch (e) {
+    quizAnswers = {};
+  }
+  const storedScore = parseInt(localStorage.getItem('quizScore'), 10);
+  if (!Number.isNaN(storedScore)) {
+    score = storedScore;
+  }
+}
+
+function saveQuizAnswers() {
+  localStorage.setItem(quizAnswersKey, JSON.stringify(quizAnswers));
+}
+
+function restoreSavedAnswers(questionId) {
+  const selected = quizAnswers[questionId];
+  if (!Array.isArray(selected)) return;
+  const inputs = document.querySelectorAll(`input[name="${questionId}"]`);
+  inputs.forEach(input => {
+    input.checked = selected.includes(input.value);
+  });
+}
+
+function recomputeScoreFromReview() {
+  score = quizReview.filter(entry => entry.correct).length;
+  updateScore();
+  localStorage.setItem('quizScore', String(score));
 }
 
 function saveQuizFlags() {
@@ -130,10 +168,25 @@ function melangerReponses(questionId) {
 }
 
 window.addEventListener('load', () => {
+  loadSavedQuizState();
   loadQuizFlags();
   initFlagCheckboxes();
   initRandomQuestions();
 }); // Initialise les questions aléatoires et les flags au chargement de la page
+
+// Si on est revenu depuis la page de résultats pour éditer une question,
+// afficher directement cette question
+window.addEventListener('load', () => {
+  const editQuestionId = localStorage.getItem('editQuestionId');
+  if (editQuestionId) {
+    try {
+      showQuestion(editQuestionId);
+      restoreSavedAnswers(editQuestionId);
+    } catch (e) {
+      console.warn('Impossible d\'afficher la question demandée:', editQuestionId, e);
+    }
+  }
+});
 
 async function goToResults() {
   // Vérifier que le score affiché correspond au score calculé
@@ -197,6 +250,7 @@ function showQuestion(id) {
     redraw(n);
   }
 
+  restoreSavedAnswers(id);
   updateProgress(id);
   melangerReponses(id);
 
@@ -222,6 +276,15 @@ function recordQuestionReview(questionId, selected, resultText, correct) {
   quizReview = quizReview.filter(entry => entry.questionId !== questionId);
   quizReview.push(reviewEntry);
   localStorage.setItem('quizReview', JSON.stringify(quizReview));
+  quizAnswers[questionId] = Array.isArray(selected) ? selected : [];
+  saveQuizAnswers();
+  recomputeScoreFromReview();
+  // Si on est en mode édition depuis la page de résultats, revenir automatiquement
+  if (localStorage.getItem('backToResults') === '1') {
+    localStorage.removeItem('backToResults');
+    localStorage.removeItem('editQuestionId');
+    window.location.href = 'resultats.html';
+  }
 }
 
 function showResult(id) {

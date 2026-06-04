@@ -131,6 +131,57 @@ function initResultPage() {
     });
   }
   loadResults();
+
+  // Prépare le sélecteur pour modifier une question
+  const select = document.getElementById('question-edit');
+  const editBtn = document.getElementById('btn-edit-question');
+  if (select) {
+    // Remplir avec les questions présentes dans le review (si disponible), sinon lister q1..q18
+    const reviewRaw = localStorage.getItem('quizReview');
+    let review = [];
+    try {
+      review = JSON.parse(reviewRaw || '[]');
+    } catch (e) { review = []; }
+
+    const seen = new Set();
+    if (Array.isArray(review) && review.length) {
+      review.forEach(item => {
+        if (item && item.questionId && !seen.has(item.questionId)) {
+          const opt = document.createElement('option');
+          opt.value = item.questionId;
+          opt.textContent = item.questionId.replace(/^q/, 'Question ');
+          select.appendChild(opt);
+          seen.add(item.questionId);
+        }
+      });
+    }
+
+    // si aucune entrée review, ajouter q1..q18
+    if (!select.querySelector('option[value^="q"]')) {
+      for (let i = 1; i <= 18; i++) {
+        const qid = `q${i}`;
+        const opt = document.createElement('option');
+        opt.value = qid;
+        opt.textContent = `Question ${i}`;
+        select.appendChild(opt);
+      }
+    }
+  }
+
+  if (editBtn) {
+    editBtn.addEventListener('click', () => {
+      const selected = document.getElementById('question-edit')?.value;
+      if (!selected) {
+        alert('Veuillez sélectionner une question à modifier.');
+        return;
+      }
+      // Indique à la page du quiz quelle question afficher et revenir aux résultats après validation
+      localStorage.setItem('editQuestionId', selected);
+      localStorage.setItem('backToResults', '1');
+      const lastQuizPage = localStorage.getItem('lastQuizPage') || 'questionnaire.html';
+      window.location.href = lastQuizPage;
+    });
+  }
 }
 
 window.addEventListener('load', initResultPage);

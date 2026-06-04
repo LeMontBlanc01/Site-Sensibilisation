@@ -21,8 +21,20 @@
 
         <div class="result-actions">
             <button id="btn-export-results" class="fr-btn" type="button">Exporter mes résultats</button>
-            <button id="btn-restart" class="fr-btn" type="button">Modifier mes réponses</button>
         </div>
+
+        <label for="question-edit">Modifier une question</label>
+        <div class="edit-question-row">
+            <select name="questions" id="question-edit">
+                <option value="">--- Veuillez sélectionner une question ---</option>
+            </select>
+            <button id="btn-edit-question" class="fr-btn" type="button">Modifier la question sélectionnée</button>
+        </div>
+        
+        <div class="bouton-revenir">
+            <button class="fr-btn" type="button" onclick="history.back()">Revenir à l'accueil</button>
+        </div>
+    
     </main>
 </body>
 </html>
