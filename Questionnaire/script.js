@@ -2,13 +2,14 @@ console.log("JS chargé !"); // Affiche un message dans la console pour confirme
 let score = 0;
 const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Facile";
-const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
+const state = {};   // État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 let quizReview = [];
-const flagStorageKey = 'quizFlags_facile';
-const quizAnswersKey = 'quizAnswers_facile';
+const flagStorageKey = 'quizFlags_facile'; // Clé de stockage pour les flags de révision
+const quizAnswersKey = 'quizAnswers_facile'; // Clé de stockage pour les réponses sélectionnées par l'utilisateur, afin de les restaurer en cas de retour à une question déjà répondue
 let quizFlags = {};
 let quizAnswers = {};
 
+// Fonction pour charger l'état des flags de révision depuis le localStorage
 function loadQuizFlags() {
   try {
     quizFlags = JSON.parse(localStorage.getItem(flagStorageKey) || '{}');
@@ -18,6 +19,7 @@ function loadQuizFlags() {
   }
 }
 
+// Fonction pour charger l'état sauvegardé du quiz (score, review, réponses sélectionnées) depuis le localStorage
 function loadSavedQuizState() {
   try {
     quizReview = JSON.parse(localStorage.getItem('quizReview') || '[]');
@@ -35,10 +37,12 @@ function loadSavedQuizState() {
   }
 }
 
+// Fonction pour sauvegarder les réponses sélectionnées par l'utilisateur dans le localStorage, afin de les restaurer en cas de retour à une question déjà répondue
 function saveQuizAnswers() {
   localStorage.setItem(quizAnswersKey, JSON.stringify(quizAnswers));
 }
 
+// Fonction pour restaurer les réponses sélectionnées par l'utilisateur lorsqu'il revient sur une question déjà répondue, en cochant les cases correspondantes
 function restoreSavedAnswers(questionId) {
   const selected = quizAnswers[questionId];
   if (!Array.isArray(selected)) return;
@@ -48,12 +52,14 @@ function restoreSavedAnswers(questionId) {
   });
 }
 
+// Fonction pour recalculer le score à partir de la revue
 function recomputeScoreFromReview() {
   score = quizReview.filter(entry => entry.correct).length;
   updateScore();
   localStorage.setItem('quizScore', String(score));
 }
 
+// Fonction pour éditer le contenu d'une question, utilisée depuis la page de résultats pour permettre à l'utilisateur de corriger une question mal comprise
 function editQuizQuestion(questionId, newContent) {
   const question = document.getElementById(questionId);
   if (question) {
@@ -61,10 +67,12 @@ function editQuizQuestion(questionId, newContent) {
   }
 }
 
+// Fonction pour sauvegarder l'état des flags de révision dans le localStorage, afin de les restaurer lors du prochain chargement de la page
 function saveQuizFlags() {
   localStorage.setItem(flagStorageKey, JSON.stringify(quizFlags));
 }
 
+// Fonction pour mettre à jour l'interface d'une question en fonction de son état de flag de révision, en changeant le texte du bouton et la classe CSS de la question
 function updateFlagUI(questionId) {
   const question = document.getElementById(questionId);
   if (!question) return;
@@ -77,6 +85,7 @@ function updateFlagUI(questionId) {
   question.classList.toggle('flagged', flagged);
 }
 
+// Fonction pour initialiser les boutons de flag de révision sur chaque question, en les créant s'ils n'existent pas et en configurant leur comportement au clic pour basculer l'état de flag de la question et mettre à jour l'interface en conséquence
 function initFlagButtons() {
   document.querySelectorAll('.question').forEach(question => {
     const questionId = question.id;
@@ -233,6 +242,7 @@ async function goToResults() {
   window.location.href = 'resultats.html';
 }
 
+// Affiche la question dont l'id est passé en paramètre et cache les autres, tout en mettant à jour la barre de progression et en redimensionnant les canvas si nécessaire
 function showQuestion(id) {
   document.querySelectorAll('.question').forEach(q => q.style.display = 'none');  //On récupère toutes les divs de la classe "question" et on les cache
   document.getElementById(id).style.display = 'block';  //On affiche uniquement la question dont l'id est passé en paramètre
@@ -909,6 +919,7 @@ async function envoyerScore(nom, score, niveau, total) {
   }
 }
 
+// Met à jour la barre de progression et le texte associé
 function updateProgress(questionId) {
   const progress = document.getElementById('progress');
   const progressText = document.getElementById('progress-text');

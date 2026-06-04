@@ -4,11 +4,12 @@ const joueurNom = prompt("Entrez votre prénom :") || "Anonyme";
 const quizNiveau = "Moyen";
 const state = {};   //État de chaque question : canvas, contexte, connexions tracées, bloc gauche sélectionné
 let quizReview = [];
-const flagStorageKey = 'quizFlags_moyen';
-const quizAnswersKey = 'quizAnswers_moyen';
+const flagStorageKey = 'quizFlags_moyen'; // Clé de stockage pour les flags de révision
+const quizAnswersKey = 'quizAnswers_moyen'; // Clé de stockage pour les réponses sélectionnées par l'utilisateur, afin de les restaurer en cas de retour à une question déjà répondue
 let quizFlags = {};
 let quizAnswers = {};
 
+// Fonction pour charger l'état des flags de révision depuis le localStorage
 function loadQuizFlags() {
   try {
     quizFlags = JSON.parse(localStorage.getItem(flagStorageKey) || '{}');
@@ -18,6 +19,7 @@ function loadQuizFlags() {
   }
 }
 
+// Fonction pour charger l'état sauvegardé du quiz (score, review, réponses sélectionnées) depuis le localStorage
 function loadSavedQuizState() {
   try {
     quizReview = JSON.parse(localStorage.getItem('quizReview') || '[]');
@@ -35,10 +37,12 @@ function loadSavedQuizState() {
   }
 }
 
+// Fonction pour sauvegarder les réponses sélectionnées par l'utilisateur dans le localStorage, afin de les restaurer en cas de retour à une question déjà répondue
 function saveQuizAnswers() {
   localStorage.setItem(quizAnswersKey, JSON.stringify(quizAnswers));
 }
 
+// Fonction pour restaurer les réponses sélectionnées par l'utilisateur lorsqu'il revient sur une question déjà répondue, en cochant les cases correspondantes
 function restoreSavedAnswers(questionId) {
   const selected = quizAnswers[questionId];
   if (!Array.isArray(selected)) return;
@@ -48,16 +52,19 @@ function restoreSavedAnswers(questionId) {
   });
 }
 
+// Fonction pour recalculer le score à partir de la revue
 function recomputeScoreFromReview() {
   score = quizReview.filter(entry => entry.correct).length;
   updateScore();
   localStorage.setItem('quizScore', String(score));
 }
 
+// Fonction pour sauvegarder l'état des flags de révision dans le localStorage, afin de les restaurer lors du prochain chargement de la page
 function saveQuizFlags() {
   localStorage.setItem(flagStorageKey, JSON.stringify(quizFlags));
 }
 
+// Fonction pour mettre à jour l'interface d'une question en fonction de son état de flag de révision, en changeant le texte du bouton et la classe CSS de la question
 function updateFlagUI(questionId) {
   const question = document.getElementById(questionId);
   if (!question) return;
