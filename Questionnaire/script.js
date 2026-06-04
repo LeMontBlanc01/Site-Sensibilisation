@@ -683,7 +683,7 @@ function checkQ13() {
 
     //Bonne réponse ou mauvaise réponse selon les cases cochées
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse ! Vérifiez toujours la source d'une application avant de la télécharger. Téléchargez des applications uniquement à partir de sources fiables, comme les boutiques d'applications officielles (Google Play Store, Apple App Store) ou les sites web des éditeurs de logiciels réputés.";
+        result.textContent = "Bonne réponse ! Vérifiez toujours la source d'un logiciel ou d'une application avant de le télécharger. Téléchargez uniquement à partir de sites officiels ou de sources fiables pour éviter les logiciels malveillants.";
         result.style.color = "green";
         score++;
         recordQuestionReview('q13', selected, result.textContent, true);

@@ -302,7 +302,7 @@ function checkQ1() {
   const result = document.getElementById("result-q1");
 
   if (arraysEqual(selected, correct)) {
-    result.textContent = "Bonne réponse !Pour un mot de passe fort, il est recommandé d'utiliser au moins 12 caractères, incluant des majuscules, des minuscules, des chiffres et des symboles.";
+    result.textContent = "Bonne réponse ! Pour un mot de passe fort, il est recommandé d'utiliser au moins 12 caractères, incluant des majuscules, des minuscules, des chiffres et des symboles.";
     result.style.color = "green";
     score++;
     recordQuestionReview('q1', selected, result.textContent, true);
