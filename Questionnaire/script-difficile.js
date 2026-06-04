@@ -467,7 +467,7 @@ function checkQ5() {
     const result = document.getElementById("result-q5");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     if (arraysEqual(selected, correct)) {
-        score ++;
+        score++;
         recordQuestionReview('q5', selected, result.textContent, true);
         result.textContent = "Bonne réponse ! La caractéristique qui distingue un jeton anti-CSRF efficace est qu'il doit être unique pour chaque session ou chaque requête, ce qui permet de garantir que les requêtes proviennent bien de l'utilisateur légitime et de prévenir les attaques de type cross-site request forgery (CSRF) en rendant difficile pour les attaquants de prédire ou de réutiliser des jetons valides.";
         result.style.color = "green";

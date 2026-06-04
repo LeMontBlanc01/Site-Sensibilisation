@@ -469,7 +469,7 @@ function checkQ5() {
     const result = document.getElementById("result-q5");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     if (arraysEqual(selected, correct)) {
-        score ++;
+        score++;
         result.textContent = "Bonne réponse ! Maintenir les systèmes à jour avec les derniers correctifs de sécurité et restreindre les permissions des applications sont des mesures essentielles pour réduire la surface d'attaque et prévenir les accès non autorisés.";
         result.style.color = "green";
         recordQuestionReview('q5', selected, result.textContent, true);

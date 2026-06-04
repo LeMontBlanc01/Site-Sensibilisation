@@ -477,7 +477,7 @@ function checkQ5() {
     const result = document.getElementById("result-q5");  // Récupère l'élément HTML où sera affiché le message de résultat pour la question
 
     if (arraysEqual(selected, correct)) {
-        score ++;
+        score++;
         result.textContent = "Bonne réponse ! Pour vérifier l'authenticité d'un email, il est important de vérifier l'adresse de l'expéditeur, de ne pas cliquer sur les liens ou télécharger les pièces jointes. Il faut aussi faire attention aux fautes d'orthographe ou de grammaire, qui sont souvent présentes dans les emails de phishing. En cas de doute, il est recommandé de contacter directement l'entreprise ou la personne concernée pour vérifier l'authenticité de l'email.";
         result.style.color = "green";
         recordQuestionReview('q5', selected, result.textContent, true);
