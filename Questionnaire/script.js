@@ -32,7 +32,7 @@ const pageConfigs = {
       q12: { correct: ['regulier'] },
       q13: { correct: ['source'] },
       q14: { correct: ['malware'] },
-      q18: { correct: ['change'] },
+      q18: { correct: ['change'] },   
     },
     matchingQuestions: {
       15: { correctMap: { A: '3', B: '1', C: '2' } },
@@ -417,16 +417,24 @@ function checkQuestion(questionId) {
     
     const correct = pageConfig.questions[questionId].correct;
     const result = document.getElementById(`result-${questionId}`);
+    const n = parseInt(questionId.replace('q', ''), 10);
     
     if (arraysEqual(selected, correct)) {
-        result.textContent = "Bonne réponse !";
+        if (onBonneReponse[n]) {
+            onBonneReponse[n](result);
+        } else {
+            result.textContent = "Bonne réponse !";
+        }
         result.style.color = "green";
-        score++;
         recordQuestionReview(questionId, selected, result.textContent, true);
         document.getElementById(`btn-valider-${questionId}`).style.display = "none";
         document.getElementById(`btn-suivant-${questionId}`).style.display = "inline-block";
     } else {
-        result.textContent = "Mauvaise réponse.";
+        if (onMauvaiseReponse[n]) {
+            onMauvaiseReponse[n](result);
+        } else {
+            result.textContent = "Mauvaise réponse.";
+        }
         result.style.color = "red";
         recordQuestionReview(questionId, selected, result.textContent, false);
         document.getElementById(`btn-valider-${questionId}`).style.display = "none";
