@@ -39,6 +39,48 @@ const pageConfigs = {
       16: { correctMap: { A: '2', B: '1', C: '3' } },
       17: { correctMap: { A: '2', B: '1', C: '3' } },
     },
+    explications: {
+      bonnes: {
+        1: "Bonne réponse ! Un bon mot de passe doit contenir au moins 12 caractères, avec une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.",
+        2: "Bonne réponse ! La clé USB peut être infectée par un virus ou un malware, et en la connectant à votre ordinateur, vous risquez de contaminer votre système. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés.",
+        3: "Bonne réponse ! Les bonnes pratiques pour protéger ses données personnelles en ligne incluent : séparer les comptes professionnels et personnels et limiter les informations personnelles partagées sur les réseaux sociaux.",
+        4: "Bonne réponse ! Un VPN (Virtual Private Network soit Réseau privé virtuel) est un outil qui permet de sécuriser votre connexion internet en chiffrant vos données et en masquant votre adresse IP. Cela protège votre vie privée en ligne et vous permet d'accéder à des contenus restreints géographiquement.",
+        5: "Bonne réponse ! Pour vérifier l'authenticité d'un email, il est important de vérifier l'adresse de l'expéditeur, de ne pas cliquer sur les liens ou télécharger les pièces jointes. Il faut aussi faire attention aux fautes d'orthographe ou de grammaire, qui sont souvent présentes dans les emails de phishing. En cas de doute, il est recommandé de contacter directement l'entreprise ou la personne concernée pour vérifier l'authenticité de l'email.",
+        6: "Bonne réponse ! Il est important de maintenir son système d'exploitation et ses logiciels à jour pour bénéficier des dernières protections contre les failles de sécurité. Les mises à jour corrigent souvent des vulnérabilités qui pourraient être exploitées par des cybercriminels.",
+        7: "Bonne réponse ! Il ne faut pas hésiter à signaler les contenus inappropriés ou les comportements suspects. Ne partagez jamais vos mots de passe ou vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.",
+        8: "Bonne réponse ! Utiliser un gestionnaire de mots de passe est une bonne pratique pour sécuriser ses mots de passe. Un gestionnaire de mots de passe stocke vos mots de passe de manière sécurisée et vous permet de générer des mots de passe forts et uniques pour chaque compte. Exemple: KeePass, LastPass, Dashlane.",
+        9: "Bonne réponse ! Il faut faire attention aux appareils qui vous sont inconnus, comme les clés USB trouvées ou prêtées par des personnes que vous ne connaissez pas. Ces appareils peuvent être infectés par des virus ou des logiciels malveillants qui peuvent compromettre la sécurité de votre ordinateur.",
+        10: "Bonne réponse ! Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter. Assurez-vous que l'URL commence par 'https://' et que le nom de domaine est correct pour éviter les sites de phishing.",
+        11: "Bonne réponse ! L'authentification à deux facteurs (2FA) est une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte. En plus de votre mot de passe, vous devez fournir un code généré par une application d'authentification ou reçu par SMS, ce qui rend plus difficile pour les attaquants d'accéder à votre compte.",
+        12: "Bonne réponse ! Sauvegarder régulièrement ses données est une bonne pratique pour éviter de les perdre en cas d'incident (panne, attaque, etc.). Utilisez des solutions de sauvegarde en ligne ou des disques durs externes pour protéger vos données importantes.",
+        13: "Bonne réponse ! Vérifiez toujours la source d'un logiciel ou d'une application avant de le télécharger. Téléchargez uniquement à partir de sites officiels ou de sources fiables pour éviter les logiciels malveillants.",
+        14: "Bonne réponse ! Un malware (contraction de 'malicious software') est un logiciel malveillant conçu pour infiltrer, endommager ou perturber un système informatique. Les malwares peuvent prendre différentes formes, comme les virus, les ransomwares, etc. Ils peuvent voler des données, espionner les utilisateurs ou rendre un système inutilisable.",
+        15: "Bonne réponse ! Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).",
+        16: "Bonne réponse ! Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.",
+        17: "Bonne réponse ! Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.",
+        18: "Bonne réponse ! En cas de suspicion de phishing, il est important de changer immédiatement vos mots de passe pour les comptes concernés. De plus, signalez l'incident à votre service informatique ou à l'équipe de sécurité de votre organisation pour qu'ils puissent prendre les mesures nécessaires pour protéger les autres utilisateurs.",
+      },
+      mauvaises: {
+        1: "Mauvaise réponse. Un bon mot de passe doit être long et complexe, contenant une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.",
+        2: "Mauvaise réponse. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés, car ils peuvent être infectés par des virus ou des malwares qui peuvent contaminer votre système.",
+        3: "Mauvaise réponse. Il ne faut pas hésiter à dissocier le professionnel du personnel.",
+        4: "Mauvaise réponse. Un VPN est un réseau privé virtuel qui sécurise votre connexion internet en chiffrant vos données et en masquant votre adresse IP.",
+        5: "Mauvaise réponse. Il faut vérifier plusieurs éléments dans un e-mail pour s'assurer de son authenticité. Comme l'adresse de l'expéditeur, les liens présents dans le mail, les pièces jointes, et faire attention aux fautes d'orthographe ou de grammaire.",
+        6: "Mauvaise réponse. Les mises à jour sont importantes pour la sécurité de votre système.",
+        7: "Mauvaise réponse. Ne partagez jamais vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.",
+        8: "Mauvaise réponse. Un gestionnaire de mots de passe est un outil qui peut vous aider à gérer vos mots de passe de manière sécurisée.",
+        9: "Mauvaise réponse. Il faut faire attention aux appareils qui vous sont inconnus, ces appareils peuvent être infectés par des virus ou des logiciels malveillants.",
+        10: "Mauvaise réponse. Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter.",
+        11: "Mauvaise réponse. Il existe une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte, Cette méthode s'appelle l'authentification à deux facteurs (2FA).",
+        12: "Mauvaise réponse. Soyez régulier dans vos sauvegardes.",
+        13: "Mauvaise réponse. Faites attention à la provenance des applications que vous téléchargez.",
+        14: "Mauvaise réponse. Un malware est un type de logiciel qui peut infiltrer, endommager ou perturber un système informatique.",
+        15: "Mauvaise réponse ! Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).",
+        16: "Mauvaise réponse ! Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.",
+        17: "Mauvaise réponse ! Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.",
+        18: "Mauvaise réponse. Priorisez la sécurité de vos comptes en changeant immédiatement vos mots de passe et signaler l'incident.",
+      }
+    }
   },
   'moyen.html': {
     niveau: 'Moyen',
@@ -67,6 +109,48 @@ const pageConfigs = {
       16: { correctMap: { A: '3', B: '2', C: '1' } },
       17: { correctMap: { A: '2', B: '1', C: '3' } },
     },
+    explications: {
+      bonnes: {
+        1: "Bonne réponse ! Pour un mot de passe fort, il est recommandé d'utiliser au moins 12 caractères, incluant des majuscules, des minuscules, des chiffres et des symboles.",
+        2: "Bonne réponse ! La segmentation réseau permet de diviser un réseau en sous-réseaux plus petits, ce qui améliore la sécurité en limitant la propagation d'une attaque.",
+        3: "Bonne réponse ! L'authentification à deux facteurs (2FA) ajoute une couche de sécurité supplémentaire en demandant une preuve d'identité supplémentaire, et l'utilisation de mots de passe uniques pour chaque compte réduit le risque d'accès non autorisé en cas de fuite de données.",
+        4: "Bonne réponse ! Une demande urgente est un indicateur classique d'une tentative de phishing, car les attaquants cherchent à créer un sentiment d'urgence pour inciter les victimes à agir rapidement et sans réfléchir.",
+        5: "Bonne réponse ! Maintenir les systèmes à jour avec les derniers correctifs de sécurité et restreindre les permissions des applications sont des mesures essentielles pour réduire la surface d'attaque et prévenir les accès non autorisés.",
+        6: "Bonne réponse ! Un gestionnaire de mots de passe permet de stocker et de générer des mots de passe forts et uniques pour chaque compte, ce qui améliore considérablement la sécurité en réduisant le risque de réutilisation de mots de passe et en facilitant la gestion des identifiants.",
+        7: "Bonne réponse ! Des connexions RDP inhabituelles entre machines internes peuvent être un indicateur d'une attaque par mouvement latéral, où un attaquant qui a compromis une machine tente de se déplacer latéralement à travers le réseau pour accéder à d'autres ressources.",
+        8: "Bonne réponse ! L'utilisation de HTTPS et l'indication d'un icône cadenas dans la barre d'adresse sont des signes que la connexion est sécurisée.",
+        9: "Bonne réponse ! Un trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissant sur le réseau, et des ports ouverts inattendus sur plusieurs machines sont tous des indicateurs potentiels d'une compromission du réseau.",
+        10: "Bonne réponse ! Des permissions inhabituelles, un éditeur inconnu, ou une taille de fichier anormalement grande ou petite peuvent être des indicateurs d'une compromission ou d'une activité malveillante.",
+        11: "Bonne réponse ! Le principe du moindre privilège consiste à accorder aux utilisateurs uniquement les permissions nécessaires pour accomplir leurs tâches, réduisant ainsi les risques.",
+        12: "Bonne réponse ! Stocker une copie locale des données et une copie dans le cloud chiffré offre une protection contre la perte de données due à des incidents locaux (comme un vol ou un incendie) tout en assurant que les données sont sécurisées contre les accès non autorisés grâce au chiffrement.",
+        13: "Bonne réponse ! Révoquer les sessions et changer les mots de passe est une mesure de sécurité importante en cas de compromission.",
+        14: "Bonne réponse ! Protéger les données en cas de vol est crucial pour éviter que des informations sensibles ne tombent entre de mauvaises mains, ce qui peut entraîner des conséquences graves comme le vol d'identité.",
+        15: "Bonne réponse ! Les données personnelles sont des informations permettant d'identifier une personne, même indirectement. Les données sensibles sont des catégories nécessitant une protection renforcée (santé, opinions, biométrie...). Les données confidentielles internes sont des informations métier non publiques (procédures, contrats, architecture IT).",
+        16: "Bonne réponse ! Le principe du moindre privilège consiste à limiter les accès pour réduire l'impact d'un compte compromis. La journalisation centralisée est une détection plus rapide d'anomalies et corrélations d'évènements. La sensibilisation continue est une réduction du risque humain grâce à des rappels réguliers et contextualisés.",
+        17: "Bonne réponse ! Le VPN (réseau virtuel) chiffre le traffic entre votre appareil et un serveur distant, il masque votre IP mais ne rend pas anonyme. Le chiffrement de bout en bout (E2EE) garantit que seuls l'expéditeur et le destinataire peuvent lire le message, même le serveur intermédiaire ne peut pas le déchiffrer. Le certificat SSL/TLS (cadenas HTTPS) chiffre les données en transit entre votre navigateur et le site web, il ne garantit pas que le site est légitime.",
+        18: "Bonne réponse ! La compromission de la clé maître donnant accès à l'ensemble du coffre est un risque majeur en matière de sécurité.",
+      },
+      mauvaises: {
+        1: "Mauvaise réponse. Il est recommandé d'utiliser au moins 12 caractères pour un mot de passe fort.",
+        2: "Mauvaise réponse. La segmentation réseau consiste à diviser un réseau en sous-réseaux pour limiter les risques en cas de compromission.",
+        3: "Mauvaise réponse. Évitez de partager et de réutiliser les mêmes mots de passe. Il faut plutôt ajouter une couche de sécurité supplémentaire avec l'authentification à deux facteurs (2FA), et utiliser un mot de passe unique pour chaque compte.",
+        4: "Mauvaise réponse. Les attaquants cherchent à vous dépechez.",
+        5: "Mauvaise réponse. La localisation et le Bluetooth activés en permanence peut être risqué. Maintenez les systèmes à jour avec les derniers correctifs de sécurité et restreignez les permissions des applications pour réduire les risques.",
+        6: "Mauvaise réponse. Un gestionnaire de mots de passe est comme un coffre-fort pour vos mots de passe.",
+        7: "Mauvaise réponse. L'indicateur qui permet le mieux de détecter une attaque par mouvement latéral dans un réseau d'entreprise est la présence de connexions RDP inhabituelles entre machines internes.",
+        8: "Mauvaise réponse. Voyez ce qui est présent sur le site (https et icône cadenas).",
+        9: "Mauvaise réponse. Des indicateurs potentiels d'une compromission du réseau incluent un trafic sortant inhabituel vers des pays étrangers, des appareils inconnus apparaissant sur le réseau, et des ports ouverts inattendus sur plusieurs machines.",
+        10: "Mauvaise réponse. Pensez à ce qui semble le plus suspect, un éditeur inconnu, des permissions inhabituelles, ou une taille de fichier anormalement grande ou petite.",
+        11: "Mauvaise réponse. Le principe du moindre privilège consiste à accorder aux utilisateurs uniquement les permissions nécessaires pour accomplir leurs tâches, réduisant ainsi les risques.",
+        12: "Mauvaise réponse. Il est recommandé de stocker une copie locale des données et une copie dans le cloud chiffré pour assurer la sécurité et la disponibilité des données.",
+        13: "Mauvaise réponse. Révoquer les sessions et changer les mots de passe est une mesure de sécurité importante en cas de compromission.",
+        14: "Mauvaise réponse. Protéger vos données.",
+        15: "Mauvaise réponse ! Les données personnelles sont des informations permettant d'identifier une personne, même indirectement. Les données sensibles sont des catégories nécessitant une protection renforcée (santé, opinions, biométrie...). Les données confidentielles internes sont des informations métier non publiques (procédures, contrats, architecture IT).",
+        16: "Mauvaise réponse ! Le principe du moindre privilège consiste à limiter les accès pour réduire l'impact d'un compte compromis. La journalisation centralisée est une détection plus rapide d'anomalies et corrélations d'évènements. La sensibilisation continue est une réduction du risque humain grâce à des rappels réguliers et contextualisés.",
+        17: "Mauvaise réponse ! Le VPN (réseau virtuel) chiffre le traffic entre votre appareil et un serveur distant, il masque votre IP mais ne rend pas anonyme. Le chiffrement de bout en bout (E2EE) garantit que seuls l'expéditeur et le destinataire peuvent lire le message. Le certificat SSL/TLS (cadenas HTTPS) chiffre les données en transit entre votre navigateur et le site web, il ne garantit pas que le site est légitime.",
+        18: "Mauvaise réponse. Le risque majeur en matière de sécurité est la compromission de la clé maître donnant accès à l'ensemble du coffre.",
+      }
+    }
   },
   'difficile.html': {
     niveau: 'Difficile',
@@ -95,6 +179,48 @@ const pageConfigs = {
       16: { correctMap: { A: '1', B: '2', C: '3' } },
       17: { correctMap: { A: '3', B: '2', C: '1' } },
     },
+    explications: {
+      bonnes: {
+        1: "",
+        2: "",
+        3: "",
+        4: "",
+        5: "",
+        6: "",
+        7: "",
+        8: "",
+        9: "",
+        10: "",
+        11: "",
+        12: "",
+        13: "",
+        14: "",
+        15: "",
+        16: "",
+        17: "",
+        18: "",
+      },
+      mauvaises: {
+        1: "",
+        2: "",
+        3: "",
+        4: "",
+        5: "",
+        6: "",
+        7: "",
+        8: "",
+        9: "",
+        10: "",
+        11: "",
+        12: "",
+        13: "",
+        14: "",
+        15: "",
+        16: "",
+        17: "",
+        18: "",
+      }
+    }
   },
 };
 
@@ -420,21 +546,13 @@ function checkQuestion(questionId) {
     const n = parseInt(questionId.replace('q', ''), 10);
     
     if (arraysEqual(selected, correct)) {
-        if (onBonneReponse[n]) {
-            onBonneReponse[n](result);
-        } else {
-            result.textContent = "Bonne réponse !";
-        }
+        result.textContent = pageConfig.explications.bonnes[n] || "Bonne réponse !";
         result.style.color = "green";
         recordQuestionReview(questionId, selected, result.textContent, true);
         document.getElementById(`btn-valider-${questionId}`).style.display = "none";
         document.getElementById(`btn-suivant-${questionId}`).style.display = "inline-block";
     } else {
-        if (onMauvaiseReponse[n]) {
-            onMauvaiseReponse[n](result);
-        } else {
-            result.textContent = "Mauvaise réponse.";
-        }
+        result.textContent = pageConfig.explications.mauvaises[n] || "Mauvaise réponse.";
         result.style.color = "red";
         recordQuestionReview(questionId, selected, result.textContent, false);
         document.getElementById(`btn-valider-${questionId}`).style.display = "none";
@@ -572,185 +690,6 @@ function checkQ14() {
 //Bonnes réponses : clé = bloc gauche (A/B/C), valeur = bloc droit attendu (1/2/3)
 const configs = pageConfig.matchingQuestions;
 
-//Appelée quand toutes les connexions d'une question sont correctes
-//À compléter avec une explication personnalisée par question
-function onBonneReponse1(result) {
-        result.textContent = "Bonne réponse ! Un bon mot de passe doit contenir au moins 12 caractères, avec une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
-}
-
-function onBonneReponse2(result) {
-  result.textContent = "Bonne réponse ! La clé USB peut être infectée par un virus ou un malware, et en la connectant à votre ordinateur, vous risquez de contaminer votre système. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés.";
-}
-
-
-function onBonneReponse3(result) {
-  result.textContent = "Bonne réponse ! Les bonnes pratiques pour protéger ses données personnelles en ligne incluent : séparer les comptes professionnels et personnels et limiter les informations personnelles partagées sur les réseaux sociaux.";
-}
-
-function onBonneReponse4(result) {
-        result.textContent = "Bonne réponse ! Un VPN (Virtual Private Network soit Réseau privé virtuel) est un outil qui permet de sécuriser votre connexion internet en chiffrant vos données et en masquant votre adresse IP. Cela protège votre vie privée en ligne et vous permet d'accéder à des contenus restreints géographiquement.";
-}
-
-function onBonneReponse5(result) {
-        result.textContent = "Bonne réponse ! Pour vérifier l'authenticité d'un email, il est important de vérifier l'adresse de l'expéditeur, de ne pas cliquer sur les liens ou télécharger les pièces jointes. Il faut aussi faire attention aux fautes d'orthographe ou de grammaire, qui sont souvent présentes dans les emails de phishing. En cas de doute, il est recommandé de contacter directement l'entreprise ou la personne concernée pour vérifier l'authenticité de l'email.";
-}
-
-function onBonneReponse6(result) {
-        result.textContent = "Bonne réponse ! Il est important de maintenir son système d'exploitation et ses logiciels à jour pour bénéficier des dernières protections contre les failles de sécurité. Les mises à jour corrigent souvent des vulnérabilités qui pourraient être exploitées par des cybercriminels.";
-}
-
-function onBonneReponse7(result) {
-        result.textContent = "Bonne réponse ! Il ne faut pas hésiter à signaler les contenus inappropriés ou les comportements suspects. Ne partagez jamais vos mots de passe ou vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
-}
-
-function onBonneReponse8(result) {
-        result.textContent = "Bonne réponse ! Utiliser un gestionnaire de mots de passe est une bonne pratique pour sécuriser ses mots de passe. Un gestionnaire de mots de passe stocke vos mots de passe de manière sécurisée et vous permet de générer des mots de passe forts et uniques pour chaque compte. Exemple: KeePass, LastPass, Dashlane.";
-}
-
-function onBonneReponse9(result) {
-        result.textContent = "Bonne réponse ! Il faut faire attention aux appareils qui vous sont inconnus, comme les clés USB trouvées ou prêtées par des personnes que vous ne connaissez pas. Ces appareils peuvent être infectés par des virus ou des logiciels malveillants qui peuvent compromettre la sécurité de votre ordinateur.";
-}
-
-function onBonneReponse10(result) {
-        result.textContent = "Bonne réponse ! Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter. Assurez-vous que l'URL commence par 'https://' et que le nom de domaine est correct pour éviter les sites de phishing.";
-}
-
-function onBonneReponse11(result) {
-        result.textContent = "Bonne réponse ! L'authentification à deux facteurs (2FA) est une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte. En plus de votre mot de passe, vous devez fournir un code généré par une application d'authentification ou reçu par SMS, ce qui rend plus difficile pour les attaquants d'accéder à votre compte.";
-}
-
-function onBonneReponse12(result) {
-        result.textContent = "Bonne réponse ! Sauvegarder régulièrement ses données est une bonne pratique pour éviter de les perdre en cas d'incident (panne, attaque, etc.). Utilisez des solutions de sauvegarde en ligne ou des disques durs externes pour protéger vos données importantes.";
-}
-
-function onBonneReponse13(result) {
-        result.textContent = "Bonne réponse ! Vérifiez toujours la source d'un logiciel ou d'une application avant de le télécharger. Téléchargez uniquement à partir de sites officiels ou de sources fiables pour éviter les logiciels malveillants.";
-}
-
-function onBonneReponse14(result) {
-        result.textContent = "Bonne réponse ! Un malware (contraction de 'malicious software') est un logiciel malveillant conçu pour infiltrer, endommager ou perturber un système informatique. Les malwares peuvent prendre différentes formes, comme les virus, les ransomwares, etc. Ils peuvent voler des données, espionner les utilisateurs ou rendre un système inutilisable.";
-}
-
-function onBonneReponse15(result) {
-  result.textContent = "Bonne réponse ! Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).";
-}
-
-function onBonneReponse16(result) {
-  result.textContent = "Bonne réponse ! Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.";
-}
-
-function onBonneReponse17(result) {
-  result.textContent = "Bonne réponse ! Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.";
-}
-
-function onMauvaiseReponse1(result) {
-        result.textContent = "Mauvaise réponse. Un bon mot de passe doit être long et complexe, contenant une combinaison de lettres majuscules et minuscules, de chiffres et de caractères spéciaux.";
-}
-
-function onMauvaiseReponse2(result) {
-        result.textContent = "Mauvaise réponse. Il est important de ne pas utiliser de périphériques de stockage inconnus ou non sécurisés, car ils peuvent être infectés par des virus ou des malwares qui peuvent contaminer votre système.";
-}
-
-function onMauvaiseReponse3(result) {
-        result.textContent = "Mauvaise réponse. Il ne faut pas hésiter à dissocier le professionnel du personnel.";
-}
-
-function onMauvaiseReponse4(result) {
-        result.textContent = "Mauvaise réponse. Un VPN est un réseau privé virtuel qui sécurise votre connexion internet en chiffrant vos données et en masquant votre adresse IP.";
-}
-
-function onMauvaiseReponse5(result) {
-        result.textContent = "Mauvaise réponse. Il faut vérifier plusieurs éléments dans un e-mail pour s'assurer de son authenticité. Comme l'adresse de l'expéditeur, les liens présents dans le mail, les pièces jointes, et faire attention aux fautes d'orthographe ou de grammaire.";
-}
-
-function onMauvaiseReponse6(result) {
-  result.textContent = "Mauvaise réponse. Les mises à jour sont importantes pour la sécurité de votre système.";
-}
-
-function onMauvaiseReponse7(result) {
-  result.textContent = "Mauvaise réponse. Ne partagez jamais vos informations personnelles avec des inconnus, même s'ils prétendent être de confiance.";
-}
-
-function onMauvaiseReponse8(result) {
-  result.textContent = "Mauvaise réponse. Un gestionnaire de mots de passe est un outil qui peut vous aider à gérer vos mots de passe de manière sécurisée.";
-}
-
-function onMauvaiseReponse9(result) {
-  result.textContent = "Mauvaise réponse. Il faut faire attention aux appareils qui vous sont inconnus, ces appareils peuvent être infectés par des virus ou des logiciels malveillants.";
-}
-
-function onMauvaiseReponse10(result) {
-  result.textContent = "Mauvaise réponse. Il faut toujours vérifier l'adresse URL d'un site avant de saisir des informations personnelles ou de se connecter.";
-}
-
-function onMauvaiseReponse11(result) {
-  result.textContent = "Mauvaise réponse. Il existe une méthode de sécurité qui nécessite deux formes d'identification pour accéder à un compte, Cette méthode s'appelle l'authentification à deux facteurs (2FA).";
-}
-
-function onMauvaiseReponse12(result) {
-  result.textContent = "Mauvaise réponse. Soyez régulier dans vos sauvegardes.";
-}
-
-function onMauvaiseReponse13(result) {
-  result.textContent = "Mauvaise réponse. Faites attention à la provenance des applications que vous téléchargez.";
-}
-
-function onMauvaiseReponse14(result) {
-  result.textContent = "Mauvaise réponse. Un malware est un type de logiciel qui peut infiltrer, endommager ou perturber un système informatique.";
-}
-
-function onMauvaiseReponse15(result) {
-  result.textContent = "Mauvaise réponse ! Si l'adresse de messagerie a été usurpée, il faut immédiatement changer le mot de passe pour éviter que l'attaquant ne conserve l'accès au compte et ne continue à envoyer des messages frauduleux en votre nom. Si, par erreur, vous communiquez votre numéro de carte bancaire vous devez faire opposition auprès de votre banque et déposer plainte. Si vous identifiez une adresse de site d'hameçonnage (site qui peut voler des identifiants, infecter le système ou accéder au réseau) vous devez le signaler à Phishing Initiative (Plateforme de signalement et de prévention contre l'hameçonnage).";
-}
-
-function onMauvaiseReponse16(result) {
-  result.textContent = "Mauvaise réponse ! Si vous travaillez régulièrement à l'extérieur, évitez de vous connecter à un réseau Wi-Fi public, car ces réseaux sont souvent non sécurisés et peuvent permettre à des personnes malveillantes d'intercepter vos données. Si vous perdez ou vous vous faites voler votre téléphone, vous devez bloquer votre ligne en appelant votre opérateur et bloquer votre téléphone en communiquant votre code IMEI (identifiant unique de la puce réseau de votre appareil), puis déposer plainte. Si vous téléchargez un jeu sur votre téléphone, n'autorisez pas l'accès à vos photos, vos contacts et vos messages, car un jeu n'a aucune raison légitime d'accéder à ces données personnelles.";
-}
-
-function onMauvaiseReponse17(result) {
-  result.textContent = "Mauvaise réponse ! Si vous êtes à la maison et vous devez consulter vos messages professionnels, assurez-vous de le faire uniquement à partir de votre ordinateur professionnel. Si vous vous apprêtez à stocker des documents professionnels sur un service en ligne personnel, demandez l'autorisation à votre employeur et prenez des mesures de sécurité supplémentaires. Si ça vous arrive de réaliser des téléchargements illégaux depuis votre ordinateur professionnel, votre entreprise pourrait contrôler votre utilisation de la connexion Internet professionnelle et se retourner contre vous.";
-}
-
-// Regroupe les callbacks par numéro de question pour les appeler dans la boucle
-const onBonneReponse = {
-  1: onBonneReponse1,
-  2: onBonneReponse2,
-  3: onBonneReponse3,
-  4: onBonneReponse4,
-  5: onBonneReponse5,
-  6: onBonneReponse6,
-  7: onBonneReponse7,
-  8: onBonneReponse8,
-  9: onBonneReponse9,
-  10: onBonneReponse10,
-  11: onBonneReponse11,
-  12: onBonneReponse12,
-  13: onBonneReponse13,
-  14: onBonneReponse14,
-  15: onBonneReponse15,
-  16: onBonneReponse16,
-  17: onBonneReponse17,
-};
-
-const onMauvaiseReponse = {
-  1: onMauvaiseReponse1,
-  2: onMauvaiseReponse2,
-  3: onMauvaiseReponse3,
-  4: onMauvaiseReponse4,
-  5: onMauvaiseReponse5,
-  6: onMauvaiseReponse6,
-  7: onMauvaiseReponse7,
-  8: onMauvaiseReponse8,
-  9: onMauvaiseReponse9,
-  10: onMauvaiseReponse10,
-  11: onMauvaiseReponse11,
-  12: onMauvaiseReponse12,
-  13: onMauvaiseReponse13,
-  14: onMauvaiseReponse14,
-  15: onMauvaiseReponse15,
-  16: onMauvaiseReponse16,
-  17: onMauvaiseReponse17,
-};
 
 // Canvas
 
@@ -831,14 +770,14 @@ window.addEventListener('load', () => {
 
       const result = document.getElementById(`result-q${n}`);
       if (bonnes === 3) {
-        onBonneReponse[n](result); //Appelle la fonction spécifique à la question
+        result.textContent = pageConfig.explications.bonnes[n] || "Bonne réponse !";
         result.style.color = "green";
         score++;
         recordQuestionReview(`q${n}`, [], result.textContent, true);
         document.getElementById(`btn-valider-q${n}`).style.display = "none";
         document.getElementById(`btn-suivant-q${n}`).style.display = "inline-block";
       } else {
-        onMauvaiseReponse[n](result); //Appelle la fonction spécifique à la question
+        result.textContent = pageConfig.explications.mauvaises[n] || "Mauvaise réponse.";
         result.style.color = "red";
         recordQuestionReview(`q${n}`, [], result.textContent, false);
         document.getElementById(`btn-valider-q${n}`).style.display = "none";
