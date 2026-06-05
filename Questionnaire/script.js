@@ -404,11 +404,29 @@ function melangerReponses(questionId) {
 }
 
 window.addEventListener('load', () => {
-  loadSavedQuizState();
-  loadQuizFlags();
+  // Déterminer si on arrive en mode édition depuis les résultats
+  const isEditMode = localStorage.getItem('backToResults') === '1' || 
+                     localStorage.getItem('editQuestionId');
+
+  if (!isEditMode) {
+    // Nouvelle partie: on repart de zéro
+    score = 0;
+    quizReview = [];
+    quizAnswers = {};
+    quizFlags = {};
+    localStorage.removeItem('quizReview');
+    localStorage.removeItem('quizScore');
+    localStorage.removeItem(pageConfig.quizAnswersKey);
+    localStorage.removeItem(pageConfig.flagStorageKey);
+  } else {
+    // Retour depuis résultats pour éditer: on restaure l'état
+    loadSavedQuizState();
+    loadQuizFlags();
+  }
+
   initFlagButtons();
   initRandomQuestions();
-}); // Initialise les questions aléatoires au chargement de la page
+});
 
 // Si on est revenu depuis la page de résultats pour éditer une question,
 // afficher directement cette question
