@@ -562,8 +562,6 @@ function checkQuestion(questionId) {
 }
 
 
-
-
 // a = réponses cochées par l'utilisateur
 // b = bonnes réponses définies dans le code
 // La fonction compare les deux tableaux pour vérifier si la réponse est correcte
@@ -692,7 +690,6 @@ const configs = pageConfig.matchingQuestions;
 
 
 // Canvas
-
 // Ajuste la taille du canvas à celle de son conteneur
 function resizeCanvas(n) {
   const s = state[n];
@@ -724,7 +721,7 @@ function redraw(n) {
   });
 }
 
-
+// Initialise les interactions pour les questions de type "relier les éléments", en configurant les clics sur les blocs gauche et droit pour créer des connexions, et le bouton de validation pour vérifier les connexions et afficher les résultats
 window.addEventListener('load', () => {
   [15, 16, 17].forEach(n => {
     const canvas = document.getElementById(`lignes${n}`);
