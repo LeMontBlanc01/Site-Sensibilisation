@@ -49,6 +49,7 @@ function exportResults() {
   const niveau = localStorage.getItem('quizNiveau');
   const nom = localStorage.getItem('quizNom');
   const total = localStorage.getItem('quizTotal') || '15';
+  const correction = JSON.parse(localStorage.getItem('quizCorrection'));
 
   if (!score || !niveau || !nom) {
     alert('Aucun résultat disponible à exporter.');
