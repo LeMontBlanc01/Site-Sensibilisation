@@ -37,24 +37,32 @@ const pageConfigs = {
   }
 };
 
-const quizConfig = {
-  Facile: {
-    lastQuizPage: 'facile.html',
-    flagStorageKey: 'quizFlags_facile',
-    quizAnswersKey: 'quizAnswers_facile',
-  },
-  moyen: {
-    lastQuizPage: 'moyen.html',
-    flagStorageKey: 'quizFlags_moyen',
-    quizAnswersKey: 'quizAnswers_moyen',
-  },
-  Difficile: {
-    lastQuizPage: 'difficile.html',
-    flagStorageKey: 'quizFlags_difficile',
-    quizAnswersKey: 'quizAnswers_difficile'
-  }
-};
+const levelMap = {
 
+  Facile: 'facile.html',
+
+  facile: 'facile.html',
+
+  Moyen: 'moyen.html',
+
+  moyen: 'moyen.html',
+
+  Difficile: 'difficile.html',
+
+  difficile: 'difficile.html',
+
+  'facile.html': 'facile.html',
+
+  'moyen.html': 'moyen.html',
+
+  'difficile.html': 'difficile.html'
+
+};
+ 
+const configKey = levelMap[niveau];
+
+    const config = quizConfig[configKey];
+ 
 const pageConfig = pageConfigs[pageName] || pageConfigs['facile.html'];
 const QuizConfig = quizConfig[pageConfig.niveau] || quizConfig['Facile'];
 
