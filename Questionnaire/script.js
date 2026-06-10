@@ -37,34 +37,9 @@ const pageConfigs = {
   }
 };
 
-const levelMap = {
 
-  Facile: 'facile.html',
-
-  facile: 'facile.html',
-
-  Moyen: 'moyen.html',
-
-  moyen: 'moyen.html',
-
-  Difficile: 'difficile.html',
-
-  difficile: 'difficile.html',
-
-  'facile.html': 'facile.html',
-
-  'moyen.html': 'moyen.html',
-
-  'difficile.html': 'difficile.html'
-
-};
- 
-const configKey = levelMap[niveau];
-
-    const config = quizConfig[configKey];
- 
 const pageConfig = pageConfigs[pageName] || pageConfigs['facile.html'];
-const QuizConfig = quizConfig[pageConfig.niveau] || quizConfig['Facile'];
+
 
 // Fonction pour charger l'état des flags de révision depuis le localStorage
 function loadQuizFlags() {
@@ -280,9 +255,9 @@ async function goToResults() {
     if (!Number.isNaN(parsed)) displayed = parsed;
   }
   
-if (progress && progressText && currentIndex > 0) {
-    progress.value = currentIndex;
-    progressText.textContent = `${currentIndex}/${questionOrder.length}`;
+  if (displayed !== score) {
+    score = displayed;
+    updateScore();
   }
 
   const confirmed = confirm('Voulez-vous définitivement valider vos réponses et voir votre score ?');
@@ -324,7 +299,7 @@ function showQuestion(id) {
   document.getElementById(id).style.display = 'block';  // On affiche uniquement la question dont l'id est passé en paramètre
   
   // Vide les messages de résultat quand on change de question
-  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15', 'q16', 'q17'].forEach(qid => {
+  ['q1','q2','q3','q4','q5','q6','q7','q8','q9','q10','q11','q12','q13','q14','q15', 'q16', 'q17','q18'].forEach(qid => {
     if (id !== qid) {
       const r = document.getElementById(`result-${qid}`);
       if (r) r.textContent = '';
@@ -547,6 +522,10 @@ function checkQ13() {
 // Fonction qui permet de vérifier la réponse de la question 14
 function checkQ14() {
   checkQuestion('q14');
+}
+
+function checkQ18() {
+  checkQuestion('q18');
 }
 
 //Q15 / Q16 / Q17

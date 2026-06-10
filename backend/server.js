@@ -24,11 +24,29 @@ if (!fs.existsSync(DB_PATH)) {
 app.post('/api/verify-question', (req, res) => {
     const { nom, niveau, questionId, reponsesUtilisateur } = req.body;
     const exactKey = Object.keys(quizConfig).find(k => k.toLowerCase() === (niveau || '').toLowerCase()) || niveau;
-    const config = quizConfig[exactKey];
-
-    const questionNum = questionId.replace('q', '');
+    const levelMap = {
+        Facile: 'facile.html',
+        facile: 'facile.html',
+        Moyen: 'moyen.html',
+        moyen: 'moyen.html',
+        Difficile: 'difficile.html',
+        difficile: 'difficile.html',
+        'facile.html': 'facile.html',
+        'moyen.html': 'moyen.html',
+        'difficile.html': 'difficile.html'
+    };
+    const configKey = levelMap[niveau];
+    const config = quizConfig[configKey];
+    const questionNum = questionId ? questionId.replace('q', '') : null;
     const num = parseInt(questionNum);
     let isCorrect = false;
+
+    if (!config) {
+    return res.status(400).json({
+        error: `Configuration introuvable pour le niveau : ${niveau}`,
+        niveauxDisponibles: Object.keys(quizConfig)
+    });
+}
 
     if (num >= 15 && num <= 17) {
         const bonnesReponses = config.matchingQuestions[num].correctMap;
