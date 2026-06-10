@@ -37,8 +37,34 @@ const pageConfigs = {
   }
 };
 
-const pageConfig = pageConfigs[pageName] || pageConfigs['facile.html'];
+const levelMap = {
 
+  Facile: 'facile.html',
+
+  facile: 'facile.html',
+
+  Moyen: 'moyen.html',
+
+  moyen: 'moyen.html',
+
+  Difficile: 'difficile.html',
+
+  difficile: 'difficile.html',
+
+  'facile.html': 'facile.html',
+
+  'moyen.html': 'moyen.html',
+
+  'difficile.html': 'difficile.html'
+
+};
+ 
+const configKey = levelMap[niveau];
+
+    const config = quizConfig[configKey];
+ 
+const pageConfig = pageConfigs[pageName] || pageConfigs['facile.html'];
+const QuizConfig = quizConfig[pageConfig.niveau] || quizConfig['Facile'];
 
 // Fonction pour charger l'état des flags de révision depuis le localStorage
 function loadQuizFlags() {
