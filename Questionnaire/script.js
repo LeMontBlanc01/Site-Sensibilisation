@@ -254,7 +254,6 @@ async function goToResults() {
     const parsed = parseInt((scoreEl.textContent || '').replace(/\D/g, ''), 10);
     if (!Number.isNaN(parsed)) displayed = parsed;
   }
-  
   if (displayed !== score) {
     score = displayed;
     updateScore();
