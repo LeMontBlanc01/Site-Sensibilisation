@@ -26,9 +26,6 @@ app.post('/api/verify-question', (req, res) => {
     const exactKey = Object.keys(quizConfig).find(k => k.toLowerCase() === (niveau || '').toLowerCase()) || niveau;
     const config = quizConfig[exactKey];
 
-
-
-
     const questionNum = questionId.replace('q', '');
     const num = parseInt(questionNum);
     let isCorrect = false;

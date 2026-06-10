@@ -37,8 +37,26 @@ const pageConfigs = {
   }
 };
 
-const pageConfig = pageConfigs[pageName] || pageConfigs['facile.html'];
+const quizConfig = {
+  Facile: {
+    lastQuizPage: 'facile.html',
+    flagStorageKey: 'quizFlags_facile',
+    quizAnswersKey: 'quizAnswers_facile',
+  },
+  moyen: {
+    lastQuizPage: 'moyen.html',
+    flagStorageKey: 'quizFlags_moyen',
+    quizAnswersKey: 'quizAnswers_moyen',
+  },
+  Difficile: {
+    lastQuizPage: 'difficile.html',
+    flagStorageKey: 'quizFlags_difficile',
+    quizAnswersKey: 'quizAnswers_difficile'
+  }
+};
 
+const pageConfig = pageConfigs[pageName] || pageConfigs['facile.html'];
+const QuizConfig = quizConfig[pageConfig.niveau] || quizConfig['Facile'];
 
 // Fonction pour charger l'état des flags de révision depuis le localStorage
 function loadQuizFlags() {
