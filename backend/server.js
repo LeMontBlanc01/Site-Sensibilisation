@@ -26,9 +26,7 @@ app.post('/api/verify-question', (req, res) => {
     const exactKey = Object.keys(quizConfig).find(k => k.toLowerCase() === (niveau || '').toLowerCase()) || niveau;
     const config = quizConfig[exactKey];
 
-    if (!config) {
-        return res.status(400).json({ error: `Configuration introuvable pour le niveau : ${niveau}` });
-    }
+
 
 
     const questionNum = questionId.replace('q', '');
@@ -60,6 +58,10 @@ app.post('/api/verify-question', (req, res) => {
         correct: isCorrect,
         explication: explication
     });
+
+    if (!config) {
+    return res.status(400).json({ error: `Configuration introuvable pour le niveau : ${niveau}` });
+    }
 });
 
 app.post('/api/scores', (req, res) => {
